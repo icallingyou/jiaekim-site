@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="ko" data-lang="kr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>김지애 Jiae Kim — 민화 · Korean Folk Painting, New York</title>
+<meta name="description" content="Minhwa (Korean folk painting) by Jiae Kim — mineral and shell pigments on hanji, made in Queens, NY. 뉴욕 퀸즈에서 전통 분채로 그리는 조선 민화.">
+<meta property="og:title" content="김지애 Jiae Kim — Minhwa, New York">
+<meta property="og:description" content="Korean folk painting in mineral pigment on hanji · Bayside, Queens, NY">
+<meta property="og:type" content="website">
+<meta property="og:image" content="images/og.jpg">
+<link rel="icon" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Song+Myung&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --hanji:#F4EAD2;        /* 페이지 바탕 — 한지 */
+  --hanji-deep:#EBDCB2;   /* 짙은 한지 밴드 (작품 배경색에서 추출) */
+  --panel:#FBF6E8;        /* 밝은 패널 */
+  --ink:#2B241A;          /* 먹 */
+  --ink-soft:#6E6250;
+  --line:#DCCEA8;
+  --seal:#B23A25;         /* 낙관 주홍 */
+  --dan-blue:#33527C;     /* 단청 청 */
+  --dan-green:#5E7D4F;    /* 단청 녹 */
+  --dan-ochre:#C8912E;    /* 단청 황 */
+  --disp:'Song Myung', serif;
+  --prose:'Gowun Batang', serif;
+  --ui:'Noto Sans KR', sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--hanji);color:var(--ink);font-family:var(--prose);line-height:1.75;
+  border-top:5px solid;
+  border-image:linear-gradient(90deg,var(--seal) 0 25%,var(--dan-ochre) 25% 50%,var(--dan-green) 50% 75%,var(--dan-blue) 75% 100%) 1;}
+img{display:block;max-width:100%}
+a{color:var(--ink)}
+a:hover{color:var(--seal)}
+:focus-visible{outline:2px solid var(--seal);outline-offset:3px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+
+/* 언어 토글: body[data-lang]에 따라 표시 */
+[data-lang="kr"] .en{display:none !important}
+[data-lang="en"] .kr{display:none !important}
+
+/* ── 낙관 (서명 요소) ── */
+.seal{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;
+  width:44px;height:44px;background:var(--seal);color:#FBF3E4;font-family:var(--disp);
+  font-size:15px;line-height:1.15;letter-spacing:1px;border-radius:4px;text-decoration:none;flex:none}
+.seal:hover{color:#fff}
+
+/* ── 내비게이션 ── */
+header.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--hanji) 88%,transparent);
+  backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;gap:16px;padding:12px 22px;max-width:1100px;margin:0 auto}
+.nav-name{font-family:var(--disp);font-size:1.15rem;letter-spacing:.5px;text-decoration:none}
+nav.links{margin-left:auto;display:flex;align-items:center;gap:20px;font-family:var(--ui);font-size:.92rem}
+nav.links a{text-decoration:none;color:var(--ink-soft)}
+nav.links a:hover{color:var(--seal)}
+#langBtn{font-family:var(--ui);font-size:.85rem;border:1px solid var(--ink);background:transparent;
+  padding:5px 12px;border-radius:99px;cursor:pointer;color:var(--ink)}
+#langBtn:hover{border-color:var(--seal);color:var(--seal)}
+
+/* ── 히어로 ── */
+.hero{position:relative}
+.hero img{width:100%;height:min(62vh,560px);object-fit:cover}
+.hero-panel{background:var(--panel);border-top:5px solid;
+  border-image:linear-gradient(90deg,var(--seal) 0 25%,var(--dan-ochre) 25% 50%,var(--dan-green) 50% 75%,var(--dan-blue) 75% 100%) 1;}
+.hero-panel-in{max-width:1100px;margin:0 auto;padding:34px 22px 38px;display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end}
+.hero-id{flex:1 1 380px}
+.eyebrow{font-family:var(--ui);font-size:.8rem;letter-spacing:.22em;color:var(--ink-soft);text-transform:uppercase}
+h1{font-family:var(--disp);font-weight:400;font-size:clamp(2.1rem,5vw,3.2rem);line-height:1.15;margin:8px 0 10px}
+.hero-sub{color:var(--ink-soft);max-width:52ch}
+.show-card{flex:0 1 380px;background:var(--hanji);border:1px solid var(--line);border-left:5px solid var(--seal);
+  padding:18px 20px;font-family:var(--ui)}
+.show-card .tag{font-size:.72rem;letter-spacing:.2em;color:var(--seal);font-weight:700}
+.show-card h3{font-family:var(--disp);font-weight:400;font-size:1.3rem;margin:6px 0 4px}
+.show-card p{font-size:.9rem;color:var(--ink-soft);line-height:1.6}
+.show-card a{font-size:.85rem;font-weight:500}
+
+/* ── 섹션 공통 ── */
+section{padding:72px 0}
+.sec-head{margin-bottom:34px}
+.sec-head::after{content:"";display:block;width:52px;height:4px;margin-top:14px;
+  background:linear-gradient(90deg,var(--seal) 0 25%,var(--dan-ochre) 25% 50%,var(--dan-green) 50% 75%,var(--dan-blue) 75% 100%)}
+h2{font-family:var(--disp);font-weight:400;font-size:clamp(1.6rem,3.4vw,2.2rem)}
+.sec-head .sub{font-family:var(--ui);color:var(--ink-soft);font-size:.92rem;margin-top:6px}
+
+/* ── 갤러리 ── */
+#gallery .grid{columns:2 320px;column-gap:26px}
+@media(min-width:960px){#gallery .grid{columns:3 300px}}
+figure.art{break-inside:avoid;margin:0 0 30px}
+.art button{border:0;padding:0;background:none;cursor:zoom-in;width:100%}
+.art img{width:100%;border:1px solid var(--line);background:#fff}
+.art figcaption{padding:10px 2px 0}
+.art .t{font-family:var(--disp);font-size:1.05rem;line-height:1.4}
+.art .m{font-family:var(--ui);font-size:.8rem;color:var(--ink-soft);margin-top:2px;line-height:1.5}
+
+/* ── 소개 ── */
+#about{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.about-cols{display:grid;grid-template-columns:1.6fr 1fr;gap:44px}
+@media(max-width:860px){.about-cols{grid-template-columns:1fr}}
+.about-prose p{margin-bottom:1.1em;max-width:62ch}
+.cv{background:var(--hanji);border:1px solid var(--line);padding:24px 26px;font-family:var(--ui);font-size:.9rem;align-self:start}
+.cv h3{font-family:var(--disp);font-weight:400;font-size:1.15rem;margin-bottom:14px}
+.cv ul{list-style:none}
+.cv li{padding:9px 0;border-top:1px solid var(--line);line-height:1.55}
+.cv li:first-of-type{border-top:0}
+.cv .y{color:var(--seal);font-weight:700;font-size:.78rem;letter-spacing:.05em;display:block}
+
+/* ── 전시 ── */
+.exh{border-top:1px solid var(--line)}
+.exh-row{display:grid;grid-template-columns:110px 1fr auto;gap:18px;padding:18px 4px;border-bottom:1px solid var(--line);align-items:baseline}
+@media(max-width:640px){.exh-row{grid-template-columns:86px 1fr}.exh-row .badge{grid-column:2}}
+.exh-row .when{font-family:var(--ui);font-weight:700;font-size:.9rem;color:var(--ink-soft)}
+.exh-row .what{font-family:var(--disp);font-size:1.1rem}
+.exh-row .where{font-family:var(--ui);font-size:.85rem;color:var(--ink-soft);display:block;margin-top:2px}
+.badge{font-family:var(--ui);font-size:.72rem;letter-spacing:.14em;color:var(--seal);border:1px solid var(--seal);
+  border-radius:99px;padding:3px 11px;white-space:nowrap;align-self:center}
+
+/* ── 샵/커미션 ── */
+#shop{background:var(--hanji-deep)}
+.shop-cards{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+@media(max-width:760px){.shop-cards{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);padding:26px 28px}
+.card h3{font-family:var(--disp);font-weight:400;font-size:1.35rem;margin-bottom:8px}
+.card p{font-size:.95rem;color:var(--ink-soft);margin-bottom:18px;max-width:46ch}
+.btn{display:inline-block;font-family:var(--ui);font-size:.9rem;font-weight:500;text-decoration:none;
+  background:var(--seal);color:#FBF3E4;padding:10px 20px;border:1px solid var(--seal);cursor:pointer}
+.btn:hover{background:#9C3220;color:#fff}
+.btn.ghost{background:transparent;color:var(--ink-soft);border:1px dashed var(--ink-soft);cursor:default}
+
+/* ── 뉴스레터 ── */
+#newsletter .card{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
+#newsletter form{display:flex;gap:10px;flex-wrap:wrap}
+#newsletter input{font-family:var(--ui);font-size:.95rem;padding:10px 14px;border:1px solid var(--ink-soft);
+  background:#fff;min-width:230px}
+#newsletter input:focus{outline:2px solid var(--seal)}
+
+/* ── 푸터 ── */
+footer{border-top:1px solid var(--line);padding:40px 0 50px;font-family:var(--ui);font-size:.9rem;color:var(--ink-soft)}
+.foot-in{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.foot-in .grow{flex:1}
+footer a{color:var(--ink-soft)}
+
+/* ── 라이트박스 ── */
+#lb{position:fixed;inset:0;background:rgba(24,19,12,.93);display:none;z-index:100;
+  align-items:center;justify-content:center;flex-direction:column;padding:28px;cursor:zoom-out}
+#lb.open{display:flex}
+#lb img{max-width:min(94vw,1100px);max-height:82vh;width:auto;border:1px solid #6E6250}
+#lb .cap{color:#EBDCB2;font-family:var(--ui);font-size:.9rem;margin-top:14px;text-align:center}
+#lb .x{position:absolute;top:16px;right:20px;background:none;border:0;color:#EBDCB2;font-size:1.9rem;cursor:pointer;line-height:1}
+</style>
+</head>
+<body data-lang="kr">
+
+<header class="nav">
+  <div class="nav-in">
+    <a class="seal" href="#top" aria-label="Jiae Kim">지<br>애</a>
+    <a class="nav-name" href="#top">김지애 <span style="color:var(--ink-soft)">Jiae Kim</span></a>
+    <nav class="links" aria-label="menu">
+      <a href="#gallery"><span class="kr">작품</span><span class="en">Gallery</span></a>
+      <a href="#about"><span class="kr">소개</span><span class="en">About</span></a>
+      <a href="#exhibitions"><span class="kr">전시</span><span class="en">Exhibitions</span></a>
+      <a href="#contact"><span class="kr">연락</span><span class="en">Contact</span></a>
+      <button id="langBtn" aria-label="Switch language">EN</button>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<div class="hero">
+  <img src="images/hero-bonghwangmun.jpg" alt="봉황문인문보 — Phoenix-pattern wrapping cloth, mineral pigment on hanji" fetchpriority="high">
+  <div class="hero-panel">
+    <div class="hero-panel-in">
+      <div class="hero-id">
+        <p class="eyebrow">민화 · Korean Folk Painting — New York</p>
+        <h1>김지애 <span style="color:var(--ink-soft)">Jiae Kim</span></h1>
+        <p class="hero-sub kr">조선 후기 민화의 재료와 기법 그대로 — 분채와 먹, 한지 위에 그림에 담긴 복(福)을 오늘의 뉴욕으로 옮겨 그립니다.</p>
+        <p class="hero-sub en">Working in the late-Joseon folk painting tradition — mineral pigments and ink on hanji — carrying the paintings' old blessings into present-day New York.</p>
+      </div>
+      <aside class="show-card">
+        <p class="tag"><span class="kr">다가오는 전시</span><span class="en">UPCOMING</span></p>
+        <h3>Moon &amp; Bloom</h3>
+        <p>Bayside Historical Society — The Castle, Queens NY<br>
+           <span class="kr">2026년 8월 · 일정 추후 공지</span>
+           <span class="en">August 2026 · dates to be announced</span></p>
+        <a href="#exhibitions"><span class="kr">전시 소식 보기 →</span><span class="en">Exhibition details →</span></a>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<section id="gallery" class="wrap">
+  <div class="sec-head">
+    <h2><span class="kr">작품</span><span class="en">Gallery</span></h2>
+    <p class="sub kr">분채와 먹, 한지 — 모든 작품은 전통 재료로 제작되었습니다.</p>
+    <p class="sub en">All works: ground mineral &amp; shell pigment (bunchae) and ink on hanji.</p>
+  </div>
+
+  <div class="grid">
+    <!-- ★ 작품 추가 방법: 아래 <figure class="art"> 블록 하나를 통째로 복사해서
+         이미지 파일명(images/…)과 제목·연도·크기만 바꾸면 됩니다. -->
+
+    <figure class="art">
+      <button class="art-open" data-cap="궁모란도 Court Peonies · 2025 · 30 × 60 in">
+        <img src="images/morando.jpg" loading="lazy" alt="궁모란도 — Court Peonies, peony tree in full bloom on golden hanji">
+      </button>
+      <figcaption>
+        <p class="t"><span class="kr">궁모란도</span><span class="en">Court Peonies (Gung-mo-ran-do)</span></p>
+        <p class="m">2025 · <span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 30 × 60 in</p>
+      </figcaption>
+    </figure>
+
+    <figure class="art">
+      <button class="art-open" data-cap="연지쌍압도 Lotus Pond with a Pair of Mandarin Ducks · 2025 · 30 × 55 in">
+        <img src="images/yeonjissangapdo.jpg" loading="lazy" alt="연지쌍압도 — lotus pond with a pair of mandarin ducks">
+      </button>
+      <figcaption>
+        <p class="t"><span class="kr">연지쌍압도</span><span class="en">Lotus Pond with a Pair of Mandarin Ducks</span></p>
+        <p class="m">2025 · <span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 30 × 55 in</p>
+      </figcaption>
+    </figure>
+
+    <figure class="art">
+      <button class="art-open" data-cap="봉황문인문보 Phoenix-and-Auspicious-Pattern Wrapping Cloth · 2025 · 40 × 25 in">
+        <img src="images/bonghwangmun.jpg" loading="lazy" alt="봉황문인문보 — phoenix-pattern ceremonial wrapping cloth painting">
+      </button>
+      <figcaption>
+        <p class="t"><span class="kr">봉황문인문보</span><span class="en">Phoenix-and-Auspicious-Pattern Wrapping Cloth</span></p>
+        <p class="m">2025 · <span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 40 × 25 in</p>
+      </figcaption>
+    </figure>
+
+    <figure class="art">
+      <button class="art-open" data-cap="동백 Camellias · 2024 · 12 × 18 in">
+        <img src="images/dongbaek.jpg" loading="lazy" alt="동백 — red camellias blooming on a branch">
+      </button>
+      <figcaption>
+        <p class="t"><span class="kr">동백</span><span class="en">Camellias (Dong-baek)</span></p>
+        <p class="m">2024 · <span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 12 × 18 in</p>
+      </figcaption>
+    </figure>
+
+    <figure class="art">
+      <button class="art-open" data-cap="모란화조도 Peonies with Paired Birds · 2024 · 12 × 18 in">
+        <img src="images/moranhwajodo.jpg" loading="lazy" alt="모란화조도 — a pair of birds among peonies">
+      </button>
+      <figcaption>
+        <p class="t"><span class="kr">모란화조도</span><span class="en">Peonies with Paired Birds (Mo-ran-hwa-jo-do)</span></p>
+        <p class="m">2024 · <span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 12 × 18 in</p>
+      </figcaption>
+    </figure>
+
+    <figure class="art">
+      <button class="art-open" data-cap="연잎과 봉오리 Lotus Leaves and Bud · 45 × 45 cm">
+        <img src="images/yeonip-study.jpg" loading="lazy" alt="연잎과 봉오리 — close study of lotus leaves and a bud">
+      </button>
+      <figcaption>
+        <p class="t"><span class="kr">연잎과 봉오리</span><span class="en">Lotus Leaves and Bud</span></p>
+        <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 45 × 45 cm</p>
+      </figcaption>
+    </figure>
+
+    <figure class="art">
+      <button class="art-open" data-cap="사계화 Four Seasons of Flowers — Part I · 2024 · 25 × 30 in">
+        <img src="images/sagyehwa-1.jpg" loading="lazy" alt="사계화 1부 — chrysanthemum panels on pink hanji">
+      </button>
+      <figcaption>
+        <p class="t"><span class="kr">사계화 — 1부</span><span class="en">Four Seasons of Flowers — Part I</span></p>
+        <p class="m">2024 · <span class="kr">재현 모사, 브루클린 미술관 소장본</span><span class="en">recreation after Flowers, Brooklyn Museum</span> · 25 × 30 in</p>
+      </figcaption>
+    </figure>
+
+    <figure class="art">
+      <button class="art-open" data-cap="사계화 Four Seasons of Flowers — Part II · 2024 · 25 × 30 in">
+        <img src="images/sagyehwa-2.jpg" loading="lazy" alt="사계화 2부 — camellia and lotus panels on pink hanji">
+      </button>
+      <figcaption>
+        <p class="t"><span class="kr">사계화 — 2부</span><span class="en">Four Seasons of Flowers — Part II</span></p>
+        <p class="m">2024 · <span class="kr">재현 모사, 브루클린 미술관 소장본</span><span class="en">recreation after Flowers, Brooklyn Museum</span> · 25 × 30 in</p>
+      </figcaption>
+    </figure>
+
+    <figure class="art">
+      <button class="art-open" data-cap="화훼도 Flower Study I">
+        <img src="images/hwahwedo-3.jpg" loading="lazy" alt="화훼도 — flowering garden with a butterfly">
+      </button>
+      <figcaption>
+        <p class="t"><span class="kr">화훼도 I</span><span class="en">Flower Study (Hwa-hwe-do) I</span></p>
+        <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span></p>
+      </figcaption>
+    </figure>
+
+    <figure class="art">
+      <button class="art-open" data-cap="화훼도 Flower Study II">
+        <img src="images/hwahwedo-2.jpg" loading="lazy" alt="화훼도 — orange blossoms with butterflies">
+      </button>
+      <figcaption>
+        <p class="t"><span class="kr">화훼도 II</span><span class="en">Flower Study (Hwa-hwe-do) II</span></p>
+        <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span></p>
+      </figcaption>
+    </figure>
+
+    <figure class="art">
+      <button class="art-open" data-cap="화훼도 Flower Study III">
+        <img src="images/hwahwedo-4.jpg" loading="lazy" alt="화훼도 — field of red blossoms and reed-like leaves">
+      </button>
+      <figcaption>
+        <p class="t"><span class="kr">화훼도 III</span><span class="en">Flower Study (Hwa-hwe-do) III</span></p>
+        <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span></p>
+      </figcaption>
+    </figure>
+
+    <figure class="art">
+      <button class="art-open" data-cap="화훼도 Flower Study IV">
+        <img src="images/hwahwedo-1.jpg" loading="lazy" alt="화훼도 — stylized blue blossoms with scrolling tendrils">
+      </button>
+      <figcaption>
+        <p class="t"><span class="kr">화훼도 IV</span><span class="en">Flower Study (Hwa-hwe-do) IV</span></p>
+        <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span></p>
+      </figcaption>
+    </figure>
+
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="kr">소개</span><span class="en">About</span></h2>
+    </div>
+    <div class="about-cols">
+      <div class="about-prose">
+        <div class="kr">
+          <p>안녕하세요, 뉴욕 퀸즈 베이사이드에서 민화를 그리는 김지애입니다. 조선 후기 민화의 전통 그대로 — 돌과 조개를 갈아 만든 분채를 아교에 개어, 한지 위에 얇게 여러 번 쌓아 올립니다.</p>
+        <p>민화는 본래 집안의 그림이었습니다. 모란은 부귀를, 연꽃은 맑음을, 원앙 한 쌍은 화목을 빌었지요. 그림마다 담긴 이 복(福)의 언어를, 퀸즈에 뿌리내린 한인 디아스포라의 오늘로 옮겨 그리는 것이 제 작업입니다.</p>
+          <p>진일민화 조현주 선생님 문하에서 수학하고 있으며, K-Color Link의 리드 아티스트로 퀸즈 곳곳에서 한·영 이중언어 무료 민화 워크숍을 엽니다.</p>
+        </div>
+        <div class="en">
+          <p>I am a minhwa painter based in Bayside, Queens — working in the late-Joseon Korean folk painting tradition with its original materials: ground mineral and shell pigments (bunchae) bound with hide glue, built up in thin layers on handmade hanji paper.</p>
+          <p>Minhwa was the painting of the household. Peonies wished a family wealth and honor, the lotus purity, a pair of mandarin ducks harmony. My work carries that language of blessing into the present-day life of the Korean diaspora in Queens.</p>
+          <p>I train in the Jinil Minhwa lineage under Master Hyun Joo Cho, and as lead artist of the K-Color Link collective I lead free bilingual minhwa workshops across Queens.</p>
+        </div>
+      </div>
+      <aside class="cv">
+        <h3><span class="kr">이력</span><span class="en">Selected CV</span></h3>
+        <ul>
+          <li><span class="y">2024–</span><span class="kr">진일민화 — 조현주 선생 사사 · 한국민화협회 네트워크</span><span class="en">Jinil Minhwa — under Master Hyun Joo Cho · Korean Folk Painting Association</span></li>
+          <li><span class="y">2024 · 2025</span><span class="kr">대한민국 민화공모전 입선</span><span class="en">Korean Minhwa Contest — Honorable Mention</span></li>
+          <li><span class="y">2025</span><span class="kr">Bank Art Gallery 국제여성비엔날레 후보</span><span class="en">Bank Art Gallery International Women's Biennale — Nominee</span></li>
+          <li><span class="y">2026</span><span class="kr">퀸즈 아츠 펀드(QAF) 뉴워크 그랜트 — “Quilt of Hopes” (K-Color Link 리드 아티스트)</span><span class="en">Queens Arts Fund New Work Grant — “Quilt of Hopes” (lead artist, K-Color Link)</span></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="exhibitions" class="wrap">
+  <div class="sec-head">
+    <h2><span class="kr">전시</span><span class="en">Exhibitions</span></h2>
+  </div>
+  <div class="exh">
+    <div class="exh-row">
+      <span class="when">2027.01</span>
+      <span><span class="what"><span class="kr">그룹전 (예정)</span><span class="en">Group Exhibition</span></span>
+      <span class="where">Flushing Town Hall — Queens, NY</span></span>
+      <span class="badge"><span class="kr">예정</span><span class="en">UPCOMING</span></span>
+    </div>
+    <div class="exh-row">
+      <span class="when">2026.08</span>
+      <span><span class="what">Moon &amp; Bloom</span>
+      <span class="where">Bayside Historical Society, The Castle — Bayside, NY · <span class="kr">일정 추후 공지</span><span class="en">dates TBA</span></span></span>
+      <span class="badge"><span class="kr">예정</span><span class="en">UPCOMING</span></span>
+    </div>
+    <div class="exh-row">
+      <span class="when">2025.03</span>
+      <span><span class="what">Peony Stories Today</span>
+      <span class="where">Shelter Rock Public Library — Albertson, NY</span></span>
+    </div>
+    <div class="exh-row">
+      <span class="when">2024–26</span>
+      <span><span class="what"><span class="kr">한국민화협회 그룹전</span><span class="en">Korean Folk Painting Association — Group Exhibitions</span></span></span>
+    </div>
+  </div>
+</section>
+
+<section id="shop">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="kr">커미션 · 샵</span><span class="en">Commissions · Shop</span></h2>
+    </div>
+    <div class="shop-cards">
+      <div class="card">
+        <h3><span class="kr">커미션</span><span class="en">Commissions</span></h3>
+        <p class="kr">결혼·돌·개업 선물을 위한 축원 민화, 소형 원화 커미션을 소량으로 받습니다. 원하시는 상징(모란·연꽃·원앙 등)과 크기를 알려주세요.</p>
+        <p class="en">I take a small number of commissions — blessing paintings for weddings, first birthdays, and new beginnings. Tell me the symbols and size you have in mind.</p>
+        <a class="btn" href="mailto:icallingyou@gmail.com?subject=Commission%20inquiry%20%2F%20%EC%BB%A4%EB%AF%B8%EC%85%98%20%EB%AC%B8%EC%9D%98"><span class="kr">커미션 문의</span><span class="en">Inquire by email</span></a>
+      </div>
+      <div class="card">
+        <h3><span class="kr">프린트 · 컬러링 도안</span><span class="en">Prints &amp; Coloring PDFs</span></h3>
+        <p class="kr">원화 기반 아트 프린트와 민화 컬러링 도안 PDF를 준비하고 있습니다. 뉴스레터로 오픈 소식을 가장 먼저 알려드릴게요.</p>
+        <p class="en">Art prints and minhwa coloring-page PDFs are in the works — newsletter readers hear first.</p>
+        <!-- 굿즈 판매 시작 시: 아래 버튼을 <a class="btn" href="검로드/코파이 링크">샵 열기</a> 로 교체 -->
+        <span class="btn ghost"><span class="kr">준비 중</span><span class="en">Coming soon</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="newsletter" class="wrap">
+  <div class="card">
+    <div>
+      <h3 style="font-family:var(--disp);font-weight:400;font-size:1.35rem"><span class="kr">뉴욕 그림 편지</span><span class="en">A Letter from the Studio</span></h3>
+      <p style="font-size:.95rem;color:var(--ink-soft);max-width:46ch;margin-top:6px">
+        <span class="kr">한 달에 한 번 — 신작과 작업 과정, 전시 소식을 담아 보냅니다.</span>
+        <span class="en">Once a month — new work, process notes, and exhibition news.</span></p>
+    </div>
+    <!-- ★ 뉴스레터 도구(스티비/Beehiiv 등) 가입 후: form의 action을 해당 폼 주소로 바꾸면 실제 구독으로 연결됩니다.
+         그 전까지는 버튼을 누르면 이메일 앱이 열립니다. -->
+    <form id="nlForm" action="#REPLACE_WITH_FORM_URL" method="post">
+      <input type="email" name="email" required placeholder="you@email.com" aria-label="Email">
+      <button class="btn" type="submit"><span class="kr">구독하기</span><span class="en">Subscribe</span></button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer id="contact">
+  <div class="wrap foot-in">
+    <span class="seal" aria-hidden="true">지<br>애</span>
+    <div class="grow">
+      <strong>김지애 Jiae Kim</strong> — Minhwa · Bayside, Queens, NY<br>
+      <a href="mailto:icallingyou@gmail.com">icallingyou@gmail.com</a>
+    </div>
+    <span>© 2026 Jiae Kim</span>
+  </div>
+</footer>
+
+<div id="lb" role="dialog" aria-modal="true" aria-label="Artwork view">
+  <button class="x" aria-label="Close">×</button>
+  <img alt="">
+  <p class="cap"></p>
+</div>
+
+<script>
+// ── 한/영 전환 ──
+const btn = document.getElementById('langBtn');
+btn.addEventListener('click', () => {
+  const now = document.body.dataset.lang === 'kr' ? 'en' : 'kr';
+  document.body.dataset.lang = now;
+  document.documentElement.dataset.lang = now;
+  document.documentElement.lang = now === 'kr' ? 'ko' : 'en';
+  btn.textContent = now === 'kr' ? 'EN' : '한국어';
+});
+
+// ── 라이트박스 ──
+const lb = document.getElementById('lb');
+const lbImg = lb.querySelector('img');
+const lbCap = lb.querySelector('.cap');
+document.querySelectorAll('.art-open').forEach(b => {
+  b.addEventListener('click', () => {
+    const im = b.querySelector('img');
+    lbImg.src = im.src; lbImg.alt = im.alt;
+    lbCap.textContent = b.dataset.cap || '';
+    lb.classList.add('open');
+  });
+});
+function closeLb(){ lb.classList.remove('open'); lbImg.src=''; }
+lb.addEventListener('click', closeLb);
+lb.querySelector('.x').addEventListener('click', closeLb);
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeLb(); });
+
+// ── 뉴스레터: 폼 주소 교체 전에는 메일 앱으로 대신 연결 ──
+document.getElementById('nlForm').addEventListener('submit', e => {
+  const f = e.target;
+  if (f.getAttribute('action').startsWith('#')) {
+    e.preventDefault();
+    const em = f.email.value;
+    location.href = 'mailto:icallingyou@gmail.com?subject=' +
+      encodeURIComponent('뉴스레터 구독 / Newsletter signup') +
+      '&body=' + encodeURIComponent('구독 이메일: ' + em);
+  }
+});
+</script>
+</body>
+</html>
