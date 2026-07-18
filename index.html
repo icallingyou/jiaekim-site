@@ -153,6 +153,8 @@ figure.art{break-inside:avoid;margin:0 0 30px}
 #newsletter input{font-family:var(--ui);font-size:.95rem;padding:10px 14px;border:1px solid var(--ink-soft);
   background:#fff;min-width:230px}
 #newsletter input:focus{outline:2px solid var(--seal)}
+#newsletter .nl-col{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.linkbtn{background:none;border:0;color:var(--seal);text-decoration:underline;cursor:pointer;font:inherit;padding:0}
 
 /* ── 푸터 ── */
 footer{border-top:1px solid var(--line);padding:40px 0 50px;font-family:var(--ui);font-size:.9rem;color:var(--ink-soft)}
@@ -492,11 +494,14 @@ footer a{color:var(--ink-soft)}
         <span class="en">Once a month — new work, process notes, and exhibition news.</span></p>
     </div>
     <!-- ★ 뉴스레터 도구(스티비/Beehiiv 등) 가입 후: form의 action을 해당 폼 주소로 바꾸면 실제 구독으로 연결됩니다.
-         그 전까지는 버튼을 누르면 이메일 앱이 열립니다. -->
-    <form id="nlForm" action="#REPLACE_WITH_FORM_URL" method="post">
-      <input type="email" name="email" required placeholder="you@email.com" aria-label="Email">
-      <button class="btn" type="submit"><span class="kr">구독하기</span><span class="en">Subscribe</span></button>
-    </form>
+         그 전까지는 신청 시 안내 문구가 뜨고, 메일 앱이 열립니다. -->
+    <div class="nl-col">
+      <form id="nlForm" action="#REPLACE_WITH_FORM_URL" method="post">
+        <input type="email" name="email" required placeholder="you@email.com" aria-label="Email">
+        <button class="btn" type="submit"><span class="kr">구독하기</span><span class="en">Subscribe</span></button>
+      </form>
+      <p id="nlMsg" class="rx-fine" hidden></p>
+    </div>
   </div>
 </section>
 
@@ -547,16 +552,27 @@ lb.addEventListener('click', closeLb);
 lb.querySelector('.x').addEventListener('click', closeLb);
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeLb(); });
 
-// ── 뉴스레터: 폼 주소 교체 전에는 메일 앱으로 대신 연결 ──
-document.getElementById('nlForm').addEventListener('submit', e => {
-  const f = e.target;
-  if (f.getAttribute('action').startsWith('#')) {
-    e.preventDefault();
-    const em = f.email.value;
+// ── 뉴스레터: 폼 주소 교체 전에는 화면 안내 + 메일 앱 시도 ──
+const nlForm = document.getElementById('nlForm');
+const nlMsg = document.getElementById('nlMsg');
+nlForm.addEventListener('submit', e => {
+  if (!nlForm.getAttribute('action').startsWith('#')) return; // 실제 폼 연결 후엔 정상 전송
+  e.preventDefault();
+  const em = nlForm.email.value.trim();
+  const kr = document.body.dataset.lang === 'kr';
+  nlMsg.hidden = false;
+  nlMsg.innerHTML = kr
+    ? '신청 감사합니다! 메일 앱이 열리면 그대로 <strong>보내기</strong>만 눌러주세요.<br>메일 앱이 열리지 않으면 <strong>icallingyou@gmail.com</strong> 으로 "구독"이라고 한 통만 보내주시면 바로 등록해드려요. <button type="button" id="cpBtn" class="linkbtn">주소 복사</button>'
+    : 'Thank you! If your mail app opens, just hit <strong>send</strong>.<br>If nothing opens, email <strong>icallingyou@gmail.com</strong> with the word "subscribe" and I\'ll add you. <button type="button" id="cpBtn" class="linkbtn">Copy address</button>';
+  const cp = document.getElementById('cpBtn');
+  cp.addEventListener('click', () => {
+    navigator.clipboard.writeText('icallingyou@gmail.com').then(() => { cp.textContent = kr ? '복사됨 ✓' : 'Copied ✓'; });
+  });
+  setTimeout(() => {
     location.href = 'mailto:icallingyou@gmail.com?subject=' +
       encodeURIComponent('뉴스레터 구독 / Newsletter signup') +
       '&body=' + encodeURIComponent('구독 이메일: ' + em);
-  }
+  }, 250);
 });
 </script>
 </body>
