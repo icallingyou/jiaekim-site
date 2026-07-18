@@ -1,4 +1,4 @@
-김지애 작가 사이트 v1 — 사용 안내
+김지애 작가 사이트 v2 — 사용 안내
 
 [올리는 법 · GitHub Pages]
 1) github.com 로그인 → New repository (예: jiaekim-site, Public) 생성

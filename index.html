@@ -13,7 +13,8 @@
 <link rel="apple-touch-icon" href="images/apple-touch.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Song+Myung&family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <style>
 :root{
   --hanji:#F4EAD2;        /* 페이지 바탕 — 한지 */
@@ -26,9 +27,9 @@
   --dan-blue:#33527C;     /* 단청 청 */
   --dan-green:#5E7D4F;    /* 단청 녹 */
   --dan-ochre:#C8912E;    /* 단청 황 */
-  --disp:'Song Myung', serif;
-  --prose:'Gowun Batang', serif;
-  --ui:'Noto Sans KR', sans-serif;
+  --disp:'Hahmlet', serif;
+  --prose:'Pretendard Variable', Pretendard, 'Noto Sans KR', sans-serif;
+  --ui:'Pretendard Variable', Pretendard, 'Noto Sans KR', sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -72,7 +73,7 @@ nav.links a:hover{color:var(--seal)}
 .hero-panel-in{max-width:1100px;margin:0 auto;padding:34px 22px 38px;display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end}
 .hero-id{flex:1 1 380px}
 .eyebrow{font-family:var(--ui);font-size:.8rem;letter-spacing:.22em;color:var(--ink-soft);text-transform:uppercase}
-h1{font-family:var(--disp);font-weight:400;font-size:clamp(2.1rem,5vw,3.2rem);line-height:1.15;margin:8px 0 10px}
+h1{font-family:var(--disp);font-weight:600;font-size:clamp(2.1rem,5vw,3.2rem);line-height:1.15;margin:8px 0 10px}
 .hero-sub{color:var(--ink-soft);max-width:52ch}
 .show-card{flex:0 1 380px;background:var(--hanji);border:1px solid var(--line);border-left:5px solid var(--seal);
   padding:18px 20px;font-family:var(--ui)}
@@ -86,7 +87,7 @@ section{padding:72px 0}
 .sec-head{margin-bottom:34px}
 .sec-head::after{content:"";display:block;width:52px;height:4px;margin-top:14px;
   background:linear-gradient(90deg,var(--seal) 0 25%,var(--dan-ochre) 25% 50%,var(--dan-green) 50% 75%,var(--dan-blue) 75% 100%)}
-h2{font-family:var(--disp);font-weight:400;font-size:clamp(1.6rem,3.4vw,2.2rem)}
+h2{font-family:var(--disp);font-weight:500;font-size:clamp(1.6rem,3.4vw,2.2rem)}
 .sec-head .sub{font-family:var(--ui);color:var(--ink-soft);font-size:.92rem;margin-top:6px}
 
 /* ── 갤러리 ── */
@@ -120,6 +121,19 @@ figure.art{break-inside:avoid;margin:0 0 30px}
 .exh-row .where{font-family:var(--ui);font-size:.85rem;color:var(--ink-soft);display:block;margin-top:2px}
 .badge{font-family:var(--ui);font-size:.72rem;letter-spacing:.14em;color:var(--seal);border:1px solid var(--seal);
   border-radius:99px;padding:3px 11px;white-space:nowrap;align-self:center}
+
+/* ── 처방전 ── */
+#prescription{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.rx-top{display:grid;grid-template-columns:minmax(270px,400px) 1fr;gap:42px;align-items:start;margin-bottom:46px}
+@media(max-width:840px){.rx-top{grid-template-columns:1fr}}
+.rx-top .art{margin:0}
+.rx-info .lead{max-width:56ch;margin-bottom:14px}
+.rx-box{background:var(--hanji);border:1px solid var(--line);padding:20px 24px;font-family:var(--ui);font-size:.92rem;line-height:1.7;margin:8px 0 22px}
+.rx-box .rx-h{font-weight:700;color:var(--seal);font-size:.78rem;letter-spacing:.16em;margin-bottom:8px}
+.rx-fine{font-family:var(--ui);font-size:.82rem;color:var(--ink-soft);margin-top:12px}
+.rx-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+@media(max-width:900px){.rx-cards{grid-template-columns:repeat(2,1fr)}}
+.rx-cards .t{font-size:.92rem}
 
 /* ── 샵/커미션 ── */
 #shop{background:var(--hanji-deep)}
@@ -159,10 +173,11 @@ footer a{color:var(--ink-soft)}
 
 <header class="nav">
   <div class="nav-in">
-    <a class="seal" href="#top" aria-label="Jiae Kim">지<br>애</a>
+    <a class="seal" href="#top" aria-label="Si-Woo — artist seal of Jiae Kim">시<br>우</a>
     <a class="nav-name" href="#top">김지애 <span style="color:var(--ink-soft)">Jiae Kim</span></a>
     <nav class="links" aria-label="menu">
       <a href="#gallery"><span class="kr">작품</span><span class="en">Gallery</span></a>
+      <a href="#prescription"><span class="kr">처방전</span><span class="en">Prescription</span></a>
       <a href="#about"><span class="kr">소개</span><span class="en">About</span></a>
       <a href="#exhibitions"><span class="kr">전시</span><span class="en">Exhibitions</span></a>
       <a href="#contact"><span class="kr">연락</span><span class="en">Contact</span></a>
@@ -185,11 +200,11 @@ footer a{color:var(--ink-soft)}
       </div>
       <aside class="show-card">
         <p class="tag"><span class="kr">다가오는 전시</span><span class="en">UPCOMING</span></p>
-        <h3>Moon &amp; Bloom</h3>
+        <h3>Moon and Bloom</h3>
         <p>Bayside Historical Society — The Castle, Queens NY<br>
-           <span class="kr">2026년 8월 · 일정 추후 공지</span>
-           <span class="en">August 2026 · dates to be announced</span></p>
-        <a href="#exhibitions"><span class="kr">전시 소식 보기 →</span><span class="en">Exhibition details →</span></a>
+           <span class="kr">2026. 8. 4 – 8. 14 · 리셉션 8. 8(토) 12–4시</span>
+           <span class="en">Aug 4 – 14, 2026 · Reception Sat, Aug 8, 12–4 PM</span></p>
+        <a href="https://www.baysidehistorical.org/events-1/moon-and-bloom-showcasing-east-asian-art-at-the-bhs-castle" target="_blank" rel="noopener"><span class="kr">전시 안내 페이지 →</span><span class="en">Event page →</span></a>
       </aside>
     </div>
   </div>
@@ -340,11 +355,13 @@ footer a{color:var(--ink-soft)}
           <p>안녕하세요, 뉴욕 퀸즈 베이사이드에서 민화를 그리는 김지애입니다. 조선 후기 민화의 전통 그대로 — 돌과 조개를 갈아 만든 분채를 아교에 개어, 한지 위에 얇게 여러 번 쌓아 올립니다.</p>
         <p>민화는 본래 집안의 그림이었습니다. 모란은 부귀를, 연꽃은 맑음을, 원앙 한 쌍은 화목을 빌었지요. 그림마다 담긴 이 복(福)의 언어를, 퀸즈에 뿌리내린 한인 디아스포라의 오늘로 옮겨 그리는 것이 제 작업입니다.</p>
           <p>진일민화 조현주 선생님 문하에서 수학하고 있으며, K-Color Link의 리드 아티스트로 퀸즈 곳곳에서 한·영 이중언어 무료 민화 워크숍을 엽니다.</p>
+          <p>호(號)는 시우(時雨) — '때맞춰 내리는 비'라는 뜻입니다. 그림이 누군가의 벽에서, 꼭 필요한 순간에 내리는 단비가 되기를 바라는 마음을 담았습니다.</p>
         </div>
         <div class="en">
           <p>I am a minhwa painter based in Bayside, Queens — working in the late-Joseon Korean folk painting tradition with its original materials: ground mineral and shell pigments (bunchae) bound with hide glue, built up in thin layers on handmade hanji paper.</p>
           <p>Minhwa was the painting of the household. Peonies wished a family wealth and honor, the lotus purity, a pair of mandarin ducks harmony. My work carries that language of blessing into the present-day life of the Korean diaspora in Queens.</p>
           <p>I train in the Jinil Minhwa lineage under Master Hyun Joo Cho, and as lead artist of the K-Color Link collective I lead free bilingual minhwa workshops across Queens.</p>
+          <p>I paint under the artist name Si-Woo (時雨) — "timely rain" — in the hope that each painting arrives on someone's wall at just the moment it is needed.</p>
         </div>
       </div>
       <aside class="cv">
@@ -373,8 +390,8 @@ footer a{color:var(--ink-soft)}
     </div>
     <div class="exh-row">
       <span class="when">2026.08</span>
-      <span><span class="what">Moon &amp; Bloom</span>
-      <span class="where">Bayside Historical Society, The Castle — Bayside, NY · <span class="kr">일정 추후 공지</span><span class="en">dates TBA</span></span></span>
+      <span><span class="what"><a href="https://www.baysidehistorical.org/events-1/moon-and-bloom-showcasing-east-asian-art-at-the-bhs-castle" target="_blank" rel="noopener">Moon and Bloom: Showcasing East Asian Art at the BHS Castle</a></span>
+      <span class="where">Bayside Historical Society, The Castle — Fort Totten, Bayside NY · <span class="kr">8. 4 – 8. 14 · 리셉션 8. 8(토) 12–4시 · 무료 입장 · 상주 작가 시간(현장 민화 시연): 월·화·수·금 10AM–3PM</span><span class="en">Aug 4–14 · Reception Sat Aug 8, 12–4 PM · Free admission · Artist-in-residence (live minhwa painting): Mon·Tue·Wed·Fri 10 AM–3 PM</span></span></span>
       <span class="badge"><span class="kr">예정</span><span class="en">UPCOMING</span></span>
     </div>
     <div class="exh-row">
@@ -385,6 +402,60 @@ footer a{color:var(--ink-soft)}
     <div class="exh-row">
       <span class="when">2024–26</span>
       <span><span class="what"><span class="kr">한국민화협회 그룹전</span><span class="en">Korean Folk Painting Association — Group Exhibitions</span></span></span>
+    </div>
+  </div>
+</section>
+
+<section id="prescription">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2><span class="kr">민화 처방전</span><span class="en">Minhwa Prescription</span></h2>
+      <p class="sub kr">약 대신 그림을 처방해드립니다.</p>
+      <p class="sub en">A painting, prescribed for your wish.</p>
+    </div>
+    <div class="rx-top">
+      <figure class="art">
+        <button class="art-open" data-cap="민화 처방전 — Minhwa Prescription">
+          <img src="images/prescription/announcement.jpg" loading="lazy" alt="민화 처방전 안내 — 증상, 처방, 용법이 적힌 처방전 형식 카드">
+        </button>
+      </figure>
+      <div class="rx-info">
+        <p class="lead kr">옛사람들은 소원을 말하는 대신, 그림으로 그려 벽에 걸었습니다. 부귀를 바라면 모란을, 화목을 바라면 한 쌍의 새를, 변치 않는 마음을 바라면 한겨울의 동백을. 당신의 소원에는 어떤 그림이 필요할까요?</p>
+        <p class="lead en">In old Korea, people didn't just speak their wishes — they hung them on the wall. Peonies for prosperity, birds in loving pairs for a happy home, winter camellias for a love that never fades. What painting does your wish need?</p>
+        <div class="rx-box">
+          <p class="rx-h"><span class="kr">참여 방법</span><span class="en">HOW IT WORKS</span></p>
+          <p class="kr">이메일로 두 가지만 보내주세요 — ① 그림을 걸고 싶은 벽 사진 한 장, ② 요즘 가장 바라는 소원 한 가지. 답장으로 소원에 맞는 민화 한 점과 그림에 담긴 상징 이야기, 당신의 벽에 걸린 모습 미리보기를 보내드립니다.</p>
+          <p class="en">Email me two things — ① a photo of the wall you'd like to fill, ② one thing you're wishing for these days. You'll receive the minhwa that matches your wish, the story behind it, and a preview of the painting on your own wall.</p>
+        </div>
+        <a class="btn" href="mailto:icallingyou@gmail.com?subject=%EB%AF%BC%ED%99%94%20%EC%B2%98%EB%B0%A9%EC%A0%84%20%2F%20Minhwa%20Prescription"><span class="kr">처방 신청하기</span><span class="en">Request a prescription</span></a>
+        <p class="rx-fine"><span class="kr">처방은 무료이고, 부담은 없습니다. 처방전에는 유효기간이 없어요.</span><span class="en">The prescription is free, no strings attached — and it never expires.</span></p>
+      </div>
+    </div>
+    <div class="rx-cards">
+      <figure class="art">
+        <button class="art-open" data-cap="궁모란도 — 부귀영화 · Wealth and Honor">
+          <img src="images/prescription/card-moran.jpg" loading="lazy" alt="궁모란도 상징 카드 — 부귀영화">
+        </button>
+        <figcaption><p class="t"><span class="kr">궁모란도 · 부귀영화</span><span class="en">Royal Peony · Wealth &amp; Honor</span></p></figcaption>
+      </figure>
+      <figure class="art">
+        <button class="art-open" data-cap="연화도 — 화합과 평안 · Harmony and Peace">
+          <img src="images/prescription/card-yeonhwa.jpg" loading="lazy" alt="연화도 상징 카드 — 화합과 평안">
+        </button>
+        <figcaption><p class="t"><span class="kr">연화도 · 화합과 평안</span><span class="en">Lotus · Harmony &amp; Peace</span></p></figcaption>
+      </figure>
+      <figure class="art">
+        <button class="art-open" data-cap="붉은 동백화 — 변치 않는 사랑 · Everlasting Love">
+          <img src="images/prescription/card-dongbaek.jpg" loading="lazy" alt="붉은 동백화 상징 카드 — 변치 않는 사랑">
+        </button>
+        <figcaption><p class="t"><span class="kr">동백화 · 변치 않는 사랑</span><span class="en">Camellia · Everlasting Love</span></p></figcaption>
+      </figure>
+      <figure class="art">
+        <button class="art-open" data-cap="화조도 — 부부금슬 · A Loving Home">
+          <img src="images/prescription/card-hwajo.jpg" loading="lazy" alt="화조도 상징 카드 — 부부금슬">
+        </button>
+        <figcaption><p class="t"><span class="kr">화조도 · 부부금슬</span><span class="en">Birds &amp; Flowers · A Loving Home</span></p></figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -433,7 +504,7 @@ footer a{color:var(--ink-soft)}
 
 <footer id="contact">
   <div class="wrap foot-in">
-    <span class="seal" aria-hidden="true">지<br>애</span>
+    <span class="seal" aria-hidden="true">시<br>우</span>
     <div class="grow">
       <strong>김지애 Jiae Kim</strong> — Minhwa · Bayside, Queens, NY<br>
       <a href="mailto:icallingyou@gmail.com">icallingyou@gmail.com</a>
