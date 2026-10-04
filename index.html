@@ -1,415 +1,851 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko" data-lang="kr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>김지애 Jiae Kim — 민화 · Korean Folk Painting, New York</title>
 <meta name="description" content="Minhwa (Korean folk painting) by Jiae Kim — mineral and shell pigments on hanji, made in Queens, NY. 뉴욕 퀸즈에서 전통 분채로 그리는 조선 민화.">
+<meta name="theme-color" content="#F4EAD2">
+<link rel="canonical" href="https://jiaekim.com/">
+<meta property="og:site_name" content="Jiae Kim — Minhwa">
 <meta property="og:title" content="김지애 Jiae Kim — Minhwa, New York">
 <meta property="og:description" content="Korean folk painting in mineral pigment on hanji · Bayside, Queens, NY">
 <meta property="og:type" content="website">
-<meta property="og:image" content="images/og.jpg">
+<meta property="og:url" content="https://jiaekim.com/">
+<meta property="og:image" content="https://jiaekim.com/images/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="봉황문인문보 — Phoenix-pattern wrapping cloth, mineral pigment on hanji">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="김지애 Jiae Kim — Minhwa, New York">
+<meta name="twitter:description" content="Korean folk painting in mineral pigment on hanji · Bayside, Queens, NY">
+<meta name="twitter:image" content="https://jiaekim.com/images/og.jpg">
 <link rel="icon" href="images/favicon.png">
 <link rel="apple-touch-icon" href="images/apple-touch.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<script>
+/* 언어 선택을 화면에 그리기 전에 적용합니다 (깜빡임 방지).
+   우선순위: 주소의 ?lang=en|kr → 이 브라우저에 저장된 선택 → 기본값 한국어.
+   공유용 주소: https://jiaekim.com/?lang=en (영어로 열림) · https://jiaekim.com/?lang=kr (한국어로 열림)
+   브라우저 언어가 한국어가 아니면 영어로 열리게 하려면 아래 줄 앞의 // 를 지우세요. */
+(function(){
+  try{
+    var l=localStorage.getItem('lang');
+    var q=new URLSearchParams(location.search).get('lang');
+    if(q==='en'||q==='kr')l=q;
+    // if(!l&&navigator.language&&!/^ko/i.test(navigator.language))l='en';
+    if(l==='en'){document.documentElement.dataset.lang='en';document.documentElement.lang='en';}
+  }catch(e){}
+})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Jiae Kim",
+  "alternateName": ["김지애", "Si-Woo", "시우"],
+  "jobTitle": "Minhwa artist (Korean folk painting)",
+  "description": "Korean folk painting (minhwa) in mineral and shell pigment on hanji, made in Bayside, Queens, New York.",
+  "url": "https://jiaekim.com/",
+  "image": "https://jiaekim.com/images/og.jpg",
+  "email": "mailto:icallingyou@gmail.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Bayside, Queens", "addressRegion": "NY", "addressCountry": "US" },
+  "sameAs": ["https://www.instagram.com/siwoo.minhwa/"],
+  "knowsLanguage": ["ko", "en"]
+}
+</script>
 <style>
+/* ══════════════════════════════════════════════════════════════
+   목차:  1 색·글꼴  2 공통  3 헤더  4 히어로  5 섹션 공통  6 갤러리
+         7 처방전  8 소개  9 전시  10 스튜디오  11 푸터  12 라이트박스
+   ══════════════════════════════════════════════════════════════ */
+
+/* 1 ── 색·글꼴. 색을 바꾸고 싶으면 아래 값만 수정하면 전체에 적용됩니다. */
 :root{
   --hanji:#F4EAD2;        /* 페이지 바탕 — 한지 */
   --hanji-deep:#EBDCB2;   /* 짙은 한지 밴드 (작품 배경색에서 추출) */
   --panel:#FBF6E8;        /* 밝은 패널 */
   --ink:#2B241A;          /* 먹 */
-  --ink-soft:#6E6250;
+  --ink-soft:#5E5243;     /* 옅은 먹 (보조 글자) */
   --line:#DCCEA8;
   --seal:#B23A25;         /* 낙관 주홍 */
+  --seal-deep:#9C3220;
   --dan-blue:#33527C;     /* 단청 청 */
   --dan-green:#5E7D4F;    /* 단청 녹 */
   --dan-ochre:#C8912E;    /* 단청 황 */
-  --disp:'Hahmlet', serif;
-  --prose:'Pretendard Variable', Pretendard, 'Noto Sans KR', sans-serif;
-  --ui:'Pretendard Variable', Pretendard, 'Noto Sans KR', sans-serif;
+  --stripe:linear-gradient(90deg,var(--seal) 0 25%,var(--dan-ochre) 25% 50%,var(--dan-green) 50% 75%,var(--dan-blue) 75% 100%);
+  --disp:'Hahmlet', 'Noto Serif KR', serif;
+  --ui:'Pretendard Variable', Pretendard, 'Noto Sans KR', system-ui, sans-serif;
+  --wrap:1120px;
+  --gutter:22px;
+  --nav-h:66px;
 }
+@media(max-width:760px){:root{--gutter:16px;--nav-h:104px}}
+
+/* 2 ── 공통 */
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-body{background:var(--hanji);color:var(--ink);font-family:var(--prose);line-height:1.75;
-  border-top:5px solid;
-  border-image:linear-gradient(90deg,var(--seal) 0 25%,var(--dan-ochre) 25% 50%,var(--dan-green) 50% 75%,var(--dan-blue) 75% 100%) 1;}
-img{display:block;max-width:100%}
-a{color:var(--ink)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h) + 12px);-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none !important;animation:none !important}}
+body{background:var(--hanji);color:var(--ink);font-family:var(--ui);font-size:1.02rem;line-height:1.75;
+  word-break:keep-all;overflow-wrap:anywhere;border-top:5px solid;border-image:var(--stripe) 1}
+body.lb-open{overflow:hidden}
+img{display:block;max-width:100%;height:auto}
+a{color:var(--ink);text-underline-offset:3px}
 a:hover{color:var(--seal)}
+button{font:inherit;color:inherit}
 :focus-visible{outline:2px solid var(--seal);outline-offset:3px}
-.wrap{max-width:1100px;margin:0 auto;padding:0 22px}
+h1,h2,h3{text-wrap:balance}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--gutter)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:-999px;top:12px;z-index:200;background:var(--seal);color:#FBF3E4;padding:8px 14px;text-decoration:none}
+.skip:focus{left:12px}
 
-/* 언어 토글: body[data-lang]에 따라 표시 */
-[data-lang="kr"] .en{display:none !important}
-[data-lang="en"] .kr{display:none !important}
+/* 언어 토글: <html data-lang="kr|en"> 값에 따라 .kr 또는 .en 만 표시 */
+html[data-lang="kr"] .en{display:none !important}
+html[data-lang="en"] .kr{display:none !important}
 
-/* ── 낙관 (서명 요소) ── */
+/* 낙관 (서명 요소) */
 .seal{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;
   width:44px;height:44px;background:var(--seal);color:#FBF3E4;font-family:var(--disp);
   font-size:15px;line-height:1.15;letter-spacing:1px;border-radius:4px;text-decoration:none;flex:none}
 .seal:hover{color:#fff}
 
-/* ── 내비게이션 ── */
-header.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--hanji) 88%,transparent);
-  backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
-.nav-in{display:flex;align-items:center;gap:16px;padding:12px 22px;max-width:1100px;margin:0 auto}
-.nav-name{font-family:var(--disp);font-size:1.15rem;letter-spacing:.5px;text-decoration:none}
-nav.links{margin-left:auto;display:flex;align-items:center;gap:20px;font-family:var(--ui);font-size:.92rem}
-nav.links a{text-decoration:none;color:var(--ink-soft)}
+/* 버튼·링크 */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-size:.92rem;font-weight:600;text-decoration:none;
+  background:var(--seal);color:#FBF3E4;padding:10px 20px;border:1px solid var(--seal);border-radius:3px;cursor:pointer;min-height:44px;line-height:1.3}
+.btn:hover{background:var(--seal-deep);border-color:var(--seal-deep);color:#fff}
+.btn.outline{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn.outline:hover{color:var(--seal);border-color:var(--seal);background:transparent}
+.arrow-link{font-weight:600;font-size:.92rem;text-decoration:none;color:var(--seal);border-bottom:1px solid transparent;white-space:nowrap}
+.arrow-link:hover{border-bottom-color:var(--seal)}
+.soon{display:inline-block;font-size:.8rem;font-weight:700;letter-spacing:.12em;color:var(--ink-soft);border:1px dashed var(--ink-soft);padding:6px 12px;border-radius:99px}
+
+/* 3 ── 헤더: 넓은 화면은 한 줄, 폰에서는 두 줄(이름·언어 / 메뉴 줄은 옆으로 넘겨 봄) */
+header.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--hanji) 92%,transparent);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+@supports not (background:color-mix(in srgb,#fff 50%,transparent)){header.nav{background:rgba(244,234,210,.96)}}
+.nav-in{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;padding:10px var(--gutter);max-width:var(--wrap);margin:0 auto}
+.nav-name{font-family:var(--disp);font-size:1.15rem;letter-spacing:.5px;text-decoration:none;white-space:nowrap}
+.nav-name span{color:var(--ink-soft)}
+nav.links{margin-left:auto;display:flex;align-items:center;gap:2px}
+nav.links a{display:inline-flex;align-items:center;min-height:44px;padding:0 10px;text-decoration:none;color:var(--ink-soft);font-size:.93rem;white-space:nowrap}
 nav.links a:hover{color:var(--seal)}
-#langBtn{font-family:var(--ui);font-size:.85rem;border:1px solid var(--ink);background:transparent;
-  padding:5px 12px;border-radius:99px;cursor:pointer;color:var(--ink)}
+#langBtn{order:3;font-size:.85rem;font-weight:600;border:1px solid var(--ink);background:transparent;
+  padding:0 14px;border-radius:99px;cursor:pointer;color:var(--ink);min-height:38px;white-space:nowrap}
 #langBtn:hover{border-color:var(--seal);color:var(--seal)}
+@media(max-width:760px){
+  .nav-in{padding:8px var(--gutter) 0;gap:4px 10px}
+  .seal{width:40px;height:40px;font-size:14px}
+  #langBtn{order:0;margin-left:auto}
+  nav.links{order:4;flex:1 1 100%;margin:0 calc(-1 * var(--gutter));padding:0 var(--gutter);gap:0;
+    overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-padding-inline:16px 48px}
+  nav.links::-webkit-scrollbar{display:none}
+  nav.links a{min-height:42px;padding:0 12px;font-size:.95rem}
+  nav.links a:first-child{padding-left:0}
+  nav.links a:last-child{padding-right:36px}
+  .nav-in.can-scroll::after{content:"";position:absolute;right:0;bottom:0;width:44px;height:42px;pointer-events:none;
+    background:linear-gradient(90deg,rgba(244,234,210,0),var(--hanji) 70%)}
+}
 
-/* ── 히어로 ── */
-.hero{position:relative}
-.hero img{width:100%;height:min(62vh,560px);object-fit:cover}
-.hero-panel{background:var(--panel);border-top:5px solid;
-  border-image:linear-gradient(90deg,var(--seal) 0 25%,var(--dan-ochre) 25% 50%,var(--dan-green) 50% 75%,var(--dan-blue) 75% 100%) 1;}
-.hero-panel-in{max-width:1100px;margin:0 auto;padding:34px 22px 38px;display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end}
-.hero-id{flex:1 1 380px}
-.eyebrow{font-family:var(--ui);font-size:.8rem;letter-spacing:.22em;color:var(--ink-soft);text-transform:uppercase}
-h1{font-family:var(--disp);font-weight:600;font-size:clamp(2.1rem,5vw,3.2rem);line-height:1.15;margin:8px 0 10px}
-.hero-sub{color:var(--ink-soft);max-width:52ch}
-.show-card{flex:0 1 380px;background:var(--hanji);border:1px solid var(--line);border-left:5px solid var(--seal);
-  padding:18px 20px;font-family:var(--ui)}
-.show-card .tag{font-size:.72rem;letter-spacing:.2em;color:var(--seal);font-weight:700}
-.show-card h3{font-family:var(--disp);font-weight:400;font-size:1.3rem;margin:6px 0 4px}
-.show-card p{font-size:.9rem;color:var(--ink-soft);line-height:1.6}
-.show-card a{font-size:.85rem;font-weight:500}
+/* 4 ── 히어로 */
+.hero-art{position:relative;background:var(--hanji-deep)}
+.hero-art img{width:100%;height:clamp(320px,52vh,560px);object-fit:cover;object-position:50% 46%}
+@media(max-width:720px){.hero-art img{height:auto;aspect-ratio:2000 / 1571}}
+.hero-art .plate{position:absolute;right:14px;bottom:12px;max-width:calc(100% - 28px);display:inline-flex;align-items:center;min-height:32px;
+  font-size:.76rem;letter-spacing:.04em;color:var(--ink);text-decoration:none;
+  background:rgba(251,246,232,.92);border:1px solid var(--line);padding:4px 11px;border-radius:2px}
+.hero-art .plate b{font-family:var(--disp);font-weight:500;margin-right:6px}
+.hero-art .plate:hover{color:var(--seal)}
+.hero-panel{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.hero-panel-in{max-width:var(--wrap);margin:0 auto;padding:38px var(--gutter) 0}
+.eyebrow{font-size:.78rem;letter-spacing:.22em;color:var(--ink-soft);text-transform:uppercase}
+h1{font-family:var(--disp);font-weight:600;font-size:clamp(2.2rem,5.2vw,3.4rem);line-height:1.12;margin:8px 0 6px;letter-spacing:-.01em}
+h1 span{color:var(--ink-soft);font-weight:500}
+.ho{font-family:var(--disp);font-size:1rem;color:var(--ink-soft);letter-spacing:.08em;margin-bottom:14px}
+.hero-sub{color:var(--ink-soft);max-width:56ch;font-size:1.08rem}
+.cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-top:22px}
+.cta-row .ig{font-size:.92rem;font-weight:600;color:var(--ink-soft);text-decoration:none;border-bottom:1px solid var(--line)}
+.cta-row .ig:hover{color:var(--seal);border-bottom-color:var(--seal)}
+/* 다음 전시 라벨 */
+.next-show{margin-top:34px;border-top:1px solid var(--line);padding:16px 0 20px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px;font-size:.92rem;color:var(--ink-soft)}
+.next-show .tag{font-size:.72rem;letter-spacing:.2em;color:var(--seal);font-weight:700;padding-left:12px;border-left:4px solid var(--seal)}
+.next-show .what{font-family:var(--disp);font-size:1.05rem;color:var(--ink)}
+.next-show .links{margin-left:auto;display:flex;gap:16px}
+@media(max-width:600px){.next-show .links{margin-left:0;flex:1 1 100%}}
 
-/* ── 섹션 공통 ── */
-section{padding:72px 0}
-.sec-head{margin-bottom:34px}
-.sec-head::after{content:"";display:block;width:52px;height:4px;margin-top:14px;
-  background:linear-gradient(90deg,var(--seal) 0 25%,var(--dan-ochre) 25% 50%,var(--dan-green) 50% 75%,var(--dan-blue) 75% 100%)}
-h2{font-family:var(--disp);font-weight:500;font-size:clamp(1.6rem,3.4vw,2.2rem)}
-.sec-head .sub{font-family:var(--ui);color:var(--ink-soft);font-size:.92rem;margin-top:6px}
+/* 5 ── 섹션 공통 */
+main{counter-reset:sec}
+section{padding:76px 0}
+@media(max-width:640px){section{padding:58px 0}}
+section.hero{padding:0}
+.sec-head{margin-bottom:34px;counter-increment:sec}
+.sec-head .num{display:block;font-family:var(--disp);font-size:.9rem;letter-spacing:.2em;color:var(--seal);margin-bottom:6px}
+.sec-head .num::before{content:counter(sec,upper-roman)}
+.sec-head::after{content:"";display:block;width:52px;height:4px;margin-top:14px;background:var(--stripe)}
+h2{font-family:var(--disp);font-weight:500;font-size:clamp(1.65rem,3.4vw,2.25rem);line-height:1.25}
+.sec-head .sub{color:var(--ink-soft);font-size:.95rem;margin-top:8px;max-width:60ch}
 
-/* ── 갤러리 ── */
-#gallery .grid{columns:2 320px;column-gap:26px}
-@media(min-width:960px){#gallery .grid{columns:3 300px}}
-figure.art{break-inside:avoid;margin:0 0 30px}
-.art button{border:0;padding:0;background:none;cursor:zoom-in;width:100%}
-.art img{width:100%;border:1px solid var(--line);background:#fff}
+/* 6 ── 갤러리: 한 줄(.hang)에 건 작품들은 높이가 같아지고, 폭은 그림 비율대로 정해집니다 (잘리지 않음).
+         각 figure의 --w/--h 는 이미지 픽셀 크기 — 사진을 바꾸면 이 두 값과 width/height 도 함께 바꿔주세요. */
+#gallery{counter-reset:plate}
+.hang{--w:4;--h:5;display:flex;gap:22px;align-items:flex-start;margin-bottom:30px}
+.hang .art{--r:calc(var(--w) / var(--h));flex:calc(var(--r) * 100) 1 0;min-width:0;margin:0;counter-increment:plate}
+.hang.pair{max-width:860px}
+@media(max-width:700px){.hang{display:block;margin-bottom:0}.hang .art{margin:0 0 36px}
+  .hang .art .art-open img{max-height:78vh;width:auto;max-width:100%;margin:0 auto}}
+.art .art-open{border:0;padding:0;background:none;cursor:zoom-in;width:100%;display:block;border-radius:2px}
+.art .art-open img{width:100%;border:1px solid var(--line);background:#fff;transition:transform .25s ease,box-shadow .25s ease}
+.art .art-open:hover img,.art .art-open:focus-visible img{box-shadow:0 10px 30px rgba(43,36,26,.16);transform:translateY(-2px)}
 .art figcaption{padding:10px 2px 0}
 .art .t{font-family:var(--disp);font-size:1.05rem;line-height:1.4}
-.art .m{font-family:var(--ui);font-size:.8rem;color:var(--ink-soft);margin-top:2px;line-height:1.5}
+.hang .art .t::before{content:counter(plate,decimal-leading-zero);font-family:var(--ui);font-size:.72rem;font-weight:700;color:var(--seal);letter-spacing:.1em;margin-right:8px;vertical-align:2px}
+.art .t small{display:block;font-family:var(--ui);font-size:.82rem;font-weight:400;color:var(--ink-soft);margin-top:1px}
+.art .m{font-size:.8rem;color:var(--ink-soft);margin-top:4px;line-height:1.5;font-variant-numeric:tabular-nums}
 
-/* ── 소개 ── */
-#about{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.about-cols{display:grid;grid-template-columns:1.6fr 1fr;gap:44px}
-@media(max-width:860px){.about-cols{grid-template-columns:1fr}}
-.about-prose p{margin-bottom:1.1em;max-width:62ch}
-.cv{background:var(--hanji);border:1px solid var(--line);padding:24px 26px;font-family:var(--ui);font-size:.9rem;align-self:start}
-.cv h3{font-family:var(--disp);font-weight:400;font-size:1.15rem;margin-bottom:14px}
-.cv ul{list-style:none}
-.cv li{padding:9px 0;border-top:1px solid var(--line);line-height:1.55}
-.cv li:first-of-type{border-top:0}
-.cv .y{color:var(--seal);font-weight:700;font-size:.78rem;letter-spacing:.05em;display:block}
-
-/* ── 전시 ── */
-.exh{border-top:1px solid var(--line)}
-.exh-row{display:grid;grid-template-columns:110px 1fr auto;gap:18px;padding:18px 4px;border-bottom:1px solid var(--line);align-items:baseline}
-@media(max-width:640px){.exh-row{grid-template-columns:86px 1fr}.exh-row .badge{grid-column:2}}
-.exh-row .when{font-family:var(--ui);font-weight:700;font-size:.9rem;color:var(--ink-soft)}
-.exh-row .what{font-family:var(--disp);font-size:1.1rem}
-.exh-row .where{font-family:var(--ui);font-size:.85rem;color:var(--ink-soft);display:block;margin-top:2px}
-.badge{font-family:var(--ui);font-size:.72rem;letter-spacing:.14em;color:var(--seal);border:1px solid var(--seal);
-  border-radius:99px;padding:3px 11px;white-space:nowrap;align-self:center}
-
-/* ── 처방전 ── */
+/* 7 ── 처방전 */
 #prescription{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.rx-top{display:grid;grid-template-columns:minmax(270px,400px) 1fr;gap:42px;align-items:start;margin-bottom:46px}
-@media(max-width:840px){.rx-top{grid-template-columns:1fr}}
-.rx-top .art{margin:0}
-.rx-info .lead{max-width:56ch;margin-bottom:14px}
-.rx-box{background:var(--hanji);border:1px solid var(--line);padding:20px 24px;font-family:var(--ui);font-size:.92rem;line-height:1.7;margin:8px 0 22px}
-.rx-box .rx-h{font-weight:700;color:var(--seal);font-size:.78rem;letter-spacing:.16em;margin-bottom:8px}
-.rx-fine{font-family:var(--ui);font-size:.82rem;color:var(--ink-soft);margin-top:12px}
+.rx-top{display:grid;grid-template-columns:minmax(250px,360px) 1fr;gap:42px;align-items:start;margin-bottom:46px}
+@media(max-width:840px){.rx-top{grid-template-columns:1fr;gap:28px}}
+.rx-top .art{margin:0;max-width:420px}
+.rx-top .art .m{text-align:center}
+.rx-info .lead{max-width:56ch;margin-bottom:14px;font-family:var(--disp);font-size:1.15rem;line-height:1.65}
+.rx-box{background:var(--hanji);border:1px solid var(--line);padding:20px 24px;font-size:.95rem;line-height:1.7;margin:8px 0 22px}
+.rx-box .rx-h{font-weight:700;color:var(--seal);font-size:.76rem;letter-spacing:.16em;margin-bottom:8px}
+.rx-actions{display:flex;flex-wrap:wrap;gap:12px}
+.rx-fine{font-size:.84rem;color:var(--ink-soft);margin-top:14px}
 .rx-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
 @media(max-width:900px){.rx-cards{grid-template-columns:repeat(2,1fr)}}
+.rx-cards .art{margin:0}
 .rx-cards .t{font-size:.92rem}
 
-/* ── 샵/커미션 ── */
-#shop{background:var(--hanji-deep)}
-.shop-cards{display:grid;grid-template-columns:1fr 1fr;gap:26px}
-@media(max-width:760px){.shop-cards{grid-template-columns:1fr}}
-.card{background:var(--panel);border:1px solid var(--line);padding:26px 28px}
-.card h3{font-family:var(--disp);font-weight:400;font-size:1.35rem;margin-bottom:8px}
-.card p{font-size:.95rem;color:var(--ink-soft);margin-bottom:18px;max-width:46ch}
-.btn{display:inline-block;font-family:var(--ui);font-size:.9rem;font-weight:500;text-decoration:none;
-  background:var(--seal);color:#FBF3E4;padding:10px 20px;border:1px solid var(--seal);cursor:pointer}
-.btn:hover{background:#9C3220;color:#fff}
-.btn.ghost{background:transparent;color:var(--ink-soft);border:1px dashed var(--ink-soft);cursor:default}
+/* 8 ── 소개 */
+.about-cols{display:grid;grid-template-columns:1.55fr 1fr;gap:48px;align-items:start}
+@media(max-width:860px){.about-cols{grid-template-columns:1fr;gap:34px}}
+.about-prose p{margin-bottom:1.1em;max-width:62ch}
+.about-prose .lead{font-family:var(--disp);font-size:1.25rem;line-height:1.6}
+.pull{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;margin:30px 0 0;padding:22px 24px;
+  background:var(--panel);border:1px solid var(--line);max-width:62ch}
+.pull p{font-family:var(--disp);font-size:1.12rem;line-height:1.65;margin:0}
+.cv{background:var(--panel);border:1px solid var(--line);padding:24px 26px;font-size:.9rem}
+.cv h3{font-family:var(--disp);font-weight:500;font-size:1.15rem;margin-bottom:14px}
+.cv ul{list-style:none}
+.cv li{display:grid;grid-template-columns:80px 1fr;gap:10px;padding:10px 0;border-top:1px solid var(--line);line-height:1.5}
+.cv li:first-child{border-top:0;padding-top:0}
+.cv .y{color:var(--seal);font-weight:700;font-size:.78rem;letter-spacing:.05em;padding-top:3px}
+.cv .ig{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:.88rem}
 
-/* ── 뉴스레터 ── */
-#newsletter .card{display:flex;flex-wrap:wrap;gap:24px;align-items:center;justify-content:space-between}
-#newsletter form{display:flex;gap:10px;flex-wrap:wrap}
-#newsletter input{font-family:var(--ui);font-size:.95rem;padding:10px 14px;border:1px solid var(--ink-soft);
-  background:#fff;min-width:230px}
+/* 9 ── 전시 */
+#exhibitions{background:var(--panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.exh{border-top:1px solid var(--line)}
+.exh-row{display:grid;grid-template-columns:110px 1fr auto;gap:10px 18px;padding:20px 4px;border-bottom:1px solid var(--line);align-items:baseline}
+@media(max-width:640px){.exh-row{grid-template-columns:1fr;gap:4px;padding:18px 2px}.exh-row .badge{justify-self:start;margin-top:4px}}
+.exh-row .when{font-family:var(--disp);font-weight:500;font-size:.95rem;color:var(--ink-soft);letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.exh-row .what{font-family:var(--disp);font-size:1.12rem;line-height:1.4}
+.exh-row .where{font-size:.86rem;color:var(--ink-soft);display:block;margin-top:3px;line-height:1.6}
+.badge{font-size:.72rem;font-weight:700;letter-spacing:.14em;color:var(--seal);border:1px solid var(--seal);
+  border-radius:99px;padding:3px 11px;white-space:nowrap;align-self:center}
+
+/* 10 ── 스튜디오 (커미션 · 프린트 · 뉴스레터) */
+#shop{background:var(--hanji-deep)}
+.studio-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+@media(max-width:900px){.studio-cards{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);padding:26px 28px;display:flex;flex-direction:column}
+.card h3{font-family:var(--disp);font-weight:500;font-size:1.3rem;margin-bottom:8px}
+.card p{font-size:.95rem;color:var(--ink-soft);margin-bottom:18px;max-width:48ch}
+.card .card-foot{margin-top:auto}
+#newsletter form{display:flex;gap:10px;flex-wrap:wrap;max-width:100%}
+#newsletter input{font-size:.95rem;padding:10px 14px;border:1px solid var(--ink-soft);
+  background:#fff;min-width:0;flex:1 1 180px;max-width:100%;min-height:44px}
 #newsletter input:focus{outline:2px solid var(--seal)}
-#newsletter .nl-col{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+#newsletter input::placeholder{color:#8A7D6A}
 .linkbtn{background:none;border:0;color:var(--seal);text-decoration:underline;cursor:pointer;font:inherit;padding:0}
 
-/* ── 푸터 ── */
-footer{border-top:1px solid var(--line);padding:40px 0 50px;font-family:var(--ui);font-size:.9rem;color:var(--ink-soft)}
-.foot-in{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-.foot-in .grow{flex:1}
+/* 11 ── 푸터 */
+footer{border-top:1px solid var(--line);padding:44px 0 54px;font-size:.92rem;color:var(--ink-soft)}
+.foot-in{display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:start}
+@media(max-width:640px){.foot-in{grid-template-columns:auto 1fr}.foot-in .copy{grid-column:2;text-align:left}}
+footer strong{color:var(--ink);font-family:var(--disp);font-weight:500;font-size:1.05rem}
 footer a{color:var(--ink-soft)}
+footer a:hover{color:var(--seal)}
+.foot-links{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:10px}
+.foot-links a{text-decoration:none;border-bottom:1px solid var(--line)}
+.foot-nav{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:14px;font-size:.85rem}
+.foot-nav a{text-decoration:none}
+.copy{text-align:right;line-height:1.6}
+.copy a{text-decoration:none;display:inline-block;margin-top:4px}
 
-/* ── 라이트박스 ── */
-#lb{position:fixed;inset:0;background:rgba(24,19,12,.93);display:none;z-index:100;
-  align-items:center;justify-content:center;flex-direction:column;padding:28px;cursor:zoom-out}
+/* 12 ── 라이트박스 */
+#lb{position:fixed;inset:0;background:rgba(24,19,12,.94);display:none;z-index:100;flex-direction:column;align-items:center;justify-content:center;padding:64px 16px 72px}
 #lb.open{display:flex}
-#lb img{max-width:min(94vw,1100px);max-height:82vh;width:auto;border:1px solid #6E6250}
-#lb .cap{color:#EBDCB2;font-family:var(--ui);font-size:.9rem;margin-top:14px;text-align:center}
-#lb .x{position:absolute;top:16px;right:20px;background:none;border:0;color:#EBDCB2;font-size:1.9rem;cursor:pointer;line-height:1}
+#lb .stage{display:flex;align-items:center;justify-content:center;width:100%;height:100%;cursor:zoom-out}
+#lb img{max-width:min(94vw,1200px);max-height:100%;width:auto;height:auto;border:1px solid #6E6250;cursor:default}
+#lb .cap{position:absolute;left:0;right:0;bottom:22px;color:#EBDCB2;font-size:.92rem;text-align:center;padding:0 72px;line-height:1.5}
+#lb .count{position:absolute;left:20px;top:20px;color:#C9B98E;font-size:.85rem;letter-spacing:.08em;font-variant-numeric:tabular-nums}
+#lb button{position:absolute;background:rgba(251,243,228,.08);border:1px solid rgba(235,220,178,.45);color:#EBDCB2;width:48px;height:48px;border-radius:50%;
+  cursor:pointer;font-size:1.5rem;line-height:1;display:flex;align-items:center;justify-content:center}
+#lb button:hover{background:rgba(251,243,228,.2);color:#fff}
+#lb .lb-close{top:14px;right:16px;font-size:1.8rem}
+#lb .lb-prev{left:14px;top:50%;transform:translateY(-50%)}
+#lb .lb-next{right:14px;top:50%;transform:translateY(-50%)}
+@media(max-width:640px){
+  #lb{padding:60px 10px 92px}
+  #lb .lb-prev,#lb .lb-next{top:auto;bottom:18px;transform:none}
+  #lb .lb-prev{left:16px}#lb .lb-next{right:16px}
+  #lb .cap{bottom:76px;padding:0 16px;font-size:.85rem}
+}
 </style>
 </head>
-<body data-lang="kr">
+<body>
+<a class="skip" href="#main"><span class="kr">본문으로 건너뛰기</span><span class="en">Skip to content</span></a>
 
 <header class="nav">
   <div class="nav-in">
     <a class="seal" href="#top" aria-label="Si-Woo — artist seal of Jiae Kim">시<br>우</a>
-    <a class="nav-name" href="#top">김지애 <span style="color:var(--ink-soft)">Jiae Kim</span></a>
-    <nav class="links" aria-label="menu">
+    <a class="nav-name" href="#top">김지애 <span>Jiae Kim</span></a>
+    <nav id="siteNav" class="links" aria-label="주요 메뉴 / Main menu">
       <a href="#gallery"><span class="kr">작품</span><span class="en">Gallery</span></a>
       <a href="#prescription"><span class="kr">처방전</span><span class="en">Prescription</span></a>
       <a href="#about"><span class="kr">소개</span><span class="en">About</span></a>
       <a href="#exhibitions"><span class="kr">전시</span><span class="en">Exhibitions</span></a>
+      <a href="#shop"><span class="kr">스튜디오</span><span class="en">Studio</span></a>
       <a href="#contact"><span class="kr">연락</span><span class="en">Contact</span></a>
-      <button id="langBtn" aria-label="Switch language">EN</button>
     </nav>
+    <button id="langBtn" type="button" aria-label="Switch to English" lang="en">EN</button>
   </div>
 </header>
 
-<main id="top">
+<main id="main">
 
-<div class="hero">
-  <img src="images/hero-bonghwangmun.jpg" alt="봉황문인문보 — Phoenix-pattern wrapping cloth, mineral pigment on hanji" fetchpriority="high">
+<section class="hero" id="top" aria-labelledby="hero-title">
+  <div class="hero-art">
+    <!-- 폰(≤720px)에서는 같은 그림의 가벼운 파일(bonghwangmun.jpg)을 잘리지 않게 통째로 보여줍니다 -->
+    <picture>
+      <source media="(max-width:720px)" srcset="images/bonghwangmun.jpg">
+      <img src="images/hero-bonghwangmun.jpg" width="2000" height="1571" alt="봉황문인문보 — 김지애 작, 분채·먹, 한지 / Phoenix-and-Auspicious-Pattern Wrapping Cloth by Jiae Kim, mineral pigment on hanji" fetchpriority="high" decoding="async">
+    </picture>
+    <a class="plate" href="#w-bonghwangmun"><b><span class="kr">봉황문인문보</span><span class="en">Phoenix Wrapping Cloth</span></b> 2025 →</a>
+  </div>
   <div class="hero-panel">
     <div class="hero-panel-in">
-      <div class="hero-id">
-        <p class="eyebrow">민화 · Korean Folk Painting — New York</p>
-        <h1>김지애 <span style="color:var(--ink-soft)">Jiae Kim</span></h1>
-        <p class="hero-sub kr">조선 후기 민화의 재료와 기법 그대로 — 분채와 먹, 한지 위에 그림에 담긴 복(福)을 오늘의 뉴욕으로 옮겨 그립니다.</p>
-        <p class="hero-sub en">Working in the late-Joseon folk painting tradition — mineral pigments and ink on hanji — carrying the paintings' old blessings into present-day New York.</p>
+      <p class="eyebrow">민화 · Korean Folk Painting — Bayside, Queens, NY</p>
+      <h1 id="hero-title">김지애 <span>Jiae Kim</span></h1>
+      <p class="ho"><span class="kr">호 시우(時雨) · Si-Woo</span><span class="en">Si-Woo 時雨 · 시우</span></p>
+      <p class="hero-sub kr">조선 후기 민화의 재료와 기법 그대로 — 분채와 먹, 한지 위에 그림에 담긴 복(福)을 오늘의 뉴욕으로 옮겨 그립니다.</p>
+      <p class="hero-sub en">Working in the late-Joseon folk painting tradition — mineral pigments and ink on hanji — carrying the paintings' old blessings into present-day New York.</p>
+      <div class="cta-row">
+        <a class="btn" href="#prescription"><span class="kr">민화 처방전 받기</span><span class="en">Get a Minhwa Prescription</span></a>
+        <a class="btn outline" href="#shop"><span class="kr">커미션 문의</span><span class="en">Commissions</span></a>
+        <a class="ig" href="https://www.instagram.com/siwoo.minhwa/" target="_blank" rel="noopener">Instagram @siwoo.minhwa</a>
       </div>
-      <!-- ✏️ 다가오는 전시 카드: 다음 전시가 확정되면 제목·장소·날짜와 링크만 바꾸면 됩니다.
-           전시 안내 페이지가 생기면 아래 a태그의 href를 그 주소로 교체하세요. -->
-      <aside class="show-card">
-        <p class="tag"><span class="kr">다가오는 전시</span><span class="en">UPCOMING</span></p>
-        <h3><span class="kr">그룹전</span><span class="en">Group Exhibition</span></h3>
-        <p>Flushing Town Hall — Queens, NY<br>
-           <span class="kr">2027년 1월 · 세부 일정 추후 공지</span>
-           <span class="en">January 2027 · Details to be announced</span></p>
-        <a href="#newsletter"><span class="kr">소식 받기 →</span><span class="en">Get updates →</span></a>
-      </aside>
+      <!-- ✏️ 다음 전시 라벨: 다음 전시가 확정되면 제목·장소·날짜만 바꾸면 됩니다.
+           전시 안내 페이지가 생기면 '전시 →' 링크의 href를 그 주소로 교체하세요. -->
+      <p class="next-show">
+        <span class="tag"><span class="kr">다음 전시</span><span class="en">NEXT</span></span>
+        <span class="what"><span class="kr">그룹전</span><span class="en">Group Exhibition</span></span>
+        <span>Flushing Town Hall — Queens, NY · <span class="kr">2027년 1월 · 세부 일정 추후 공지</span><span class="en">January 2027 · Details to be announced</span></span>
+        <span class="links"><a class="arrow-link" href="#exhibitions"><span class="kr">전시 →</span><span class="en">Exhibitions →</span></a>
+        <a class="arrow-link" href="#newsletter"><span class="kr">소식 받기 →</span><span class="en">Get updates →</span></a></span>
+      </p>
     </div>
-  </div>
-</div>
-
-<section id="gallery" class="wrap">
-  <div class="sec-head">
-    <h2><span class="kr">작품</span><span class="en">Gallery</span></h2>
-    <p class="sub kr">분채와 먹, 한지 — 모든 작품은 전통 재료로 제작되었습니다.</p>
-    <p class="sub en">All works: ground mineral &amp; shell pigment (bunchae) and ink on hanji.</p>
-  </div>
-
-  <div class="grid">
-    <!-- ★ 작품 추가 방법: 아래 <figure class="art"> 블록 하나를 통째로 복사해서
-         이미지 파일명(images/…)과 제목·연도·크기만 바꾸면 됩니다. -->
-
-    <figure class="art">
-      <button class="art-open" data-cap="궁모란도 Court Peonies · 2025 · 30 × 60 in">
-        <img src="images/morando.jpg" loading="lazy" alt="궁모란도 — Court Peonies, peony tree in full bloom on golden hanji">
-      </button>
-      <figcaption>
-        <p class="t"><span class="kr">궁모란도</span><span class="en">Court Peonies (Gung-mo-ran-do)</span></p>
-        <p class="m">2025 · <span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 30 × 60 in</p>
-      </figcaption>
-    </figure>
-
-    <figure class="art">
-      <button class="art-open" data-cap="연지쌍압도 Lotus Pond with a Pair of Mandarin Ducks · 2025 · 30 × 55 in">
-        <img src="images/yeonjissangapdo.jpg" loading="lazy" alt="연지쌍압도 — lotus pond with a pair of mandarin ducks">
-      </button>
-      <figcaption>
-        <p class="t"><span class="kr">연지쌍압도</span><span class="en">Lotus Pond with a Pair of Mandarin Ducks</span></p>
-        <p class="m">2025 · <span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 30 × 55 in</p>
-      </figcaption>
-    </figure>
-
-    <figure class="art">
-      <button class="art-open" data-cap="봉황문인문보 Phoenix-and-Auspicious-Pattern Wrapping Cloth · 2025 · 40 × 25 in">
-        <img src="images/bonghwangmun.jpg" loading="lazy" alt="봉황문인문보 — phoenix-pattern ceremonial wrapping cloth painting">
-      </button>
-      <figcaption>
-        <p class="t"><span class="kr">봉황문인문보</span><span class="en">Phoenix-and-Auspicious-Pattern Wrapping Cloth</span></p>
-        <p class="m">2025 · <span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 40 × 25 in</p>
-      </figcaption>
-    </figure>
-
-    <figure class="art">
-      <button class="art-open" data-cap="동백 Camellias · 2024 · 12 × 18 in">
-        <img src="images/dongbaek.jpg" loading="lazy" alt="동백 — red camellias blooming on a branch">
-      </button>
-      <figcaption>
-        <p class="t"><span class="kr">동백</span><span class="en">Camellias (Dong-baek)</span></p>
-        <p class="m">2024 · <span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 12 × 18 in</p>
-      </figcaption>
-    </figure>
-
-    <figure class="art">
-      <button class="art-open" data-cap="모란화조도 Peonies with Paired Birds · 2024 · 12 × 18 in">
-        <img src="images/moranhwajodo.jpg" loading="lazy" alt="모란화조도 — a pair of birds among peonies">
-      </button>
-      <figcaption>
-        <p class="t"><span class="kr">모란화조도</span><span class="en">Peonies with Paired Birds (Mo-ran-hwa-jo-do)</span></p>
-        <p class="m">2024 · <span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 12 × 18 in</p>
-      </figcaption>
-    </figure>
-
-    <figure class="art">
-      <button class="art-open" data-cap="연잎과 봉오리 Lotus Leaves and Bud · 45 × 45 cm">
-        <img src="images/yeonip-study.jpg" loading="lazy" alt="연잎과 봉오리 — close study of lotus leaves and a bud">
-      </button>
-      <figcaption>
-        <p class="t"><span class="kr">연잎과 봉오리</span><span class="en">Lotus Leaves and Bud</span></p>
-        <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 45 × 45 cm</p>
-      </figcaption>
-    </figure>
-
-    <figure class="art">
-      <button class="art-open" data-cap="사계화 Four Seasons of Flowers — Part I · 2024 · 25 × 30 in">
-        <img src="images/sagyehwa-1.jpg" loading="lazy" alt="사계화 1부 — chrysanthemum panels on pink hanji">
-      </button>
-      <figcaption>
-        <p class="t"><span class="kr">사계화 — 1부</span><span class="en">Four Seasons of Flowers — Part I</span></p>
-        <p class="m">2024 · <span class="kr">재현 모사, 브루클린 미술관 소장본</span><span class="en">recreation after Flowers, Brooklyn Museum</span> · 25 × 30 in</p>
-      </figcaption>
-    </figure>
-
-    <figure class="art">
-      <button class="art-open" data-cap="사계화 Four Seasons of Flowers — Part II · 2024 · 25 × 30 in">
-        <img src="images/sagyehwa-2.jpg" loading="lazy" alt="사계화 2부 — camellia and lotus panels on pink hanji">
-      </button>
-      <figcaption>
-        <p class="t"><span class="kr">사계화 — 2부</span><span class="en">Four Seasons of Flowers — Part II</span></p>
-        <p class="m">2024 · <span class="kr">재현 모사, 브루클린 미술관 소장본</span><span class="en">recreation after Flowers, Brooklyn Museum</span> · 25 × 30 in</p>
-      </figcaption>
-    </figure>
-
-    <figure class="art">
-      <button class="art-open" data-cap="화훼도 Flower Study I">
-        <img src="images/hwahwedo-3.jpg" loading="lazy" alt="화훼도 — flowering garden with a butterfly">
-      </button>
-      <figcaption>
-        <p class="t"><span class="kr">화훼도 I</span><span class="en">Flower Study (Hwa-hwe-do) I</span></p>
-        <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span></p>
-      </figcaption>
-    </figure>
-
-    <figure class="art">
-      <button class="art-open" data-cap="화훼도 Flower Study II">
-        <img src="images/hwahwedo-2.jpg" loading="lazy" alt="화훼도 — orange blossoms with butterflies">
-      </button>
-      <figcaption>
-        <p class="t"><span class="kr">화훼도 II</span><span class="en">Flower Study (Hwa-hwe-do) II</span></p>
-        <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span></p>
-      </figcaption>
-    </figure>
-
-    <figure class="art">
-      <button class="art-open" data-cap="화훼도 Flower Study III">
-        <img src="images/hwahwedo-4.jpg" loading="lazy" alt="화훼도 — field of red blossoms and reed-like leaves">
-      </button>
-      <figcaption>
-        <p class="t"><span class="kr">화훼도 III</span><span class="en">Flower Study (Hwa-hwe-do) III</span></p>
-        <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span></p>
-      </figcaption>
-    </figure>
-
-    <figure class="art">
-      <button class="art-open" data-cap="화훼도 Flower Study IV">
-        <img src="images/hwahwedo-1.jpg" loading="lazy" alt="화훼도 — stylized blue blossoms with scrolling tendrils">
-      </button>
-      <figcaption>
-        <p class="t"><span class="kr">화훼도 IV</span><span class="en">Flower Study (Hwa-hwe-do) IV</span></p>
-        <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span></p>
-      </figcaption>
-    </figure>
-
   </div>
 </section>
 
-<section id="about">
+<section id="gallery" aria-labelledby="gallery-h">
   <div class="wrap">
     <div class="sec-head">
-      <h2><span class="kr">소개</span><span class="en">About</span></h2>
+      <span class="num" aria-hidden="true"></span>
+      <h2 id="gallery-h"><span class="kr">작품</span><span class="en">Gallery</span></h2>
+      <p class="sub kr">분채와 먹, 한지 — 모든 작품은 전통 재료로 제작되었습니다. 그림을 누르면 크게 볼 수 있습니다.</p>
+      <p class="sub en">All works: ground mineral &amp; shell pigment (bunchae) and ink on hanji. Tap a painting to view it larger.</p>
+    </div>
+
+    <div data-lb-group="works">
+      <!-- ★ 작품 추가 방법: 원하는 줄(<div class="hang">) 안에 <figure class="art"> 블록 하나를 통째로 복사해 붙이고,
+           이미지 파일명(images/…) · --w/--h 와 width/height(사진의 가로·세로 픽셀) · 제목 · 연도 · 크기만 바꾸세요.
+           한 줄에 2~3점이 보기 좋습니다. 새 줄은 <div class="hang"> … </div> 묶음을 통째로 복사하세요.
+           data-cap-kr / data-cap-en 은 크게 보기 화면 아래에 뜨는 설명입니다. -->
+
+      <div class="hang">
+        <figure class="art" id="w-morando" style="--w:716;--h:1600">
+          <button class="art-open" type="button" data-cap-kr="궁모란도 · 2025 · 분채·먹, 한지 · 30 × 60 in" data-cap-en="Court Peonies · 2025 · mineral &amp; shell pigment and ink on hanji · 30 × 60 in">
+            <img src="images/morando.jpg" width="716" height="1600" decoding="async" alt="궁모란도 — Court Peonies, peony tree in full bloom on golden hanji">
+          </button>
+          <figcaption>
+            <p class="t"><span class="kr">궁모란도 <small>Court Peonies</small></span><span class="en">Court Peonies <small>궁모란도</small></span></p>
+            <p class="m">2025 · <span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 30 × 60 in</p>
+          </figcaption>
+        </figure>
+
+        <figure class="art" id="w-yeonjissangapdo" style="--w:990;--h:1600">
+          <button class="art-open" type="button" data-cap-kr="연지쌍압도 · 2025 · 분채·먹, 한지 · 30 × 55 in" data-cap-en="Lotus Pond with a Pair of Mandarin Ducks · 2025 · mineral &amp; shell pigment and ink on hanji · 30 × 55 in">
+            <img src="images/yeonjissangapdo.jpg" width="990" height="1600" loading="lazy" decoding="async" alt="연지쌍압도 — lotus pond with a pair of mandarin ducks">
+          </button>
+          <figcaption>
+            <p class="t"><span class="kr">연지쌍압도 <small>Lotus Pond with a Pair of Mandarin Ducks</small></span><span class="en">Lotus Pond with a Pair of Mandarin Ducks <small>연지쌍압도</small></span></p>
+            <p class="m">2025 · <span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 30 × 55 in</p>
+          </figcaption>
+        </figure>
+
+        <figure class="art" id="w-bonghwangmun" style="--w:1600;--h:1257">
+          <button class="art-open" type="button" data-cap-kr="봉황문인문보 · 2025 · 분채·먹, 한지 · 40 × 25 in" data-cap-en="Phoenix-and-Auspicious-Pattern Wrapping Cloth · 2025 · mineral &amp; shell pigment and ink on hanji · 40 × 25 in">
+            <img src="images/bonghwangmun.jpg" width="1600" height="1257" loading="lazy" decoding="async" alt="봉황문인문보 — phoenix-pattern ceremonial wrapping cloth painting">
+          </button>
+          <figcaption>
+            <p class="t"><span class="kr">봉황문인문보 <small>Phoenix-and-Auspicious-Pattern Wrapping Cloth</small></span><span class="en">Phoenix-and-Auspicious-Pattern Wrapping Cloth <small>봉황문인문보</small></span></p>
+            <p class="m">2025 · <span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 40 × 25 in</p>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="hang">
+        <figure class="art" id="w-dongbaek" style="--w:1092;--h:1600">
+          <button class="art-open" type="button" data-cap-kr="동백 · 2024 · 분채·먹, 한지 · 12 × 18 in" data-cap-en="Camellias · 2024 · mineral &amp; shell pigment and ink on hanji · 12 × 18 in">
+            <img src="images/dongbaek.jpg" width="1092" height="1600" loading="lazy" decoding="async" alt="동백 — red camellias blooming on a branch">
+          </button>
+          <figcaption>
+            <p class="t"><span class="kr">동백 <small>Camellias</small></span><span class="en">Camellias <small>동백</small></span></p>
+            <p class="m">2024 · <span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 12 × 18 in</p>
+          </figcaption>
+        </figure>
+
+        <figure class="art" id="w-moranhwajodo" style="--w:1112;--h:1600">
+          <button class="art-open" type="button" data-cap-kr="모란화조도 · 2024 · 분채·먹, 한지 · 12 × 18 in" data-cap-en="Peonies with Paired Birds · 2024 · mineral &amp; shell pigment and ink on hanji · 12 × 18 in">
+            <img src="images/moranhwajodo.jpg" width="1112" height="1600" loading="lazy" decoding="async" alt="모란화조도 — a pair of birds among peonies">
+          </button>
+          <figcaption>
+            <p class="t"><span class="kr">모란화조도 <small>Peonies with Paired Birds</small></span><span class="en">Peonies with Paired Birds <small>모란화조도</small></span></p>
+            <p class="m">2024 · <span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 12 × 18 in</p>
+          </figcaption>
+        </figure>
+
+        <!-- 연잎과 봉오리: 제작 연도를 아시면 아래 .m 줄 맨 앞에 '연도 · ' 를 넣어주세요 -->
+        <figure class="art" id="w-yeonip" style="--w:1559;--h:1600">
+          <button class="art-open" type="button" data-cap-kr="연잎과 봉오리 · 분채·먹, 한지 · 45 × 45 cm" data-cap-en="Lotus Leaves and Bud · mineral &amp; shell pigment and ink on hanji · 45 × 45 cm">
+            <img src="images/yeonip-study.jpg" width="1559" height="1600" loading="lazy" decoding="async" alt="연잎과 봉오리 — close study of lotus leaves and a bud">
+          </button>
+          <figcaption>
+            <p class="t"><span class="kr">연잎과 봉오리 <small>Lotus Leaves and Bud</small></span><span class="en">Lotus Leaves and Bud <small>연잎과 봉오리</small></span></p>
+            <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 45 × 45 cm</p>
+          </figcaption>
+        </figure>
+      </div>
+
+      <!-- 사계화 두 폭은 항상 같은 줄에 나란히 -->
+      <div class="hang pair">
+        <figure class="art" id="w-sagyehwa-1" style="--w:1453;--h:1600">
+          <button class="art-open" type="button" data-cap-kr="사계화 — 1부 · 2024 · 재현 모사, 브루클린 미술관 소장본 · 25 × 30 in" data-cap-en="Four Seasons of Flowers — Part I · 2024 · recreation after Flowers, Brooklyn Museum · 25 × 30 in">
+            <img src="images/sagyehwa-1.jpg" width="1453" height="1600" loading="lazy" decoding="async" alt="사계화 1부 — chrysanthemum panels on pink hanji">
+          </button>
+          <figcaption>
+            <p class="t"><span class="kr">사계화 — 1부 <small>Four Seasons of Flowers — Part I</small></span><span class="en">Four Seasons of Flowers — Part I <small>사계화 — 1부</small></span></p>
+            <p class="m">2024 · <span class="kr">재현 모사, 브루클린 미술관 소장본</span><span class="en">recreation after Flowers, Brooklyn Museum</span> · 25 × 30 in</p>
+          </figcaption>
+        </figure>
+
+        <figure class="art" id="w-sagyehwa-2" style="--w:1515;--h:1600">
+          <button class="art-open" type="button" data-cap-kr="사계화 — 2부 · 2024 · 재현 모사, 브루클린 미술관 소장본 · 25 × 30 in" data-cap-en="Four Seasons of Flowers — Part II · 2024 · recreation after Flowers, Brooklyn Museum · 25 × 30 in">
+            <img src="images/sagyehwa-2.jpg" width="1515" height="1600" loading="lazy" decoding="async" alt="사계화 2부 — camellia and lotus panels on pink hanji">
+          </button>
+          <figcaption>
+            <p class="t"><span class="kr">사계화 — 2부 <small>Four Seasons of Flowers — Part II</small></span><span class="en">Four Seasons of Flowers — Part II <small>사계화 — 2부</small></span></p>
+            <p class="m">2024 · <span class="kr">재현 모사, 브루클린 미술관 소장본</span><span class="en">recreation after Flowers, Brooklyn Museum</span> · 25 × 30 in</p>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="hang">
+        <figure class="art" id="w-hwahwedo-1" style="--w:1600;--h:1200">
+          <button class="art-open" type="button" data-cap-kr="화훼도 I · 분채·먹, 한지" data-cap-en="Flower Study I · mineral &amp; shell pigment and ink on hanji">
+            <img src="images/hwahwedo-3.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="화훼도 — flowering garden with a butterfly">
+          </button>
+          <figcaption>
+            <p class="t"><span class="kr">화훼도 I <small>Flower Study I</small></span><span class="en">Flower Study I <small>화훼도 I</small></span></p>
+            <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span></p>
+          </figcaption>
+        </figure>
+
+        <figure class="art" id="w-hwahwedo-2" style="--w:1600;--h:1344">
+          <button class="art-open" type="button" data-cap-kr="화훼도 II · 분채·먹, 한지" data-cap-en="Flower Study II · mineral &amp; shell pigment and ink on hanji">
+            <img src="images/hwahwedo-2.jpg" width="1600" height="1344" loading="lazy" decoding="async" alt="화훼도 — orange blossoms with butterflies">
+          </button>
+          <figcaption>
+            <p class="t"><span class="kr">화훼도 II <small>Flower Study II</small></span><span class="en">Flower Study II <small>화훼도 II</small></span></p>
+            <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span></p>
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="hang">
+        <figure class="art" id="w-hwahwedo-3" style="--w:1600;--h:1200">
+          <button class="art-open" type="button" data-cap-kr="화훼도 III · 분채·먹, 한지" data-cap-en="Flower Study III · mineral &amp; shell pigment and ink on hanji">
+            <img src="images/hwahwedo-4.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="화훼도 — field of red blossoms and reed-like leaves">
+          </button>
+          <figcaption>
+            <p class="t"><span class="kr">화훼도 III <small>Flower Study III</small></span><span class="en">Flower Study III <small>화훼도 III</small></span></p>
+            <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span></p>
+          </figcaption>
+        </figure>
+
+        <figure class="art" id="w-hwahwedo-4" style="--w:1600;--h:1253">
+          <button class="art-open" type="button" data-cap-kr="화훼도 IV · 분채·먹, 한지" data-cap-en="Flower Study IV · mineral &amp; shell pigment and ink on hanji">
+            <img src="images/hwahwedo-1.jpg" width="1600" height="1253" loading="lazy" decoding="async" alt="화훼도 — stylized blue blossoms with scrolling tendrils">
+          </button>
+          <figcaption>
+            <p class="t"><span class="kr">화훼도 IV <small>Flower Study IV</small></span><span class="en">Flower Study IV <small>화훼도 IV</small></span></p>
+            <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span></p>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="prescription" aria-labelledby="rx-h" data-lb-group="rx">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="num" aria-hidden="true"></span>
+      <h2 id="rx-h"><span class="kr">민화 처방전</span><span class="en">Minhwa Prescription</span></h2>
+      <p class="sub kr">약 대신 그림을 처방해드립니다.</p>
+      <p class="sub en">A painting, prescribed for your wish.</p>
+    </div>
+    <div class="rx-top">
+      <figure class="art" style="--w:1080;--h:1350">
+        <button class="art-open" type="button" data-cap-kr="민화 처방전 안내 카드" data-cap-en="Minhwa Prescription — announcement card (Korean)">
+          <img src="images/prescription/announcement.jpg" width="1080" height="1350" loading="lazy" decoding="async" alt="민화 처방전 안내 — 증상, 처방, 용법이 적힌 처방전 형식 카드">
+        </button>
+        <figcaption><p class="m"><span class="kr">안내 카드 (한국어)</span><span class="en">Announcement card (Korean)</span></p></figcaption>
+      </figure>
+      <div class="rx-info">
+        <p class="lead kr">옛사람들은 소원을 말하는 대신, 그림으로 그려 벽에 걸었습니다. 부귀를 바라면 모란을, 화목을 바라면 한 쌍의 새를, 변치 않는 마음을 바라면 한겨울의 동백을. 당신의 소원에는 어떤 그림이 필요할까요?</p>
+        <p class="lead en">In old Korea, people didn't just speak their wishes — they hung them on the wall. Peonies for prosperity, birds in loving pairs for a happy home, winter camellias for a love that never fades. What painting does your wish need?</p>
+        <div class="rx-box">
+          <p class="rx-h"><span class="kr">참여 방법</span><span class="en">HOW IT WORKS</span></p>
+          <p class="kr">이메일 또는 인스타그램 DM으로 두 가지만 보내주세요 — ① 그림을 걸고 싶은 벽 사진 한 장, ② 요즘 가장 바라는 소원 한 가지. 답장으로 소원에 맞는 민화 한 점과 그림에 담긴 상징 이야기, 당신의 벽에 걸린 모습 미리보기를 보내드립니다.</p>
+          <p class="en">Email me, or DM me on Instagram, with two things — ① a photo of the wall you'd like to fill, ② one thing you're wishing for these days. You'll receive the minhwa that matches your wish, the story behind it, and a preview of the painting on your own wall.</p>
+        </div>
+        <div class="rx-actions">
+          <a class="btn" href="mailto:icallingyou@gmail.com?subject=%EB%AF%BC%ED%99%94%20%EC%B2%98%EB%B0%A9%EC%A0%84%20%2F%20Minhwa%20Prescription"><span class="kr">이메일로 신청하기</span><span class="en">Request by email</span></a>
+          <a class="btn outline" href="https://www.instagram.com/siwoo.minhwa/" target="_blank" rel="noopener"><span class="kr">인스타그램 DM</span><span class="en">DM on Instagram</span></a>
+        </div>
+        <p class="rx-fine"><span class="kr">처방은 무료이고, 부담은 없습니다. 처방전에는 유효기간이 없어요.</span><span class="en">The prescription is free, no strings attached — and it never expires.</span></p>
+      </div>
+    </div>
+    <div class="rx-cards">
+      <figure class="art" style="--w:1135;--h:1600">
+        <button class="art-open" type="button" data-cap-kr="궁모란도 — 부귀영화" data-cap-en="Royal Peony — Wealth and Honor">
+          <img src="images/prescription/card-moran.jpg" width="1135" height="1600" loading="lazy" decoding="async" alt="궁모란도 상징 카드 — 부귀영화">
+        </button>
+        <figcaption><p class="t"><span class="kr">궁모란도 · 부귀영화</span><span class="en">Royal Peony · Wealth &amp; Honor</span></p></figcaption>
+      </figure>
+      <figure class="art" style="--w:1135;--h:1600">
+        <button class="art-open" type="button" data-cap-kr="연화도 — 화합과 평안" data-cap-en="Lotus — Harmony and Peace">
+          <img src="images/prescription/card-yeonhwa.jpg" width="1135" height="1600" loading="lazy" decoding="async" alt="연화도 상징 카드 — 화합과 평안">
+        </button>
+        <figcaption><p class="t"><span class="kr">연화도 · 화합과 평안</span><span class="en">Lotus · Harmony &amp; Peace</span></p></figcaption>
+      </figure>
+      <figure class="art" style="--w:1135;--h:1600">
+        <button class="art-open" type="button" data-cap-kr="붉은 동백화 — 변치 않는 사랑" data-cap-en="Red Camellia — Everlasting Love">
+          <img src="images/prescription/card-dongbaek.jpg" width="1135" height="1600" loading="lazy" decoding="async" alt="붉은 동백화 상징 카드 — 변치 않는 사랑">
+        </button>
+        <figcaption><p class="t"><span class="kr">동백화 · 변치 않는 사랑</span><span class="en">Camellia · Everlasting Love</span></p></figcaption>
+      </figure>
+      <figure class="art" style="--w:1135;--h:1600">
+        <button class="art-open" type="button" data-cap-kr="화조도 — 부부금슬" data-cap-en="Birds and Flowers — A Loving Home">
+          <img src="images/prescription/card-hwajo.jpg" width="1135" height="1600" loading="lazy" decoding="async" alt="화조도 상징 카드 — 부부금슬">
+        </button>
+        <figcaption><p class="t"><span class="kr">화조도 · 부부금슬</span><span class="en">Birds &amp; Flowers · A Loving Home</span></p></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section id="about" aria-labelledby="about-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="num" aria-hidden="true"></span>
+      <h2 id="about-h"><span class="kr">소개</span><span class="en">About</span></h2>
     </div>
     <div class="about-cols">
       <div class="about-prose">
         <div class="kr">
-          <p>안녕하세요, 뉴욕 퀸즈 베이사이드에서 민화를 그리는 김지애입니다. 조선 후기 민화의 전통 그대로 — 돌과 조개를 갈아 만든 분채를 아교에 개어, 한지 위에 얇게 여러 번 쌓아 올립니다.</p>
-        <p>민화는 본래 집안의 그림이었습니다. 모란은 부귀를, 연꽃은 맑음을, 원앙 한 쌍은 화목을 빌었지요. 그림마다 담긴 이 복(福)의 언어를, 퀸즈에 뿌리내린 한인 디아스포라의 오늘로 옮겨 그리는 것이 제 작업입니다.</p>
+          <p class="lead">안녕하세요, 뉴욕 퀸즈 베이사이드에서 민화를 그리는 김지애입니다.</p>
+          <p>조선 후기 민화의 전통 그대로 — 돌과 조개를 갈아 만든 분채를 아교에 개어, 한지 위에 얇게 여러 번 쌓아 올립니다.</p>
+          <p>민화는 본래 집안의 그림이었습니다. 모란은 부귀를, 연꽃은 맑음을, 원앙 한 쌍은 화목을 빌었지요. 그림마다 담긴 이 복(福)의 언어를, 퀸즈에 뿌리내린 한인 디아스포라의 오늘로 옮겨 그리는 것이 제 작업입니다.</p>
           <p>지닐민화 조현주 선생님 문하에서 수학하고 있으며, K-Color Link의 리드 아티스트로 퀸즈 곳곳에서 한·영 이중언어 무료 민화 워크숍을 엽니다.</p>
-          <p>호(號)는 시우(時雨) — '때맞춰 내리는 비'라는 뜻입니다. 그림이 누군가의 벽에서, 꼭 필요한 순간에 내리는 단비가 되기를 바라는 마음을 담았습니다.</p>
         </div>
         <div class="en">
-          <p>I am a minhwa painter based in Bayside, Queens — working in the late-Joseon Korean folk painting tradition with its original materials: ground mineral and shell pigments (bunchae) bound with hide glue, built up in thin layers on handmade hanji paper.</p>
+          <p class="lead">I am a minhwa painter based in Bayside, Queens.</p>
+          <p>I work in the late-Joseon Korean folk painting tradition with its original materials: ground mineral and shell pigments (bunchae) bound with hide glue, built up in thin layers on handmade hanji paper.</p>
           <p>Minhwa was the painting of the household. Peonies wished a family wealth and honor, the lotus purity, a pair of mandarin ducks harmony. My work carries that language of blessing into the present-day life of the Korean diaspora in Queens.</p>
           <p>I train in the Jinil Minhwa lineage under Master Hyun Joo Cho, and as lead artist of the K-Color Link collective I lead free bilingual minhwa workshops across Queens.</p>
-          <p>I paint under the artist name Si-Woo (時雨) — "timely rain" — in the hope that each painting arrives on someone's wall at just the moment it is needed.</p>
         </div>
+        <blockquote class="pull">
+          <span class="seal" aria-hidden="true">시<br>우</span>
+          <div>
+            <p class="kr">호(號)는 시우(時雨) — '때맞춰 내리는 비'라는 뜻입니다. 그림이 누군가의 벽에서, 꼭 필요한 순간에 내리는 단비가 되기를 바라는 마음을 담았습니다.</p>
+            <p class="en">I paint under the artist name Si-Woo (時雨) — "timely rain" — in the hope that each painting arrives on someone's wall at just the moment it is needed.</p>
+          </div>
+        </blockquote>
       </div>
-      <aside class="cv">
-        <h3><span class="kr">이력</span><span class="en">Selected CV</span></h3>
+      <aside class="cv" aria-labelledby="cv-h">
+        <h3 id="cv-h"><span class="kr">약력</span><span class="en">Selected CV</span></h3>
         <ul>
-          <li><span class="y">2024–</span><span class="kr">지닐민화 — 조현주 선생 사사 · 한국민화협회 네트워크</span><span class="en">Jinil Minhwa — under Master Hyun Joo Cho · Korean Folk Painting Association</span></li>
-          <li><span class="y">2024 · 2025</span><span class="kr">대한민국 민화공모전 입선</span><span class="en">Korean Minhwa Contest — Honorable Mention</span></li>
-          <li><span class="y">2025</span><span class="kr">Bank Art Gallery 국제여성비엔날레 후보</span><span class="en">Bank Art Gallery International Women's Biennale — Nominee</span></li>
-          <li><span class="y">2026</span><span class="kr">퀸즈 아츠 펀드(QAF) 뉴워크 그랜트 — “Quilt of Hopes” (K-Color Link 리드 아티스트)</span><span class="en">Queens Arts Fund New Work Grant — “Quilt of Hopes” (lead artist, K-Color Link)</span></li>
+          <li><span class="y">2026</span><span><span class="kr">퀸즈 아츠 펀드(QAF) 뉴워크 그랜트 — “Quilt of Hopes” (K-Color Link 리드 아티스트)</span><span class="en">Queens Arts Fund New Work Grant — “Quilt of Hopes” (lead artist, K-Color Link)</span></span></li>
+          <li><span class="y">2025</span><span><span class="kr">Bank Art Gallery 국제여성비엔날레 후보</span><span class="en">Bank Art Gallery International Women's Biennale — Nominee</span></span></li>
+          <li><span class="y">2024 · 2025</span><span><span class="kr">대한민국 민화공모전 입선</span><span class="en">Korean Minhwa Contest — Honorable Mention</span></span></li>
+          <li><span class="y">2024–</span><span><span class="kr">지닐민화 — 조현주 선생 사사 · 한국민화협회 네트워크</span><span class="en">Jinil Minhwa — under Master Hyun Joo Cho · Korean Folk Painting Association</span></span></li>
         </ul>
+        <p class="ig">Instagram · <a href="https://www.instagram.com/siwoo.minhwa/" target="_blank" rel="me noopener">@siwoo.minhwa</a></p>
       </aside>
     </div>
   </div>
 </section>
 
-<section id="exhibitions" class="wrap">
-  <div class="sec-head">
-    <h2><span class="kr">전시</span><span class="en">Exhibitions</span></h2>
-  </div>
-  <div class="exh">
-    <!-- ✏️ 새 전시 추가하기: 아래 템플릿을 복사해 이 주석 바로 밑(목록 맨 위)에 붙이고 내용을 수정하세요.
-         전시가 끝나면 badge 줄을 삭제하고, 리셉션·관람 안내 정보는 지워서 장소와 날짜만 남기면 됩니다.
+<section id="exhibitions" aria-labelledby="exh-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="num" aria-hidden="true"></span>
+      <h2 id="exh-h"><span class="kr">전시</span><span class="en">Exhibitions</span></h2>
+    </div>
+    <div class="exh">
+      <!-- ✏️ 새 전시 추가하기: 아래 템플릿을 복사해 이 주석 바로 밑(목록 맨 위)에 붙이고 내용을 수정하세요.
+           전시가 끝나면 badge 줄을 삭제하고, 리셉션·관람 안내 정보는 지워서 장소와 날짜만 남기면 됩니다.
 
-    <div class="exh-row">
-      <span class="when">YYYY.MM</span>
-      <span><span class="what">전시 제목</span>
-      <span class="where">장소 · <span class="kr">날짜 · 리셉션 정보</span><span class="en">Dates · Reception info</span></span></span>
-      <span class="badge"><span class="kr">예정</span><span class="en">UPCOMING</span></span>
+      <div class="exh-row">
+        <span class="when">YYYY.MM</span>
+        <span><span class="what">전시 제목</span>
+        <span class="where">장소 · <span class="kr">날짜 · 리셉션 정보</span><span class="en">Dates · Reception info</span></span></span>
+        <span class="badge"><span class="kr">예정</span><span class="en">UPCOMING</span></span>
+      </div>
+      -->
+      <div class="exh-row">
+        <span class="when">2027.01</span>
+        <span><span class="what"><span class="kr">그룹전</span><span class="en">Group Exhibition</span></span>
+        <span class="where">Flushing Town Hall — Queens, NY · <span class="kr">2027년 1월 · 세부 일정 추후 공지</span><span class="en">January 2027 · Details to be announced</span></span></span>
+        <span class="badge"><span class="kr">예정</span><span class="en">UPCOMING</span></span>
+      </div>
+      <div class="exh-row">
+        <span class="when">2026.08</span>
+        <span><span class="what"><a href="https://www.baysidehistorical.org/events-1/moon-and-bloom-showcasing-east-asian-art-at-the-bhs-castle" target="_blank" rel="noopener">Moon and Bloom: Showcasing East Asian Art at the BHS Castle</a></span>
+        <span class="where">Bayside Historical Society, The Castle — Fort Totten, Bayside NY · <span class="kr">2026. 8. 4 – 8. 14</span><span class="en">Aug 4–14, 2026</span></span></span>
+      </div>
+      <div class="exh-row">
+        <span class="when">2025.03</span>
+        <span><span class="what">Peony Stories Today</span>
+        <span class="where">Shelter Rock Public Library — Albertson, NY</span></span>
+      </div>
+      <div class="exh-row">
+        <span class="when">2024–26</span>
+        <span><span class="what"><span class="kr">한국민화협회 그룹전</span><span class="en">Korean Folk Painting Association — Group Exhibitions</span></span></span>
+      </div>
     </div>
-    -->
-    <div class="exh-row">
-      <span class="when">2027.01</span>
-      <span><span class="what"><span class="kr">그룹전 (예정)</span><span class="en">Group Exhibition</span></span>
-      <span class="where">Flushing Town Hall — Queens, NY</span></span>
-      <span class="badge"><span class="kr">예정</span><span class="en">UPCOMING</span></span>
+  </div>
+</section>
+
+<section id="shop" aria-labelledby="studio-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="num" aria-hidden="true"></span>
+      <h2 id="studio-h"><span class="kr">스튜디오</span><span class="en">Studio</span></h2>
+      <p class="sub kr">커미션, 프린트, 그리고 한 달에 한 번의 편지.</p>
+      <p class="sub en">Commissions, prints, and a letter once a month.</p>
     </div>
-    <div class="exh-row">
-      <span class="when">2026.08</span>
-      <span><span class="what"><a href="https://www.baysidehistorical.org/events-1/moon-and-bloom-showcasing-east-asian-art-at-the-bhs-castle" target="_blank" rel="noopener">Moon and Bloom: Showcasing East Asian Art at the BHS Castle</a></span>
-      <span class="where">Bayside Historical Society, The Castle — Fort Totten, Bayside NY · <span class="kr">2026. 8. 4 – 8. 14</span><span class="en">Aug 4–14, 2026</span></span></span>
+    <div class="studio-cards">
+      <div class="card">
+        <h3><span class="kr">커미션</span><span class="en">Commissions</span></h3>
+        <p class="kr">결혼·돌·개업 선물을 위한 축원 민화, 소형 원화 커미션을 소량으로 받습니다. 원하시는 상징(모란·연꽃·원앙 등)과 크기를 알려주세요.</p>
+        <p class="en">I take a small number of commissions — blessing paintings for weddings, first birthdays, and new beginnings. Tell me the symbols and size you have in mind.</p>
+        <div class="card-foot"><a class="btn" href="mailto:icallingyou@gmail.com?subject=Commission%20inquiry%20%2F%20%EC%BB%A4%EB%AF%B8%EC%85%98%20%EB%AC%B8%EC%9D%98"><span class="kr">커미션 문의</span><span class="en">Inquire by email</span></a></div>
+      </div>
+      <div class="card">
+        <h3><span class="kr">프린트 · 컬러링 도안</span><span class="en">Prints &amp; Coloring PDFs</span></h3>
+        <p class="kr">원화 기반 아트 프린트와 민화 컬러링 도안 PDF를 준비하고 있습니다. 뉴스레터로 오픈 소식을 가장 먼저 알려드릴게요.</p>
+        <p class="en">Art prints and minhwa coloring-page PDFs are in the works — newsletter readers hear first.</p>
+        <!-- ★ 굿즈 판매 시작 시: 아래 줄을 <a class="btn" href="검로드/코파이 링크">샵 열기</a> 로 교체 -->
+        <div class="card-foot"><span class="soon"><span class="kr">준비 중</span><span class="en">COMING SOON</span></span></div>
+      </div>
+      <div class="card" id="newsletter">
+        <h3 id="nl-h"><span class="kr">뉴욕 그림 편지</span><span class="en">A Letter from the Studio</span></h3>
+        <p><span class="kr">한 달에 한 번 — 신작과 작업 과정, 전시 소식을 담아 보냅니다.</span><span class="en">Once a month — new work, process notes, and exhibition news.</span></p>
+        <!-- ★ 뉴스레터 도구(스티비/Beehiiv 등) 가입 후: form의 action을 해당 폼 주소로 바꾸면 실제 구독으로 연결됩니다.
+             그 전까지는 신청 시 안내 문구가 뜨고, 메일 앱이 열립니다. -->
+        <div class="card-foot">
+          <form id="nlForm" action="#REPLACE_WITH_FORM_URL" method="post">
+            <label for="nlEmail" class="sr-only"><span class="kr">이메일 주소</span><span class="en">Email address</span></label>
+            <input id="nlEmail" type="email" name="email" required placeholder="you@email.com" autocomplete="email" inputmode="email">
+            <button class="btn" type="submit"><span class="kr">구독하기</span><span class="en">Subscribe</span></button>
+          </form>
+          <p id="nlMsg" class="rx-fine" hidden role="status" aria-live="polite"></p>
+        </div>
+      </div>
     </div>
-    <div class="exh-row">
-      <span class="when">2025.03</span>
-      <span><span class="what">Peony Stories Today</span>
-      <span class="where">Shelter Rock Public Library — Albertson, NY</span></span>
+  </div>
+</section>
+
+</main>
+
+<footer id="contact">
+  <h2 class="sr-only"><span class="kr">연락</span><span class="en">Contact</span></h2>
+  <div class="wrap foot-in">
+    <span class="seal" aria-hidden="true">시<br>우</span>
+    <div>
+      <strong>김지애 Jiae Kim</strong> — <span class="kr">민화 · 뉴욕 퀸즈 베이사이드</span><span class="en">Minhwa · Bayside, Queens, NY</span>
+      <div class="foot-links">
+        <a href="mailto:icallingyou@gmail.com">icallingyou@gmail.com</a>
+        <a href="https://www.instagram.com/siwoo.minhwa/" target="_blank" rel="me noopener">Instagram @siwoo.minhwa</a>
+      </div>
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="#gallery"><span class="kr">작품</span><span class="en">Gallery</span></a>
+        <a href="#prescription"><span class="kr">민화 처방전</span><span class="en">Prescription</span></a>
+        <a href="#about"><span class="kr">소개</span><span class="en">About</span></a>
+        <a href="#exhibitions"><span class="kr">전시</span><span class="en">Exhibitions</span></a>
+        <a href="#shop"><span class="kr">스튜디오</span><span class="en">Studio</span></a>
+        <a href="#newsletter"><span class="kr">뉴스레터</span><span class="en">Newsletter</span></a>
+      </nav>
     </div>
-    <div class="exh-row">
+    <span class="copy">© <span id="year">2026</span> Jiae Kim<br><a href="#top"><span class="kr">↑ 맨 위로</span><span class="en">↑ Top</span></a></span>
+  </div>
+</footer>
+
+<div id="lb" role="dialog" aria-modal="true" aria-label="Artwork view">
+  <span class="count" aria-live="polite"></span>
+  <button class="lb-close" type="button" aria-label="닫기 Close">×</button>
+  <button class="lb-prev" type="button" aria-label="이전 Previous">‹</button>
+  <div class="stage"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt=""></div>
+  <button class="lb-next" type="button" aria-label="다음 Next">›</button>
+  <p class="cap"></p>
+</div>
+
+<script>
+// ── 한/영 전환 (선택한 언어는 이 브라우저에 기억됩니다) ──
+(function(){
+  var root = document.documentElement, btn = document.getElementById('langBtn');
+  if (root.dataset.lang !== 'en') root.dataset.lang = 'kr';
+  if (!btn) return;
+  function label(lang){
+    btn.textContent = lang === 'kr' ? 'EN' : '한국어';
+    btn.lang = lang === 'kr' ? 'en' : 'ko';
+    btn.setAttribute('aria-label', lang === 'kr' ? 'Switch to English' : '한국어로 보기');
+  }
+  label(root.dataset.lang);
+  btn.addEventListener('click', function(){
+    var lang = root.dataset.lang === 'kr' ? 'en' : 'kr';
+    root.dataset.lang = lang;
+    root.lang = lang === 'kr' ? 'ko' : 'en';
+    label(lang);
+    try { localStorage.setItem('lang', lang); } catch(e) {}
+    document.dispatchEvent(new CustomEvent('langchange'));
+  });
+})();
+
+// ── 폰 메뉴 줄: 옆으로 더 있을 때만 오른쪽 끝을 흐리게 ──
+(function(){
+  var nav = document.getElementById('siteNav'); if (!nav) return;
+  var bar = nav.parentElement;
+  nav.addEventListener('focusin', function(e){ if (e.target.scrollIntoView) e.target.scrollIntoView({block:'nearest', inline:'nearest'}); });
+  function check(){ bar.classList.toggle('can-scroll', nav.scrollWidth > nav.clientWidth + 2 && nav.scrollLeft + nav.clientWidth < nav.scrollWidth - 2); }
+  check(); window.addEventListener('resize', check); nav.addEventListener('scroll', check, {passive:true});
+  document.addEventListener('langchange', check);
+})();
+
+// ── 라이트박스 (←/→ 이전·다음, Esc 닫기, 손가락으로 넘기기) ──
+(function(){
+  var lb = document.getElementById('lb'); if (!lb) return;
+  var lbImg = lb.querySelector('img');
+  var lbCap = lb.querySelector('.cap');
+  var lbCount = lb.querySelector('.count');
+  var blank = lbImg.getAttribute('src');
+  var all = Array.prototype.slice.call(document.querySelectorAll('.art-open'));
+  var items = [], current = -1, lastFocus = null;
+  function groupOf(b){ var g = b.closest('[data-lb-group]'); return g ? g.getAttribute('data-lb-group') : 'default'; }
+  function capFor(b){
+    var kr = document.documentElement.dataset.lang === 'kr';
+    return (kr ? b.getAttribute('data-cap-kr') : b.getAttribute('data-cap-en')) || b.getAttribute('data-cap') || '';
+  }
+  function show(i){
+    current = (i + items.length) % items.length;
+    var b = items[current], im = b.querySelector('img');
+    lbImg.src = im.currentSrc || im.src; lbImg.alt = im.alt;
+    lbCap.textContent = capFor(b);
+    lbCount.textContent = (current + 1) + ' / ' + items.length;
+    var n = items[(current + 1) % items.length].querySelector('img'); // 다음 그림 미리 받아두기
+    if (n && !n.complete) n.loading = 'eager';
+  }
+  function open(b){
+    var g = groupOf(b);
+    items = all.filter(function(x){ return groupOf(x) === g; });
+    lastFocus = document.activeElement;
+    show(items.indexOf(b));
+    lb.classList.add('open');
+    document.body.classList.add('lb-open');
+    lb.querySelector('.lb-close').focus();
+  }
+  function close(){
+    lb.classList.remove('open');
+    document.body.classList.remove('lb-open');
+    lbImg.setAttribute('src', blank); lbImg.alt = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  all.forEach(function(b){ b.addEventListener('click', function(){ open(b); }); });
+  lb.querySelector('.lb-close').addEventListener('click', close);
+  lb.querySelector('.lb-prev').addEventListener('click', function(){ show(current - 1); });
+  lb.querySelector('.lb-next').addEventListener('click', function(){ show(current + 1); });
+  lb.querySelector('.stage').addEventListener('click', function(e){ if (e.target !== lbImg) close(); });
+  document.addEventListener('langchange', function(){ if (lb.classList.contains('open')) lbCap.textContent = capFor(items[current]); });
+  document.addEventListener('keydown', function(e){
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowRight') show(current + 1);
+    else if (e.key === 'ArrowLeft') show(current - 1);
+    else if (e.key === 'Tab') { // 포커스를 라이트박스 안에 가둠
+      var f = lb.querySelectorAll('button'), first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  });
+  var x0 = null, y0 = null;
+  lb.addEventListener('touchstart', function(e){ if (e.touches.length === 1) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; } else { x0 = y0 = null; } }, {passive:true});
+  lb.addEventListener('touchend', function(e){
+    if (x0 === null || e.touches.length) return;
+    var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = y0 = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) show(current + (dx < 0 ? 1 : -1));
+  });
+})();
+
+// ── 뉴스레터: 폼 주소 교체 전에는 화면 안내 + 메일 앱 시도 ──
+(function(){
+  var nlForm = document.getElementById('nlForm');
+  var nlMsg = document.getElementById('nlMsg');
+  if (!nlForm || !nlMsg) return;
+  nlForm.addEventListener('submit', function(e){
+    if (nlForm.getAttribute('action').indexOf('#') !== 0) return; // 실제 폼 연결 후엔 정상 전송
+    e.preventDefault();
+    var em = nlForm.email.value.trim();
+    var kr = document.documentElement.dataset.lang === 'kr';
+    nlMsg.hidden = false;
+    nlMsg.innerHTML = kr
+      ? '신청 감사합니다! 메일 앱이 열리면 그대로 <strong>보내기</strong>만 눌러주세요.<br>메일 앱이 열리지 않으면 <strong>icallingyou@gmail.com</strong> 으로 "구독"이라고 한 통만 보내주시면 바로 등록해드려요. <button type="button" id="cpBtn" class="linkbtn">주소 복사</button>'
+      : 'Thank you! If your mail app opens, just hit <strong>send</strong>.<br>If nothing opens, email <strong>icallingyou@gmail.com</strong> with the word "subscribe" and I\'ll add you. <button type="button" id="cpBtn" class="linkbtn">Copy address</button>';
+    var cp = document.getElementById('cpBtn');
+    cp.addEventListener('click', function(){
+      if (navigator.clipboard) navigator.clipboard.writeText('icallingyou@gmail.com').then(function(){ cp.textContent = kr ? '복사됨 ✓' : 'Copied ✓'; });
+    });
+    setTimeout(function(){
+      location.href = 'mailto:icallingyou@gmail.com?subject=' +
+        encodeURIComponent('뉴스레터 구독 / Newsletter signup') +
+        '&body=' + encodeURIComponent('구독 이메일: ' + em);
+    }, 250);
+  });
+})();
+
+// ── 푸터 연도 자동 갱신 ──
+(function(){ var y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear(); })();
+</script>
+</body>
+</html>
