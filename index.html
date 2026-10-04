@@ -144,9 +144,9 @@ nav.links a:hover{color:var(--seal)}
   .seal{width:40px;height:40px;font-size:14px}
   #langBtn{order:0;margin-left:auto}
   nav.links{order:4;flex:1 1 100%;margin:0 calc(-1 * var(--gutter));padding:0 var(--gutter);gap:0;
-    overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
+    overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-padding-inline:16px 48px}
   nav.links::-webkit-scrollbar{display:none}
-  nav.links a{scroll-snap-align:start;min-height:42px;padding:0 12px;font-size:.95rem}
+  nav.links a{min-height:42px;padding:0 12px;font-size:.95rem}
   nav.links a:first-child{padding-left:0}
   nav.links a:last-child{padding-right:36px}
   .nav-in.can-scroll::after{content:"";position:absolute;right:0;bottom:0;width:44px;height:42px;pointer-events:none;
@@ -183,6 +183,7 @@ h1 span{color:var(--ink-soft);font-weight:500}
 main{counter-reset:sec}
 section{padding:76px 0}
 @media(max-width:640px){section{padding:58px 0}}
+section.hero{padding:0}
 .sec-head{margin-bottom:34px;counter-increment:sec}
 .sec-head .num{display:block;font-family:var(--disp);font-size:.9rem;letter-spacing:.2em;color:var(--seal);margin-bottom:6px}
 .sec-head .num::before{content:counter(sec,upper-roman)}
@@ -193,12 +194,11 @@ h2{font-family:var(--disp);font-weight:500;font-size:clamp(1.65rem,3.4vw,2.25rem
 /* 6 ── 갤러리: 한 줄(.hang)에 건 작품들은 높이가 같아지고, 폭은 그림 비율대로 정해집니다 (잘리지 않음).
          각 figure의 --w/--h 는 이미지 픽셀 크기 — 사진을 바꾸면 이 두 값과 width/height 도 함께 바꿔주세요. */
 #gallery{counter-reset:plate}
-.hang{display:flex;gap:22px;align-items:flex-start;margin-bottom:30px}
+.hang{--w:4;--h:5;display:flex;gap:22px;align-items:flex-start;margin-bottom:30px}
 .hang .art{--r:calc(var(--w) / var(--h));flex:calc(var(--r) * 100) 1 0;min-width:0;margin:0;counter-increment:plate}
 .hang.pair{max-width:860px}
 @media(max-width:700px){.hang{display:block;margin-bottom:0}.hang .art{margin:0 0 36px}
-  .hang .art img{max-height:78vh;width:auto;max-width:100%;margin:0 auto}}
-.art img{aspect-ratio:var(--w) / var(--h)}
+  .hang .art .art-open img{max-height:78vh;width:auto;max-width:100%;margin:0 auto}}
 .art .art-open{border:0;padding:0;background:none;cursor:zoom-in;width:100%;display:block;border-radius:2px}
 .art .art-open img{width:100%;border:1px solid var(--line);background:#fff;transition:transform .25s ease,box-shadow .25s ease}
 .art .art-open:hover img,.art .art-open:focus-visible img{box-shadow:0 10px 30px rgba(43,36,26,.16);transform:translateY(-2px)}
@@ -726,12 +726,13 @@ footer a:hover{color:var(--seal)}
 // ── 한/영 전환 (선택한 언어는 이 브라우저에 기억됩니다) ──
 (function(){
   var root = document.documentElement, btn = document.getElementById('langBtn');
+  if (root.dataset.lang !== 'en') root.dataset.lang = 'kr';
+  if (!btn) return;
   function label(lang){
     btn.textContent = lang === 'kr' ? 'EN' : '한국어';
     btn.lang = lang === 'kr' ? 'en' : 'ko';
     btn.setAttribute('aria-label', lang === 'kr' ? 'Switch to English' : '한국어로 보기');
   }
-  if (root.dataset.lang !== 'en') root.dataset.lang = 'kr';
   label(root.dataset.lang);
   btn.addEventListener('click', function(){
     var lang = root.dataset.lang === 'kr' ? 'en' : 'kr';
@@ -745,7 +746,9 @@ footer a:hover{color:var(--seal)}
 
 // ── 폰 메뉴 줄: 옆으로 더 있을 때만 오른쪽 끝을 흐리게 ──
 (function(){
-  var nav = document.getElementById('siteNav'), bar = nav.parentElement;
+  var nav = document.getElementById('siteNav'); if (!nav) return;
+  var bar = nav.parentElement;
+  nav.addEventListener('focusin', function(e){ if (e.target.scrollIntoView) e.target.scrollIntoView({block:'nearest', inline:'nearest'}); });
   function check(){ bar.classList.toggle('can-scroll', nav.scrollWidth > nav.clientWidth + 2 && nav.scrollLeft + nav.clientWidth < nav.scrollWidth - 2); }
   check(); window.addEventListener('resize', check); nav.addEventListener('scroll', check, {passive:true});
   document.addEventListener('langchange', check);
@@ -753,7 +756,7 @@ footer a:hover{color:var(--seal)}
 
 // ── 라이트박스 (←/→ 이전·다음, Esc 닫기, 손가락으로 넘기기) ──
 (function(){
-  var lb = document.getElementById('lb');
+  var lb = document.getElementById('lb'); if (!lb) return;
   var lbImg = lb.querySelector('img');
   var lbCap = lb.querySelector('.cap');
   var lbCount = lb.querySelector('.count');
@@ -806,12 +809,12 @@ footer a:hover{color:var(--seal)}
       else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
     }
   });
-  var x0 = null;
-  lb.addEventListener('touchstart', function(e){ x0 = e.touches[0].clientX; }, {passive:true});
+  var x0 = null, y0 = null;
+  lb.addEventListener('touchstart', function(e){ if (e.touches.length === 1) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; } else { x0 = y0 = null; } }, {passive:true});
   lb.addEventListener('touchend', function(e){
-    if (x0 === null) return;
-    var dx = e.changedTouches[0].clientX - x0; x0 = null;
-    if (Math.abs(dx) > 50) show(current + (dx < 0 ? 1 : -1));
+    if (x0 === null || e.touches.length) return;
+    var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0; x0 = y0 = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) show(current + (dx < 0 ? 1 : -1));
   });
 })();
 
@@ -819,6 +822,7 @@ footer a:hover{color:var(--seal)}
 (function(){
   var nlForm = document.getElementById('nlForm');
   var nlMsg = document.getElementById('nlMsg');
+  if (!nlForm || !nlMsg) return;
   nlForm.addEventListener('submit', function(e){
     if (nlForm.getAttribute('action').indexOf('#') !== 0) return; // 실제 폼 연결 후엔 정상 전송
     e.preventDefault();
@@ -841,7 +845,7 @@ footer a:hover{color:var(--seal)}
 })();
 
 // ── 푸터 연도 자동 갱신 ──
-document.getElementById('year').textContent = new Date().getFullYear();
+(function(){ var y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear(); })();
 </script>
 </body>
 </html>
