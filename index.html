@@ -33,14 +33,15 @@
 /* 언어 선택을 화면에 그리기 전에 적용합니다 (깜빡임 방지).
    우선순위: 주소의 ?lang=en|kr → 이 브라우저에 저장된 선택 → 기본값 한국어.
    공유용 주소: https://jiaekim.com/?lang=en (영어로 열림) · https://jiaekim.com/?lang=kr (한국어로 열림)
-   브라우저 언어가 한국어가 아니면 영어로 열리게 하려면 아래 줄 앞의 // 를 지우세요. */
+   브라우저 언어가 한국어가 아닌 방문자(심사위원·큐레이터 등)에게는 영어로 열립니다 (2026-10 적용).
+   다시 한국어 기본으로 돌리려면 navigator.language 줄 앞에 // 를 붙이세요. */
 (function(){
   try{
     var l=localStorage.getItem('lang');
     var q=new URLSearchParams(location.search).get('lang');
     if(q==='en'||q==='kr')l=q;
-    // if(!l&&navigator.language&&!/^ko/i.test(navigator.language))l='en';
-    if(l==='en'){document.documentElement.dataset.lang='en';document.documentElement.lang='en';}
+    if(!l&&navigator.language&&!/^ko/i.test(navigator.language))l='en';
+    if(l==='en'){document.documentElement.dataset.lang='en';document.documentElement.lang='en';document.title='Jiae Kim — Minhwa · Korean Folk Painting, New York';}
   }catch(e){}
 })();
 </script>
@@ -299,6 +300,10 @@ footer a:hover{color:var(--seal)}
   #lb .lb-prev{left:16px}#lb .lb-next{right:16px}
   #lb .cap{bottom:76px;padding:0 16px;font-size:.85rem}
 }
+/* 갤러리 소제목(재현 모사 작품 묶음) */
+.gal-sub{margin:44px 0 16px;padding-top:20px;border-top:1px solid var(--line)}
+.gal-sub h3{font-family:var(--disp);font-weight:500;font-size:1.08rem;margin:0 0 4px}
+.gal-sub p{color:var(--ink-soft);font-size:.9rem;max-width:64ch;margin:0;line-height:1.6}
 </style>
 </head>
 <body>
@@ -347,8 +352,8 @@ footer a:hover{color:var(--seal)}
            전시 안내 페이지가 생기면 '전시 →' 링크의 href를 그 주소로 교체하세요. -->
       <p class="next-show">
         <span class="tag"><span class="kr">다음 전시</span><span class="en">NEXT</span></span>
-        <span class="what"><span class="kr">그룹전</span><span class="en">Group Exhibition</span></span>
-        <span>Flushing Town Hall — Queens, NY · <span class="kr">2027년 1월 · 세부 일정 추후 공지</span><span class="en">January 2027 · Details to be announced</span></span>
+        <span class="what"><span class="kr">그룹전 두 곳 · 2027년 1월</span><span class="en">Two group exhibitions · January 2027</span></span>
+        <span><em>Quilt of Hopes</em> — Flushing Town Hall · <em>Full Circle</em> — Queens College <span class="kr">(1월 23일 – 2월 23일)</span><span class="en">(Jan 23 – Feb 23)</span> · Queens, NY</span>
         <span class="links"><a class="arrow-link" href="#exhibitions"><span class="kr">전시 →</span><span class="en">Exhibitions →</span></a>
         <a class="arrow-link" href="#newsletter"><span class="kr">소식 받기 →</span><span class="en">Get updates →</span></a></span>
       </p>
@@ -426,82 +431,45 @@ footer a:hover{color:var(--seal)}
 
         <!-- 연잎과 봉오리: 제작 연도를 아시면 아래 .m 줄 맨 앞에 '연도 · ' 를 넣어주세요 -->
         <figure class="art" id="w-yeonip" style="--w:1559;--h:1600">
-          <button class="art-open" type="button" data-cap-kr="연잎과 봉오리 · 분채·먹, 한지 · 45 × 45 cm" data-cap-en="Lotus Leaves and Bud · mineral &amp; shell pigment and ink on hanji · 45 × 45 cm">
+          <button class="art-open" type="button" data-cap-kr="연잎과 봉오리 · 분채·먹, 한지 · 17.7 × 17.7 in (45 × 45 cm)" data-cap-en="Lotus Leaves and Bud · mineral &amp; shell pigment and ink on hanji · 17.7 × 17.7 in (45 × 45 cm)">
             <img src="images/yeonip-study.jpg" width="1559" height="1600" loading="lazy" decoding="async" alt="연잎과 봉오리 — close study of lotus leaves and a bud">
           </button>
           <figcaption>
             <p class="t"><span class="kr">연잎과 봉오리 <small>Lotus Leaves and Bud</small></span><span class="en">Lotus Leaves and Bud <small>연잎과 봉오리</small></span></p>
-            <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 45 × 45 cm</p>
+            <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span> · 17.7 × 17.7 in <small>(45 × 45 cm)</small></p>
           </figcaption>
         </figure>
       </div>
 
+      <!-- 재현 모사(jaehyeon): 박물관 소장 옛 그림을 그대로 그려 배우는 전통 수련. 창작 작품과 구분해 맨 끝에 둡니다. -->
+      <div class="gal-sub">
+        <h3><span class="kr">재현 모사 — 박물관 소장 옛 그림을 따라 그린 수련작</span><span class="en">Studies after museum paintings (<i>jaehyeon</i>)</span></h3>
+        <p class="kr">조선의 민화는 이름 없는 화가들이 손에서 손으로 본을 옮기며 전해졌습니다. 재현 모사는 그 전승 방식 그대로 옛 그림을 한 폭씩 따라 그리는 수련이며, 위의 작품들은 이 수련 위에서 새로 구성한 그림들입니다.</p>
+        <p class="en">Joseon folk painting was passed from hand to hand by anonymous painters copying model drawings. <i>Jaehyeon</i> is that training: painting a museum-held original panel by panel. The works above are my own compositions built on it.</p>
+      </div>
       <!-- 사계화 두 폭은 항상 같은 줄에 나란히 -->
       <div class="hang pair">
         <figure class="art" id="w-sagyehwa-1" style="--w:1453;--h:1600">
-          <button class="art-open" type="button" data-cap-kr="사계화 — 1부 · 2024 · 재현 모사, 브루클린 미술관 소장본 · 25 × 30 in" data-cap-en="Four Seasons of Flowers — Part I · 2024 · recreation after Flowers, Brooklyn Museum · 25 × 30 in">
+          <button class="art-open" type="button" data-cap-kr="사계화 — 1부 · 2024 · 재현 모사(브루클린 미술관 소장 19세기 조선 화훼도) · 분채·먹, 한지 · 25 × 30 in" data-cap-en="Four Seasons of Flowers — Part I · 2024 · study after Flowers (19th c., Joseon), Brooklyn Museum · mineral &amp; shell pigment and ink on hanji · 25 × 30 in">
             <img src="images/sagyehwa-1.jpg" width="1453" height="1600" loading="lazy" decoding="async" alt="사계화 1부 — chrysanthemum panels on pink hanji">
           </button>
           <figcaption>
             <p class="t"><span class="kr">사계화 — 1부 <small>Four Seasons of Flowers — Part I</small></span><span class="en">Four Seasons of Flowers — Part I <small>사계화 — 1부</small></span></p>
-            <p class="m">2024 · <span class="kr">재현 모사, 브루클린 미술관 소장본</span><span class="en">recreation after Flowers, Brooklyn Museum</span> · 25 × 30 in</p>
+            <p class="m">2024 · <span class="kr">재현 모사 · 분채·먹, 한지</span><span class="en">study after <em>Flowers</em>, Brooklyn Museum · mineral &amp; shell pigment and ink on hanji</span> · 25 × 30 in</p>
           </figcaption>
         </figure>
 
         <figure class="art" id="w-sagyehwa-2" style="--w:1515;--h:1600">
-          <button class="art-open" type="button" data-cap-kr="사계화 — 2부 · 2024 · 재현 모사, 브루클린 미술관 소장본 · 25 × 30 in" data-cap-en="Four Seasons of Flowers — Part II · 2024 · recreation after Flowers, Brooklyn Museum · 25 × 30 in">
+          <button class="art-open" type="button" data-cap-kr="사계화 — 2부 · 2024 · 재현 모사(브루클린 미술관 소장 19세기 조선 화훼도) · 분채·먹, 한지 · 25 × 30 in" data-cap-en="Four Seasons of Flowers — Part II · 2024 · study after Flowers (19th c., Joseon), Brooklyn Museum · mineral &amp; shell pigment and ink on hanji · 25 × 30 in">
             <img src="images/sagyehwa-2.jpg" width="1515" height="1600" loading="lazy" decoding="async" alt="사계화 2부 — camellia and lotus panels on pink hanji">
           </button>
           <figcaption>
             <p class="t"><span class="kr">사계화 — 2부 <small>Four Seasons of Flowers — Part II</small></span><span class="en">Four Seasons of Flowers — Part II <small>사계화 — 2부</small></span></p>
-            <p class="m">2024 · <span class="kr">재현 모사, 브루클린 미술관 소장본</span><span class="en">recreation after Flowers, Brooklyn Museum</span> · 25 × 30 in</p>
+            <p class="m">2024 · <span class="kr">재현 모사 · 분채·먹, 한지</span><span class="en">study after <em>Flowers</em>, Brooklyn Museum · mineral &amp; shell pigment and ink on hanji</span> · 25 × 30 in</p>
           </figcaption>
         </figure>
       </div>
 
-      <div class="hang">
-        <figure class="art" id="w-hwahwedo-1" style="--w:1600;--h:1200">
-          <button class="art-open" type="button" data-cap-kr="화훼도 I · 분채·먹, 한지" data-cap-en="Flower Study I · mineral &amp; shell pigment and ink on hanji">
-            <img src="images/hwahwedo-3.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="화훼도 — flowering garden with a butterfly">
-          </button>
-          <figcaption>
-            <p class="t"><span class="kr">화훼도 I <small>Flower Study I</small></span><span class="en">Flower Study I <small>화훼도 I</small></span></p>
-            <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span></p>
-          </figcaption>
-        </figure>
-
-        <figure class="art" id="w-hwahwedo-2" style="--w:1600;--h:1344">
-          <button class="art-open" type="button" data-cap-kr="화훼도 II · 분채·먹, 한지" data-cap-en="Flower Study II · mineral &amp; shell pigment and ink on hanji">
-            <img src="images/hwahwedo-2.jpg" width="1600" height="1344" loading="lazy" decoding="async" alt="화훼도 — orange blossoms with butterflies">
-          </button>
-          <figcaption>
-            <p class="t"><span class="kr">화훼도 II <small>Flower Study II</small></span><span class="en">Flower Study II <small>화훼도 II</small></span></p>
-            <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span></p>
-          </figcaption>
-        </figure>
-      </div>
-
-      <div class="hang">
-        <figure class="art" id="w-hwahwedo-3" style="--w:1600;--h:1200">
-          <button class="art-open" type="button" data-cap-kr="화훼도 III · 분채·먹, 한지" data-cap-en="Flower Study III · mineral &amp; shell pigment and ink on hanji">
-            <img src="images/hwahwedo-4.jpg" width="1600" height="1200" loading="lazy" decoding="async" alt="화훼도 — field of red blossoms and reed-like leaves">
-          </button>
-          <figcaption>
-            <p class="t"><span class="kr">화훼도 III <small>Flower Study III</small></span><span class="en">Flower Study III <small>화훼도 III</small></span></p>
-            <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span></p>
-          </figcaption>
-        </figure>
-
-        <figure class="art" id="w-hwahwedo-4" style="--w:1600;--h:1253">
-          <button class="art-open" type="button" data-cap-kr="화훼도 IV · 분채·먹, 한지" data-cap-en="Flower Study IV · mineral &amp; shell pigment and ink on hanji">
-            <img src="images/hwahwedo-1.jpg" width="1600" height="1253" loading="lazy" decoding="async" alt="화훼도 — stylized blue blossoms with scrolling tendrils">
-          </button>
-          <figcaption>
-            <p class="t"><span class="kr">화훼도 IV <small>Flower Study IV</small></span><span class="en">Flower Study IV <small>화훼도 IV</small></span></p>
-            <p class="m"><span class="kr">분채·먹, 한지</span><span class="en">mineral &amp; shell pigment and ink on hanji</span></p>
-          </figcaption>
-        </figure>
-      </div>
     </div>
   </div>
 </section>
@@ -576,14 +544,16 @@ footer a:hover{color:var(--seal)}
         <div class="kr">
           <p class="lead">안녕하세요, 뉴욕 퀸즈 베이사이드에서 민화를 그리는 김지애입니다.</p>
           <p>조선 후기 민화의 전통 그대로 — 돌과 조개를 갈아 만든 분채를 아교에 개어, 한지 위에 얇게 여러 번 쌓아 올립니다.</p>
-          <p>민화는 본래 집안의 그림이었습니다. 모란은 부귀를, 연꽃은 맑음을, 원앙 한 쌍은 화목을 빌었지요. 그림마다 담긴 이 복(福)의 언어를, 퀸즈에 뿌리내린 한인 디아스포라의 오늘로 옮겨 그리는 것이 제 작업입니다.</p>
-          <p>지닐민화 조현주 선생님 문하에서 수학하고 있으며, K-Color Link의 리드 아티스트로 퀸즈 곳곳에서 한·영 이중언어 무료 민화 워크숍을 엽니다.</p>
+          <p>민화는 본래 집안의 그림이었습니다. 모란은 부귀를, 연꽃은 맑음을, 원앙 한 쌍은 화목을 빌었지요. 그림마다 담긴 이 복(福)의 언어를 오늘의 퀸즈로 옮겨 그리는 것이 제 작업입니다 — 처음에는 한인 이민 가정을 위해, 이제는 출신을 가리지 않는 이웃들을 위해.</p>
+          <p>형식을 현대화하지는 않습니다. 바꾸는 것은 그림이 누구를 위한 것인가입니다.</p>
+          <p>지닐민화 조현주 선생님 문하에서 수학했으며, K-Color Link의 창립 리드 아티스트로 퀸즈 곳곳에서 한·영 이중언어 무료 민화 워크숍을 엽니다. 2026년에는 베이사이드 역사협회(BHS Castle)에서 전시 <em>Moon and Bloom</em>을 기획하고 2주간 오픈 스튜디오 레지던시를 했습니다.</p>
         </div>
         <div class="en">
           <p class="lead">I am a minhwa painter based in Bayside, Queens.</p>
           <p>I work in the late-Joseon Korean folk painting tradition with its original materials: ground mineral and shell pigments (bunchae) bound with hide glue, built up in thin layers on handmade hanji paper.</p>
-          <p>Minhwa was the painting of the household. Peonies wished a family wealth and honor, the lotus purity, a pair of mandarin ducks harmony. My work carries that language of blessing into the present-day life of the Korean diaspora in Queens.</p>
-          <p>I train in the Jinil Minhwa lineage under Master Hyun Joo Cho, and as lead artist of the K-Color Link collective I lead free bilingual minhwa workshops across Queens.</p>
+          <p>Minhwa was the painting of the household. Peonies wished a family wealth and honor, the lotus purity, a pair of mandarin ducks harmony. My work carries that language of blessing into present-day Queens — first for Korean immigrant households, now for neighbors of every origin.</p>
+          <p>I do not modernize the form; I change whom it is for.</p>
+          <p>I trained in the Jinil Minhwa lineage under master painter Hyun-joo Cho. As founding lead artist of the K-Color Link collective I lead free bilingual minhwa workshops across Queens, and in 2026 I organized <em>Moon and Bloom</em> at the Bayside Historical Society, with a two-week open-studio residency.</p>
         </div>
         <blockquote class="pull">
           <span class="seal" aria-hidden="true">시<br>우</span>
@@ -596,10 +566,12 @@ footer a:hover{color:var(--seal)}
       <aside class="cv" aria-labelledby="cv-h">
         <h3 id="cv-h"><span class="kr">약력</span><span class="en">Selected CV</span></h3>
         <ul>
-          <li><span class="y">2026</span><span><span class="kr">퀸즈 아츠 펀드(QAF) 뉴워크 그랜트 — “Quilt of Hopes” (K-Color Link 리드 아티스트)</span><span class="en">Queens Arts Fund New Work Grant — “Quilt of Hopes” (lead artist, K-Color Link)</span></span></li>
-          <li><span class="y">2025</span><span><span class="kr">Bank Art Gallery 국제여성비엔날레 후보</span><span class="en">Bank Art Gallery International Women's Biennale — Nominee</span></span></li>
-          <li><span class="y">2024 · 2025</span><span><span class="kr">대한민국 민화공모전 입선</span><span class="en">Korean Minhwa Contest — Honorable Mention</span></span></li>
-          <li><span class="y">2024–</span><span><span class="kr">지닐민화 — 조현주 선생 사사 · 한국민화협회 네트워크</span><span class="en">Jinil Minhwa — under Master Hyun Joo Cho · Korean Folk Painting Association</span></span></li>
+          <li><span class="y">2027</span><span><span class="kr">그룹전 <em>Full Circle</em>, 퀸즈 칼리지 · <em>Quilt of Hopes</em>, 플러싱 타운홀 (예정)</span><span class="en">Group exhibitions <em>Full Circle</em>, Queens College · <em>Quilt of Hopes</em>, Flushing Town Hall (upcoming)</span></span></li>
+          <li><span class="y">2026</span><span><span class="kr">퀸즈 아츠 펀드(QAF) 뉴워크 그랜트 — “Quilt of Hopes” (K-Color Link 창립 리드 아티스트) · NYFA / 뉴욕시 문화국</span><span class="en">Queens Arts Fund New Work Grant — “Quilt of Hopes” (founding lead artist, K-Color Link) · NYFA / NYC Department of Cultural Affairs</span></span></li>
+          <li><span class="y">2026</span><span><span class="kr"><em>Moon and Bloom</em> 기획 · 2주 오픈 스튜디오 레지던시, 베이사이드 역사협회</span><span class="en">Organizer, <em>Moon and Bloom</em> · two-week open-studio residency, Bayside Historical Society</span></span></li>
+          <li><span class="y">2024 · 2025</span><span><span class="kr">대한민국 민화공모전 입선</span><span class="en">Korean Folk Painting Association national minhwa competition — Honorable Mention</span></span></li>
+          <li><span class="y">2023–</span><span><span class="kr">지닐민화 — 조현주 선생 사사 · 한국민화협회 네트워크</span><span class="en">Jinil Minhwa — trained under master painter Hyun-joo Cho · Korean Folk Painting Association</span></span></li>
+          <li><span class="y"><span class="kr">학력</span><span class="en">Education</span></span><span><span class="kr">삼성디자인교육원(SADI) 제품디자인 · 2008년부터 뉴욕 거주</span><span class="en">Samsung Art and Design Institute, Seoul (product design) · based in New York since 2008</span></span></li>
         </ul>
         <p class="ig">Instagram · <a href="https://www.instagram.com/siwoo.minhwa/" target="_blank" rel="me noopener">@siwoo.minhwa</a></p>
       </aside>
@@ -624,16 +596,30 @@ footer a:hover{color:var(--seal)}
         <span class="badge"><span class="kr">예정</span><span class="en">UPCOMING</span></span>
       </div>
       -->
+      <!-- ✏️ Door to Door (BHS 솔로전, 2027년 8월): BHS와 일정이 확정되면 이 주석 표시를 풀고 날짜를 넣으세요.
+      <div class="exh-row">
+        <span class="when">2027.08</span>
+        <span><span class="what"><span class="kr">개인전 · Door to Door: 퀸즈를 위한 세화</span><span class="en">Solo exhibition · Door to Door: Sehwa (New Year Wish Paintings) for Queens</span></span>
+        <span class="where">Bayside Historical Society, The Castle — Fort Totten, Bayside NY · <span class="kr">2027년 8월 · 세부 일정 추후 공지</span><span class="en">August 2027 · Dates to be announced</span></span></span>
+        <span class="badge"><span class="kr">예정</span><span class="en">UPCOMING</span></span>
+      </div>
+      -->
       <div class="exh-row">
         <span class="when">2027.01</span>
-        <span><span class="what"><span class="kr">그룹전</span><span class="en">Group Exhibition</span></span>
-        <span class="where">Flushing Town Hall — Queens, NY · <span class="kr">2027년 1월 · 세부 일정 추후 공지</span><span class="en">January 2027 · Details to be announced</span></span></span>
+        <span><span class="what"><span class="kr">그룹전 · Full Circle</span><span class="en">Group exhibition · <em>Full Circle</em></span></span>
+        <span class="where">Queens College — Queens, NY · <span class="kr">2027년 1월 23일 – 2월 23일</span><span class="en">January 23 – February 23, 2027</span></span></span>
+        <span class="badge"><span class="kr">예정</span><span class="en">UPCOMING</span></span>
+      </div>
+      <div class="exh-row">
+        <span class="when">2027.01</span>
+        <span><span class="what"><span class="kr">그룹전 · Quilt of Hopes: Korean Folk Art in Queens</span><span class="en">Group exhibition · <em>Quilt of Hopes: Korean Folk Art in Queens</em></span></span>
+        <span class="where">Flushing Town Hall — Queens, NY · <span class="kr">K-Color Link · 퀸즈 아츠 펀드 뉴워크 그랜트 · 2027년 1월 · 세부 일정 추후 공지</span><span class="en">K-Color Link · Queens Arts Fund New Work Grant · January 2027 · Details to be announced</span></span></span>
         <span class="badge"><span class="kr">예정</span><span class="en">UPCOMING</span></span>
       </div>
       <div class="exh-row">
         <span class="when">2026.08</span>
         <span><span class="what"><a href="https://www.baysidehistorical.org/events-1/moon-and-bloom-showcasing-east-asian-art-at-the-bhs-castle" target="_blank" rel="noopener">Moon and Bloom: Showcasing East Asian Art at the BHS Castle</a></span>
-        <span class="where">Bayside Historical Society, The Castle — Fort Totten, Bayside NY · <span class="kr">2026. 8. 4 – 8. 14</span><span class="en">Aug 4–14, 2026</span></span></span>
+        <span class="where">Bayside Historical Society, The Castle — Fort Totten, Bayside NY · <span class="kr">2026. 8. 4 – 8. 14 · 전시 기획 · 2주 오픈 스튜디오 레지던시 · 무료 이중언어 워크숍</span><span class="en">Aug 4–14, 2026 · Organizer · two-week open-studio residency · free bilingual workshops</span></span></span>
       </div>
       <div class="exh-row">
         <span class="when">2025.03</span>
@@ -738,6 +724,7 @@ footer a:hover{color:var(--seal)}
     var lang = root.dataset.lang === 'kr' ? 'en' : 'kr';
     root.dataset.lang = lang;
     root.lang = lang === 'kr' ? 'ko' : 'en';
+    document.title = lang === 'kr' ? '김지애 Jiae Kim — 민화 · Korean Folk Painting, New York' : 'Jiae Kim — Minhwa · Korean Folk Painting, New York';
     label(lang);
     try { localStorage.setItem('lang', lang); } catch(e) {}
     document.dispatchEvent(new CustomEvent('langchange'));
