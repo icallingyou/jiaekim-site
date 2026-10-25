@@ -17,19 +17,6 @@ settings:
       delete: "내용 삭제: {path} (Pages CMS)"
       rename: "이름 변경: {oldPath} → {newPath} (Pages CMS)"
 
-components:
-  image_size:
-    type: object
-    label: 사진 크기 (비워 두면 자동)
-    description: 사진을 올린 뒤 1~2분이면 자동으로 채워집니다. 직접 입력할 필요 없습니다.
-    fields:
-      - name: w
-        label: 가로 픽셀
-        type: number
-      - name: h
-        label: 세로 픽셀
-        type: number
-
 content:
   - name: works
     label: 작품
@@ -50,12 +37,12 @@ content:
         label: 사진
         type: image
         required: true
-        description: 긴 변 1600~2200px 정도의 JPG를 권장합니다. 파일 이름은 영문으로 (예 morando.jpg).
+        description: 긴 변 1600~2200px 정도의 JPG를 권장합니다. 파일 이름은 영문·숫자로 (예 morando.jpg). 크기는 자동으로 기록됩니다.
       - name: row
         label: 줄 번호
         type: number
         required: true
-        description: 같은 번호끼리 한 줄에 나란히 걸립니다. 한 줄에 2~3점이 보기 좋습니다. (1, 2, 3 …)
+        description: 같은 번호끼리 한 줄에 나란히 걸립니다(한 줄에 2~3점). 줄의 순서는 이 목록의 순서(위→아래)를 따르고, 목록은 드래그로 옮길 수 있습니다. 사진 크기는 자동으로 기록되니 신경 쓰지 않아도 됩니다.
       - name: year
         label: 연도
         type: string
@@ -67,7 +54,7 @@ content:
       - name: meta_en
         label: 재료 · 크기 (영어)
         type: string
-        description: "예 mineral & shell pigment and ink on hanji · 30 × 60 in. 기울임은 *별표*로 감싸세요."
+        description: "예 mineral & shell pigment and ink on hanji · 30 × 60 in. 어느 글 칸이든 기울임은 *별표*로 감싸면 됩니다."
       - name: study
         label: 재현 모사 작품
         type: boolean
@@ -83,12 +70,6 @@ content:
       - name: alt
         label: 사진 설명 (시각장애인·검색용, 영어 권장)
         type: string
-      - name: w
-        label: 사진 가로 픽셀 (비워 두면 자동)
-        type: number
-      - name: h
-        label: 사진 세로 픽셀 (비워 두면 자동)
-        type: number
 
   - name: exhibitions
     label: 전시
@@ -204,12 +185,6 @@ content:
         label: 인스타그램 링크 표시
         type: boolean
         default: true
-      - name: w
-        label: 대표 사진 가로 픽셀 (비워 두면 자동)
-        type: number
-      - name: h
-        label: 대표 사진 세로 픽셀 (비워 두면 자동)
-        type: number
       - name: next_show
         label: 다음 전시 라벨
         type: object
@@ -356,12 +331,6 @@ content:
           - name: cap_en
             label: 크게 보기 설명 (영어)
             type: text
-          - name: w
-            label: 사진 가로 픽셀 (비워 두면 자동)
-            type: number
-          - name: h
-            label: 사진 세로 픽셀 (비워 두면 자동)
-            type: number
 
   - name: prescription
     label: 민화 처방전
@@ -401,12 +370,6 @@ content:
           - name: cap_en
             label: 크게 보기 설명 (영어)
             type: string
-          - name: w
-            label: 사진 가로 픽셀 (비워 두면 자동)
-            type: number
-          - name: h
-            label: 사진 세로 픽셀 (비워 두면 자동)
-            type: number
       - name: lead_kr
         label: 소개 글 (한국어)
         type: text
@@ -476,12 +439,6 @@ content:
           - name: alt
             label: 사진 설명 (검색·접근성용)
             type: string
-          - name: w
-            label: 사진 가로 픽셀 (비워 두면 자동)
-            type: number
-          - name: h
-            label: 사진 세로 픽셀 (비워 두면 자동)
-            type: number
 
   - name: studio
     label: 스튜디오 (커미션 · 프린트 · 뉴스레터)
@@ -677,7 +634,8 @@ content:
       - name: url
         label: 사이트 주소
         type: string
-        description: 바꾸지 마세요 (도메인이 바뀌지 않는 한).
+        readonly: true
+        description: 도메인이 바뀔 때만 (Claude 에게 요청) 수정합니다.
       - name: seal_top
         label: 낙관 윗글자
         type: string

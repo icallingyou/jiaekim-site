@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
-"""Fill in missing image pixel sizes (w/h) in _data/*.yml.
+"""Record the pixel size of every photo referenced from _data/*.yml.
 
-Pages CMS writes `image: /images/foo.jpg` lines; this script reads the JPEG/PNG/WebP/GIF
-header of each referenced file and inserts `w:` and `h:` lines right after the `image:`
-line when the surrounding mapping does not already have both. It edits the YAML as text so
-formatting and comments are preserved. No third-party dependencies.
+Pages CMS writes lines such as `image: /images/foo.jpg` into the content files. This
+script reads the JPEG/PNG/GIF/WebP header of each referenced file and writes one map,
+`_data/image_sizes.yml`, keyed by the exact path value found in the content files:
+
+    "/images/foo.jpg":
+      w: 1600
+      h: 1200
+
+The templates look sizes up in that map, so the content files the owner edits are never
+touched by automation. The map is fully regenerated on every run, so a replaced or
+re-uploaded photo always gets its current size. No third-party dependencies.
 
 Usage: python3 scripts/fill_image_sizes.py [repo_root]
-Exit code 0 always; prints the files it changed.
+Prints "updated" when the map changed, "no change" otherwise. Exit code 0 always.
 """
 import os
 import re
@@ -17,6 +24,10 @@ import urllib.parse
 
 ROOT = os.path.abspath(sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.path.dirname(__file__), ".."))
 DATA_DIR = os.path.join(ROOT, "_data")
+OUT = os.path.join(DATA_DIR, "image_sizes.yml")
+KEYS = ("image", "image_mobile", "og_image")
+LINE_RE = re.compile(r"^\s*(?:-\s+)?(" + "|".join(KEYS) + r"):\s*(.+?)\s*$")
+HEADER = "# 자동 생성 파일 — 사진의 가로·세로 픽셀 크기. GitHub Action(scripts/fill_image_sizes.py)이 채웁니다. 직접 고치지 마세요.\n"
 
 
 def image_size(path):
@@ -35,9 +46,7 @@ def image_size(path):
                 f.seek(12)
                 data = f.read(30)
                 if chunk == b"VP8X":
-                    w = 1 + int.from_bytes(data[12:15], "little")
-                    h = 1 + int.from_bytes(data[15:18], "little")
-                    return w, h
+                    return 1 + int.from_bytes(data[12:15], "little"), 1 + int.from_bytes(data[15:18], "little")
                 if chunk == b"VP8L":
                     b = data[9:13]
                     w = 1 + (((b[1] & 0x3F) << 8) | b[0])
@@ -55,7 +64,7 @@ def image_size(path):
                     if len(marker) < 2 or marker[0] != 0xFF:
                         return None
                     m = marker[1]
-                    while m == 0xFF:  # padding
+                    while m == 0xFF:
                         nxt = f.read(1)
                         if not nxt:
                             return None
@@ -78,80 +87,62 @@ def image_size(path):
     return None
 
 
-def resolve_image(value):
-    """Map a content value like /images/a.jpg (possibly percent-encoded or quoted) to a repo path."""
-    v = value.strip().strip('"').strip("'")
-    v = urllib.parse.unquote(v)
-    if v.startswith("http://") or v.startswith("https://"):
+def unquote_value(raw):
+    v = raw.strip()
+    if len(v) >= 2 and v[0] == v[-1] and v[0] in "\"'":
+        v = v[1:-1]
+    return v
+
+
+def resolve(value):
+    """Map a content value like /images/a.jpg (possibly percent-encoded) to a repo path."""
+    if value.startswith(("http://", "https://", "data:")):
         return None
-    v = v.lstrip("/")
-    return os.path.join(ROOT, v)
+    return os.path.join(ROOT, urllib.parse.unquote(value).lstrip("/"))
 
 
-KEY_RE = re.compile(r"^(\s*)(- )?([A-Za-z_][A-Za-z0-9_]*):(.*)$")
-
-
-def process(path):
-    with open(path, encoding="utf-8") as f:
-        lines = f.read().split("\n")
-    out = []
-    changed = False
-    i = 0
-    n = len(lines)
-    while i < n:
-        line = lines[i]
-        out.append(line)
-        m = KEY_RE.match(line)
-        if m and m.group(3) == "image":
-            indent = len(m.group(1)) + (2 if m.group(2) else 0)  # column where sibling keys start
-            value = m.group(4)
-            # collect sibling keys of this mapping
-            sib = set()
-            j = i + 1
-            while j < n:
-                l2 = lines[j]
-                if l2.strip() == "" or l2.lstrip().startswith("#"):
-                    j += 1
+def referenced_paths():
+    found = []
+    if not os.path.isdir(DATA_DIR):
+        return found
+    for name in sorted(os.listdir(DATA_DIR)):
+        if not name.endswith((".yml", ".yaml")) or name == os.path.basename(OUT):
+            continue
+        with open(os.path.join(DATA_DIR, name), encoding="utf-8") as f:
+            for line in f:
+                m = LINE_RE.match(line)
+                if not m:
                     continue
-                m2 = KEY_RE.match(l2)
-                cur_indent = len(l2) - len(l2.lstrip(" "))
-                if m2 and not m2.group(2) and cur_indent == indent:
-                    sib.add(m2.group(3))
-                    j += 1
-                    continue
-                if cur_indent > indent and not (m2 and m2.group(2) and cur_indent == indent):
-                    j += 1
-                    continue
-                break
-            if "w" in sib and "h" in sib:
-                i += 1
-                continue
-            target = resolve_image(value)
-            size = image_size(target) if target and os.path.isfile(target) else None
-            if size:
-                pad = " " * indent
-                if "w" not in sib:
-                    out.append(f"{pad}w: {size[0]}")
-                if "h" not in sib:
-                    out.append(f"{pad}h: {size[1]}")
-                changed = True
-        i += 1
-    if changed:
-        with open(path, "w", encoding="utf-8") as f:
-            f.write("\n".join(out))
-        print(f"updated {os.path.relpath(path, ROOT)}")
-    return changed
+                v = unquote_value(m.group(2))
+                if v and v not in found:
+                    found.append(v)
+    return found
+
+
+def yaml_key(s):
+    return '"' + s.replace("\\", "\\\\").replace('"', '\\"') + '"'
 
 
 def main():
-    if not os.path.isdir(DATA_DIR):
+    entries = []
+    for value in sorted(referenced_paths()):
+        path = resolve(value)
+        if not path or not os.path.isfile(path):
+            continue
+        size = image_size(path)
+        if size:
+            entries.append((value, size))
+    text = HEADER + "".join(f"{yaml_key(v)}:\n  w: {w}\n  h: {h}\n" for v, (w, h) in entries)
+    old = None
+    if os.path.isfile(OUT):
+        with open(OUT, encoding="utf-8") as f:
+            old = f.read()
+    if old == text:
+        print(f"no change ({len(entries)} images)")
         return
-    any_changed = False
-    for name in sorted(os.listdir(DATA_DIR)):
-        if name.endswith((".yml", ".yaml")):
-            any_changed |= process(os.path.join(DATA_DIR, name))
-    if not any_changed:
-        print("nothing to fill")
+    with open(OUT, "w", encoding="utf-8") as f:
+        f.write(text)
+    print(f"updated {os.path.relpath(OUT, ROOT)} ({len(entries)} images)")
 
 
 if __name__ == "__main__":

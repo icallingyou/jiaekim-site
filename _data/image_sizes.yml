@@ -1,0 +1,52 @@
+# 자동 생성 파일 — 사진의 가로·세로 픽셀 크기. GitHub Action(scripts/fill_image_sizes.py)이 채웁니다. 직접 고치지 마세요.
+"/images/bonghwangmun.jpg":
+  w: 1600
+  h: 1257
+"/images/dongbaek.jpg":
+  w: 1092
+  h: 1600
+"/images/hero-bonghwangmun.jpg":
+  w: 2000
+  h: 1571
+"/images/hwabyeongdo.jpg":
+  w: 1445
+  h: 2000
+"/images/morando.jpg":
+  w: 984
+  h: 2200
+"/images/moranhwajodo.jpg":
+  w: 1112
+  h: 1600
+"/images/og.jpg":
+  w: 1200
+  h: 630
+"/images/openstudio-moonandbloom.jpg":
+  w: 1800
+  h: 1350
+"/images/prescription/announcement.jpg":
+  w: 1080
+  h: 1350
+"/images/prescription/card-dongbaek.jpg":
+  w: 1135
+  h: 1600
+"/images/prescription/card-hwajo.jpg":
+  w: 1135
+  h: 1600
+"/images/prescription/card-moran.jpg":
+  w: 1135
+  h: 1600
+"/images/prescription/card-yeonhwa.jpg":
+  w: 1135
+  h: 1600
+"/images/sagyehwa-four.jpg":
+  w: 2000
+  h: 1114
+"/images/sipjangsaeng-wreath.jpg":
+  w: 1800
+  h: 1800
+"/images/yeonip-study.jpg":
+  w: 1559
+  h: 1600
+"/images/yeonjissangapdo.jpg":
+  w: 1237
+  h: 2000

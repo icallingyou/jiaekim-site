@@ -43,8 +43,6 @@ cv:
 photo:
   show: true
   image: /images/openstudio-moonandbloom.jpg
-  w: 1800
-  h: 1350
   alt: Moon and Bloom 오픈 스튜디오 — 전시장 테이블 위에서 화병도를 채색하는 장면, 벽에는 족자 작품들
   title_kr: 오픈 스튜디오, *Moon and Bloom*
   title_en: Open studio during *Moon and Bloom*

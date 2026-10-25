@@ -1,16 +1,21 @@
 {%- comment -%} 작품 한 점 (갤러리). index.html 에서 include work.html 에 w=작품, n=순번 을 넘겨 사용합니다. {%- endcomment -%}
 {%- assign w = include.w -%}
 {%- assign _slug = w.image | default: "" | split: "/" | last | split: "." | first -%}
+{%- assign _sz = site.data.image_sizes[w.image] -%}
 {%- assign _title_en = w.title_en | default: w.title_kr -%}
 {%- assign _meta_en = w.meta_en | default: w.meta_kr -%}
-{%- capture _cap_kr -%}{%- if w.cap_kr and w.cap_kr != "" -%}{{ w.cap_kr }}{%- else -%}{{ w.title_kr }}{%- if w.year and w.year != "" %} · {{ w.year }}{%- endif -%}{%- if w.meta_kr and w.meta_kr != "" %} · {{ w.meta_kr | replace: "*", "" }}{%- endif -%}{%- endif -%}{%- endcapture -%}
-{%- capture _cap_en -%}{%- if w.cap_en and w.cap_en != "" -%}{{ w.cap_en }}{%- else -%}{{ _title_en }}{%- if w.year and w.year != "" %} · {{ w.year }}{%- endif -%}{%- if _meta_en and _meta_en != "" %} · {{ _meta_en | replace: "*", "" }}{%- endif -%}{%- endif -%}{%- endcapture -%}
-<figure class="art" id="w-{{ _slug | slugify: "pretty" }}"{% if w.w and w.h %} style="--w:{{ w.w }};--h:{{ w.h }}"{% endif %}>
+{%- assign _has_year = false -%}{%- if w.year and w.year != "" -%}{%- assign _has_year = true -%}{%- endif -%}
+{%- assign _has_meta = false -%}{%- if w.meta_kr and w.meta_kr != "" -%}{%- assign _has_meta = true -%}{%- endif -%}
+{%- capture _cap_kr -%}{%- if w.cap_kr and w.cap_kr != "" -%}{{ w.cap_kr }}{%- else -%}{{ w.title_kr | replace: "*", "" }}{%- if _has_year %} · {{ w.year }}{%- endif -%}{%- if _has_meta %} · {{ w.meta_kr | replace: "*", "" }}{%- endif -%}{%- endif -%}{%- endcapture -%}
+{%- capture _cap_en -%}{%- if w.cap_en and w.cap_en != "" -%}{{ w.cap_en }}{%- else -%}{{ _title_en | replace: "*", "" }}{%- if _has_year %} · {{ w.year }}{%- endif -%}{%- if _meta_en and _meta_en != "" %} · {{ _meta_en | replace: "*", "" }}{%- endif -%}{%- endif -%}{%- endcapture -%}
+<figure class="art" id="w-{{ _slug | slugify: "pretty" }}"{% if _sz %} style="--w:{{ _sz.w }};--h:{{ _sz.h }}"{% endif %}>
   <button class="art-open" type="button" data-cap-kr="{{ _cap_kr | strip | escape }}" data-cap-en="{{ _cap_en | strip | escape }}">
-    <img src="{{ w.image | relative_url }}"{% if w.w and w.h %} width="{{ w.w }}" height="{{ w.h }}"{% endif %}{% if include.n > 1 %} loading="lazy"{% endif %} decoding="async" alt="{{ w.alt | default: _title_en | escape }}">
+    <img src="{{ w.image | relative_url | escape }}"{% if _sz %} width="{{ _sz.w }}" height="{{ _sz.h }}"{% endif %}{% if include.n > 1 %} loading="lazy"{% endif %} decoding="async" alt="{{ w.alt | default: _title_en | replace: "*", "" | escape }}">
   </button>
   <figcaption>
-    <p class="t"><span class="kr">{% include t.html s=w.title_kr %} <small>{% include t.html s=_title_en %}</small></span><span class="en">{% include t.html s=_title_en %} <small>{% include t.html s=w.title_kr %}</small></span></p>
-    <p class="m">{% if w.year and w.year != "" %}{{ w.year | escape }} · {% endif %}<span class="kr">{% include t.html s=w.meta_kr %}</span><span class="en">{% include t.html s=_meta_en %}</span></p>
+    <p class="t"><span class="kr">{% include t.html s=w.title_kr %}{% if _title_en != w.title_kr %} <small>{% include t.html s=_title_en %}</small>{% endif %}</span><span class="en">{% include t.html s=_title_en %}{% if _title_en != w.title_kr %} <small>{% include t.html s=w.title_kr %}</small>{% endif %}</span></p>
+    {%- if _has_year or _has_meta %}
+    <p class="m">{% if _has_year %}{{ w.year | escape }}{% endif %}{% if _has_year and _has_meta %} · {% endif %}{% if _has_meta %}<span class="kr">{% include t.html s=w.meta_kr %}</span><span class="en">{% include t.html s=_meta_en %}</span>{% endif %}</p>
+    {%- endif %}
   </figcaption>
 </figure>

@@ -4,8 +4,6 @@ sub_kr: 약 대신 그림을 처방해드립니다.
 sub_en: A painting, prescribed for your wish.
 announcement:
   image: /images/prescription/announcement.jpg
-  w: 1080
-  h: 1350
   alt: 민화 처방전 안내 — 증상, 처방, 용법이 적힌 처방전 형식 카드
   caption_kr: 안내 카드 (한국어)
   caption_en: Announcement card (Korean)
@@ -26,32 +24,24 @@ fine_kr: 처방은 무료이고, 부담은 없습니다. 처방전에는 유효�
 fine_en: The prescription is free, no strings attached — and it never expires.
 cards:
   - image: /images/prescription/card-moran.jpg
-    w: 1135
-    h: 1600
     title_kr: 궁모란도 · 부귀영화
     title_en: Royal Peony · Wealth & Honor
     cap_kr: 궁모란도 — 부귀영화
     cap_en: Royal Peony — Wealth and Honor
     alt: 궁모란도 상징 카드 — 부귀영화
   - image: /images/prescription/card-yeonhwa.jpg
-    w: 1135
-    h: 1600
     title_kr: 연화도 · 화합과 평안
     title_en: Lotus · Harmony & Peace
     cap_kr: 연화도 — 화합과 평안
     cap_en: Lotus — Harmony and Peace
     alt: 연화도 상징 카드 — 화합과 평안
   - image: /images/prescription/card-dongbaek.jpg
-    w: 1135
-    h: 1600
     title_kr: 동백화 · 변치 않는 사랑
     title_en: Camellia · Everlasting Love
     cap_kr: 붉은 동백화 — 변치 않는 사랑
     cap_en: Red Camellia — Everlasting Love
     alt: 붉은 동백화 상징 카드 — 변치 않는 사랑
   - image: /images/prescription/card-hwajo.jpg
-    w: 1135
-    h: 1600
     title_kr: 화조도 · 부부금슬
     title_en: Birds & Flowers · A Loving Home
     cap_kr: 화조도 — 부부금슬

@@ -1,11 +1,9 @@
 # 작품 목록 — Pages CMS 의 '작품'에서 편집됩니다.
-# row: 같은 번호끼리 한 줄에 걸립니다 (한 줄에 2~3점). study: true 는 '재현 모사' 묶음(맨 끝)으로 갑니다.
-# w/h(이미지 픽셀)는 비워 두면 자동으로 채워집니다.
+# row: 같은 번호끼리 한 줄에 걸립니다 (한 줄에 2~3점). 줄의 순서는 목록 순서(위→아래)를 따릅니다. study: true 는 '재현 모사' 묶음(맨 끝)으로 갑니다.
+# 사진 픽셀 크기는 _data/image_sizes.yml 에 자동 기록됩니다.
 - title_kr: 화병도
   title_en: Flowers in a Vase
   image: /images/hwabyeongdo.jpg
-  w: 1445
-  h: 2000
   row: 1
   year: "2026"
   meta_kr: 분채·먹, 한지
@@ -16,8 +14,6 @@
 - title_kr: 십장생 리스
   title_en: Ten Longevity Symbols Wreath
   image: /images/sipjangsaeng-wreath.jpg
-  w: 1800
-  h: 1800
   row: 1
   year: "2026"
   meta_kr: 작업 중 · 분채·먹, 염색 한지
@@ -28,8 +24,6 @@
 - title_kr: 궁모란도
   title_en: Court Peonies
   image: /images/morando.jpg
-  w: 984
-  h: 2200
   row: 2
   year: "2025"
   meta_kr: 분채·먹, 한지 · 30 × 60 in
@@ -38,8 +32,6 @@
 - title_kr: 연지쌍압도
   title_en: Lotus Pond with a Pair of Mandarin Ducks
   image: /images/yeonjissangapdo.jpg
-  w: 1237
-  h: 2000
   row: 2
   year: "2025"
   meta_kr: 분채·먹, 한지 · 30 × 55 in
@@ -48,8 +40,6 @@
 - title_kr: 봉황문인문보
   title_en: Phoenix-and-Auspicious-Pattern Wrapping Cloth
   image: /images/bonghwangmun.jpg
-  w: 1600
-  h: 1257
   row: 2
   year: "2025"
   meta_kr: 분채·먹, 한지 · 40 × 25 in
@@ -58,8 +48,6 @@
 - title_kr: 동백
   title_en: Camellias
   image: /images/dongbaek.jpg
-  w: 1092
-  h: 1600
   row: 3
   year: "2024"
   meta_kr: 분채·먹, 한지 · 12 × 18 in
@@ -68,8 +56,6 @@
 - title_kr: 모란화조도
   title_en: Peonies with Paired Birds
   image: /images/moranhwajodo.jpg
-  w: 1112
-  h: 1600
   row: 3
   year: "2024"
   meta_kr: 분채·먹, 한지 · 12 × 18 in
@@ -78,8 +64,6 @@
 - title_kr: 연잎과 봉오리
   title_en: Lotus Leaves and Bud
   image: /images/yeonip-study.jpg
-  w: 1559
-  h: 1600
   row: 3
   year: ""
   meta_kr: 분채·먹, 한지 · 17.7 × 17.7 in (45 × 45 cm)
@@ -88,8 +72,6 @@
 - title_kr: 사계화 4폭
   title_en: Four Seasons of Flowers, set of four panels
   image: /images/sagyehwa-four.jpg
-  w: 2000
-  h: 1114
   row: 1
   study: true
   year: "2024"

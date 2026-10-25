@@ -11,7 +11,12 @@
 {%- assign rx = site.data.prescription -%}
 {%- assign about = site.data.about -%}
 {%- assign studio = site.data.studio -%}
-{%- assign og_abs = info.og_image | remove_first: "/" | prepend: info.url -%}
+{%- assign sizes = site.data.image_sizes -%}
+{%- assign _last = info.url | slice: -1 -%}
+{%- if _last == "/" -%}{%- assign base_url = info.url -%}{%- else -%}{%- assign base_url = info.url | append: "/" -%}{%- endif -%}
+{%- assign og_abs = info.og_image | remove_first: "/" | prepend: base_url -%}
+{%- assign title_en = info.title_en | default: info.title_kr -%}
+{%- assign nl = studio.newsletter -%}
 <!DOCTYPE html>
 <html lang="ko" data-lang="kr">
 <head>
@@ -20,12 +25,12 @@
 <title>{{ info.title_kr | escape }}</title>
 <meta name="description" content="{{ info.description | escape }}">
 <meta name="theme-color" content="#F4EAD2">
-<link rel="canonical" href="{{ info.url }}">
+<link rel="canonical" href="{{ base_url }}">
 <meta property="og:site_name" content="{{ info.name_en | escape }} — Minhwa">
 <meta property="og:title" content="{{ info.og_title | escape }}">
 <meta property="og:description" content="{{ info.og_description | escape }}">
 <meta property="og:type" content="website">
-<meta property="og:url" content="{{ info.url }}">
+<meta property="og:url" content="{{ base_url }}">
 <meta property="og:image" content="{{ og_abs }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -53,7 +58,7 @@
     var q=new URLSearchParams(location.search).get('lang');
     if(q==='en'||q==='kr')l=q;
     {% if info.auto_english %}if(!l&&navigator.language&&!/^ko/i.test(navigator.language))l='en';{% endif %}
-    if(l==='en'){document.documentElement.dataset.lang='en';document.documentElement.lang='en';document.title={{ info.title_en | jsonify }};}
+    if(l==='en'){document.documentElement.dataset.lang='en';document.documentElement.lang='en';document.title={{ title_en | jsonify }};}
   }catch(e){}
 })();
 </script>
@@ -65,11 +70,13 @@
   "alternateName": [{{ info.name_kr | jsonify }}, "Si-Woo", "시우"],
   "jobTitle": "Minhwa artist (Korean folk painting)",
   "description": "Korean folk painting (minhwa) in mineral and shell pigment on hanji, made in Bayside, Queens, New York.",
-  "url": {{ info.url | jsonify }},
+  "url": {{ base_url | jsonify }},
   "image": {{ og_abs | jsonify }},
   "email": {{ info.email | prepend: "mailto:" | jsonify }},
   "address": { "@type": "PostalAddress", "addressLocality": "Bayside, Queens", "addressRegion": "NY", "addressCountry": "US" },
+{%- if info.instagram_url and info.instagram_url != "" %}
   "sameAs": [{{ info.instagram_url | jsonify }}],
+{%- endif %}
   "knowsLanguage": ["ko", "en"]
 }
 </script>
@@ -346,45 +353,57 @@ footer a:hover{color:var(--seal)}
 <main id="main">
 
 <section class="hero" id="top" aria-labelledby="hero-title">
-  <div class="hero-art"{% if hero.w and hero.h %} style="--hw:{{ hero.w }};--hh:{{ hero.h }}"{% endif %}>
+  {%- assign hsz = sizes[hero.image] -%}
+  {%- assign hmsz = sizes[hero.image_mobile] | default: hsz -%}
+  <div class="hero-art"{% if hmsz %} style="--hw:{{ hmsz.w }};--hh:{{ hmsz.h }}"{% endif %}>
     <picture>
       {%- if hero.image_mobile and hero.image_mobile != "" %}
-      <source media="(max-width:720px)" srcset="{{ hero.image_mobile | relative_url }}">
+      <source media="(max-width:720px)" srcset="{{ hero.image_mobile | relative_url | escape }}">
       {%- endif %}
-      <img src="{{ hero.image | relative_url }}"{% if hero.w and hero.h %} width="{{ hero.w }}" height="{{ hero.h }}"{% endif %} alt="{{ hero.image_alt | escape }}" fetchpriority="high" decoding="async">
+      <img src="{{ hero.image | relative_url | escape }}"{% if hsz %} width="{{ hsz.w }}" height="{{ hsz.h }}"{% endif %} alt="{{ hero.image_alt | escape }}" fetchpriority="high" decoding="async">
     </picture>
     {%- if hero.plate_kr and hero.plate_kr != "" %}
-    <a class="plate" href="{{ hero.plate_link | default: '#gallery' }}"><b><span class="kr">{{ hero.plate_kr | escape }}</span><span class="en">{{ hero.plate_en | default: hero.plate_kr | escape }}</span></b> {{ hero.plate_year | escape }} →</a>
+    {%- assign plate_en = hero.plate_en | default: hero.plate_kr %}
+    <a class="plate" href="{{ hero.plate_link | default: '#gallery' | escape }}"><b><span class="kr">{% include t.html s=hero.plate_kr %}</span><span class="en">{% include t.html s=plate_en %}</span></b> {{ hero.plate_year | escape }} →</a>
     {%- endif %}
   </div>
   <div class="hero-panel">
     <div class="hero-panel-in{% unless hero.next_show.show %} no-next{% endunless %}">
-      <p class="eyebrow">{{ hero.eyebrow | escape }}</p>
+      <p class="eyebrow">{% include t.html s=hero.eyebrow %}</p>
       <h1 id="hero-title">{{ info.name_kr | escape }} <span>{{ info.name_en | escape }}</span></h1>
       {%- if hero.ho_kr and hero.ho_kr != "" %}
-      <p class="ho"><span class="kr">{{ hero.ho_kr | escape }}</span><span class="en">{{ hero.ho_en | default: hero.ho_kr | escape }}</span></p>
+      {%- assign ho_en = hero.ho_en | default: hero.ho_kr %}
+      <p class="ho"><span class="kr">{% include t.html s=hero.ho_kr %}</span><span class="en">{% include t.html s=ho_en %}</span></p>
       {%- endif %}
-      <p class="hero-sub kr">{{ hero.sub_kr | escape }}</p>
-      <p class="hero-sub en">{{ hero.sub_en | default: hero.sub_kr | escape }}</p>
+      {%- assign sub_en = hero.sub_en | default: hero.sub_kr %}
+      <p class="hero-sub kr">{% include t.html s=hero.sub_kr br=true %}</p>
+      <p class="hero-sub en">{% include t.html s=sub_en br=true %}</p>
       <div class="cta-row">
-        {%- if hero.cta1_kr and hero.cta1_kr != "" %}
-        <a class="btn" href="{{ hero.cta1_link | default: '#prescription' }}"><span class="kr">{{ hero.cta1_kr | escape }}</span><span class="en">{{ hero.cta1_en | default: hero.cta1_kr | escape }}</span></a>
-        {%- endif %}
-        {%- if hero.cta2_kr and hero.cta2_kr != "" %}
-        <a class="btn outline" href="{{ hero.cta2_link | default: '#shop' }}"><span class="kr">{{ hero.cta2_kr | escape }}</span><span class="en">{{ hero.cta2_en | default: hero.cta2_kr | escape }}</span></a>
-        {%- endif %}
+        {%- assign cta1_link = hero.cta1_link | default: '#prescription' %}
+        {%- assign cta2_link = hero.cta2_link | default: '#shop' %}
+        {%- if hero.cta1_kr and hero.cta1_kr != "" %}{% unless cta1_link == '#prescription' and rx.show == false %}
+        {%- assign cta1_en = hero.cta1_en | default: hero.cta1_kr %}
+        <a class="btn" href="{{ cta1_link | escape }}"><span class="kr">{% include t.html s=hero.cta1_kr %}</span><span class="en">{% include t.html s=cta1_en %}</span></a>
+        {%- endunless %}{% endif %}
+        {%- if hero.cta2_kr and hero.cta2_kr != "" %}{% unless cta2_link == '#prescription' and rx.show == false %}
+        {%- assign cta2_en = hero.cta2_en | default: hero.cta2_kr %}
+        <a class="btn outline" href="{{ cta2_link | escape }}"><span class="kr">{% include t.html s=hero.cta2_kr %}</span><span class="en">{% include t.html s=cta2_en %}</span></a>
+        {%- endunless %}{% endif %}
         {%- if hero.show_instagram and info.instagram_url and info.instagram_url != "" %}
-        <a class="ig" href="{{ info.instagram_url }}" target="_blank" rel="noopener">Instagram {{ info.instagram_handle | escape }}</a>
+        <a class="ig" href="{{ info.instagram_url | escape }}" target="_blank" rel="noopener">Instagram {{ info.instagram_handle | escape }}</a>
         {%- endif %}
       </div>
       {%- if hero.next_show.show %}
       {%- assign ns = hero.next_show %}
       <p class="next-show">
-        <span class="tag"><span class="kr">{{ ns.tag_kr | default: '다음 전시' | escape }}</span><span class="en">{{ ns.tag_en | default: 'NEXT' | escape }}</span></span>
+        {%- assign ns_tag_kr = ns.tag_kr | default: '다음 전시' %}{% assign ns_tag_en = ns.tag_en | default: 'NEXT' %}
+        <span class="tag"><span class="kr">{% include t.html s=ns_tag_kr %}</span><span class="en">{% include t.html s=ns_tag_en %}</span></span>
         <span class="what"><span class="kr">{% include t.html s=ns.what_kr %}</span><span class="en">{% include t.html s=ns.what_en %}</span></span>
         <span><span class="kr">{% include t.html s=ns.detail_kr %}</span><span class="en">{% include t.html s=ns.detail_en %}</span></span>
-        <span class="links">{% if ns.link_kr and ns.link_kr != "" %}<a class="arrow-link" href="{{ ns.link_url | default: '#exhibitions' }}"><span class="kr">{{ ns.link_kr | escape }}</span><span class="en">{{ ns.link_en | default: ns.link_kr | escape }}</span></a>{% endif %}
-        {% if ns.link2_kr and ns.link2_kr != "" %}<a class="arrow-link" href="{{ ns.link2_url | default: '#newsletter' }}"><span class="kr">{{ ns.link2_kr | escape }}</span><span class="en">{{ ns.link2_en | default: ns.link2_kr | escape }}</span></a>{% endif %}</span>
+        {%- assign ns_link_url = ns.link_url | default: '#exhibitions' %}{% assign ns_link2_url = ns.link2_url | default: '#newsletter' %}
+        {%- assign ns_link_en = ns.link_en | default: ns.link_kr %}{% assign ns_link2_en = ns.link2_en | default: ns.link2_kr %}
+        <span class="links">{% if ns.link_kr and ns.link_kr != "" %}<a class="arrow-link" href="{{ ns_link_url | escape }}"><span class="kr">{% include t.html s=ns.link_kr %}</span><span class="en">{% include t.html s=ns_link_en %}</span></a>{% endif %}
+        {% if ns.link2_kr and ns.link2_kr != "" %}{% unless ns_link2_url == '#newsletter' and nl.show != true %}<a class="arrow-link" href="{{ ns_link2_url | escape }}"><span class="kr">{% include t.html s=ns.link2_kr %}</span><span class="en">{% include t.html s=ns_link2_en %}</span></a>{% endunless %}{% endif %}</span>
       </p>
       {%- endif %}
     </div>
@@ -397,8 +416,9 @@ footer a:hover{color:var(--seal)}
       <span class="num" aria-hidden="true"></span>
       <h2 id="gallery-h"><span class="kr">작품</span><span class="en">Gallery</span></h2>
       {%- if gal.sub_kr and gal.sub_kr != "" %}
-      <p class="sub kr">{{ gal.sub_kr | escape }}</p>
-      <p class="sub en">{{ gal.sub_en | default: gal.sub_kr | escape }}</p>
+      {%- assign gal_sub_en = gal.sub_en | default: gal.sub_kr %}
+      <p class="sub kr">{% include t.html s=gal.sub_kr br=true %}</p>
+      <p class="sub en">{% include t.html s=gal_sub_en br=true %}</p>
       {%- endif %}
     </div>
 
@@ -418,10 +438,12 @@ footer a:hover{color:var(--seal)}
       {%- endfor %}
       {%- if studies.size > 0 %}
       <div class="gal-sub">
-        <h3><span class="kr">{% include t.html s=gal.study_title_kr %}</span><span class="en">{% include t.html s=gal.study_title_en %}</span></h3>
+        {%- assign study_title_en = gal.study_title_en | default: gal.study_title_kr %}
+        <h3><span class="kr">{% include t.html s=gal.study_title_kr %}</span><span class="en">{% include t.html s=study_title_en %}</span></h3>
         {%- if gal.study_text_kr and gal.study_text_kr != "" %}
-        <p class="kr">{% include t.html s=gal.study_text_kr %}</p>
-        <p class="en">{% include t.html s=gal.study_text_en %}</p>
+        {%- assign study_text_en = gal.study_text_en | default: gal.study_text_kr %}
+        <p class="kr">{% include t.html s=gal.study_text_kr br=true %}</p>
+        <p class="en">{% include t.html s=study_text_en br=true %}</p>
         {%- endif %}
       </div>
       {%- assign srows = studies | group_by: "row" -%}
@@ -444,48 +466,60 @@ footer a:hover{color:var(--seal)}
     <div class="sec-head">
       <span class="num" aria-hidden="true"></span>
       <h2 id="rx-h"><span class="kr">민화 처방전</span><span class="en">Minhwa Prescription</span></h2>
-      <p class="sub kr">{{ rx.sub_kr | escape }}</p>
-      <p class="sub en">{{ rx.sub_en | default: rx.sub_kr | escape }}</p>
+      {%- assign rx_sub_en = rx.sub_en | default: rx.sub_kr %}
+      <p class="sub kr">{% include t.html s=rx.sub_kr br=true %}</p>
+      <p class="sub en">{% include t.html s=rx_sub_en br=true %}</p>
     </div>
     <div class="rx-top">
       {%- assign an = rx.announcement %}
       {%- if an.image and an.image != "" %}
-      <figure class="art"{% if an.w and an.h %} style="--w:{{ an.w }};--h:{{ an.h }}"{% endif %}>
+      {%- assign asz = sizes[an.image] %}
+      <figure class="art"{% if asz %} style="--w:{{ asz.w }};--h:{{ asz.h }}"{% endif %}>
         <button class="art-open" type="button" data-cap-kr="{{ an.cap_kr | escape }}" data-cap-en="{{ an.cap_en | default: an.cap_kr | escape }}">
-          <img src="{{ an.image | relative_url }}"{% if an.w and an.h %} width="{{ an.w }}" height="{{ an.h }}"{% endif %} loading="lazy" decoding="async" alt="{{ an.alt | escape }}">
+          <img src="{{ an.image | relative_url | escape }}"{% if asz %} width="{{ asz.w }}" height="{{ asz.h }}"{% endif %} loading="lazy" decoding="async" alt="{{ an.alt | escape }}">
         </button>
         {%- if an.caption_kr and an.caption_kr != "" %}
-        <figcaption><p class="m"><span class="kr">{{ an.caption_kr | escape }}</span><span class="en">{{ an.caption_en | default: an.caption_kr | escape }}</span></p></figcaption>
+        {%- assign an_caption_en = an.caption_en | default: an.caption_kr %}
+        <figcaption><p class="m"><span class="kr">{% include t.html s=an.caption_kr %}</span><span class="en">{% include t.html s=an_caption_en %}</span></p></figcaption>
         {%- endif %}
       </figure>
       {%- endif %}
       <div class="rx-info">
-        <p class="lead kr">{{ rx.lead_kr | escape }}</p>
-        <p class="lead en">{{ rx.lead_en | default: rx.lead_kr | escape }}</p>
+        {%- assign rx_lead_en = rx.lead_en | default: rx.lead_kr %}
+        {%- assign rx_how_title_kr = rx.how_title_kr | default: '참여 방법' %}{% assign rx_how_title_en = rx.how_title_en | default: 'HOW IT WORKS' %}
+        {%- assign rx_how_en = rx.how_en | default: rx.how_kr %}
+        {%- assign rx_email_en = rx.email_button_en | default: rx.email_button_kr %}
+        {%- assign rx_dm_en = rx.dm_button_en | default: rx.dm_button_kr %}
+        {%- assign rx_fine_en = rx.fine_en | default: rx.fine_kr %}
+        {%- assign rx_subject = rx.email_subject | default: 'Minhwa Prescription' | url_encode | replace: "+", "%20" %}
+        <p class="lead kr">{% include t.html s=rx.lead_kr br=true %}</p>
+        <p class="lead en">{% include t.html s=rx_lead_en br=true %}</p>
         <div class="rx-box">
-          <p class="rx-h"><span class="kr">{{ rx.how_title_kr | default: '참여 방법' | escape }}</span><span class="en">{{ rx.how_title_en | default: 'HOW IT WORKS' | escape }}</span></p>
-          <p class="kr">{{ rx.how_kr | escape }}</p>
-          <p class="en">{{ rx.how_en | default: rx.how_kr | escape }}</p>
+          <p class="rx-h"><span class="kr">{% include t.html s=rx_how_title_kr %}</span><span class="en">{% include t.html s=rx_how_title_en %}</span></p>
+          <p class="kr">{% include t.html s=rx.how_kr br=true %}</p>
+          <p class="en">{% include t.html s=rx_how_en br=true %}</p>
         </div>
         <div class="rx-actions">
-          <a class="btn" href="mailto:{{ info.email }}?subject={{ rx.email_subject | default: 'Minhwa Prescription' | uri_escape }}"><span class="kr">{{ rx.email_button_kr | escape }}</span><span class="en">{{ rx.email_button_en | default: rx.email_button_kr | escape }}</span></a>
+          <a class="btn" href="mailto:{{ info.email | escape }}?subject={{ rx_subject }}"><span class="kr">{% include t.html s=rx.email_button_kr %}</span><span class="en">{% include t.html s=rx_email_en %}</span></a>
           {%- if info.instagram_url and info.instagram_url != "" and rx.dm_button_kr and rx.dm_button_kr != "" %}
-          <a class="btn outline" href="{{ info.instagram_url }}" target="_blank" rel="noopener"><span class="kr">{{ rx.dm_button_kr | escape }}</span><span class="en">{{ rx.dm_button_en | default: rx.dm_button_kr | escape }}</span></a>
+          <a class="btn outline" href="{{ info.instagram_url | escape }}" target="_blank" rel="noopener"><span class="kr">{% include t.html s=rx.dm_button_kr %}</span><span class="en">{% include t.html s=rx_dm_en %}</span></a>
           {%- endif %}
         </div>
         {%- if rx.fine_kr and rx.fine_kr != "" %}
-        <p class="rx-fine"><span class="kr">{{ rx.fine_kr | escape }}</span><span class="en">{{ rx.fine_en | default: rx.fine_kr | escape }}</span></p>
+        <p class="rx-fine"><span class="kr">{% include t.html s=rx.fine_kr br=true %}</span><span class="en">{% include t.html s=rx_fine_en br=true %}</span></p>
         {%- endif %}
       </div>
     </div>
     {%- if rx.cards and rx.cards.size > 0 %}
     <div class="rx-cards">
       {%- for c in rx.cards %}
-      <figure class="art"{% if c.w and c.h %} style="--w:{{ c.w }};--h:{{ c.h }}"{% endif %}>
-        <button class="art-open" type="button" data-cap-kr="{{ c.cap_kr | default: c.title_kr | escape }}" data-cap-en="{{ c.cap_en | default: c.title_en | default: c.title_kr | escape }}">
-          <img src="{{ c.image | relative_url }}"{% if c.w and c.h %} width="{{ c.w }}" height="{{ c.h }}"{% endif %} loading="lazy" decoding="async" alt="{{ c.alt | default: c.title_kr | escape }}">
+      {%- assign csz = sizes[c.image] %}
+      {%- assign c_title_en = c.title_en | default: c.title_kr %}
+      <figure class="art"{% if csz %} style="--w:{{ csz.w }};--h:{{ csz.h }}"{% endif %}>
+        <button class="art-open" type="button" data-cap-kr="{{ c.cap_kr | default: c.title_kr | replace: '*', '' | escape }}" data-cap-en="{{ c.cap_en | default: c_title_en | replace: '*', '' | escape }}">
+          <img src="{{ c.image | relative_url | escape }}"{% if csz %} width="{{ csz.w }}" height="{{ csz.h }}"{% endif %} loading="lazy" decoding="async" alt="{{ c.alt | default: c.title_kr | replace: '*', '' | escape }}">
         </button>
-        <figcaption><p class="t"><span class="kr">{{ c.title_kr | escape }}</span><span class="en">{{ c.title_en | default: c.title_kr | escape }}</span></p></figcaption>
+        <figcaption><p class="t"><span class="kr">{% include t.html s=c.title_kr %}</span><span class="en">{% include t.html s=c_title_en %}</span></p></figcaption>
       </figure>
       {%- endfor %}
     </div>
@@ -504,13 +538,13 @@ footer a:hover{color:var(--seal)}
       <div class="about-prose">
         <div class="kr">
           {%- if about.lead_kr and about.lead_kr != "" %}
-          <p class="lead">{{ about.lead_kr | escape }}</p>
+          <p class="lead">{% include t.html s=about.lead_kr %}</p>
           {%- endif %}
           {{ about.body_kr }}
         </div>
         <div class="en">
           {%- if about.lead_en and about.lead_en != "" %}
-          <p class="lead">{{ about.lead_en | escape }}</p>
+          <p class="lead">{% include t.html s=about.lead_en %}</p>
           {%- endif %}
           {{ about.body_en | default: about.body_kr }}
         </div>
@@ -518,35 +552,40 @@ footer a:hover{color:var(--seal)}
         <blockquote class="pull">
           <span class="seal" aria-hidden="true">{{ info.seal_top | escape }}<br>{{ info.seal_bottom | escape }}</span>
           <div>
-            <p class="kr">{% include t.html s=about.quote_kr %}</p>
-            <p class="en">{% include t.html s=about.quote_en %}</p>
+            {%- assign quote_en = about.quote_en | default: about.quote_kr %}
+            <p class="kr">{% include t.html s=about.quote_kr br=true %}</p>
+            <p class="en">{% include t.html s=quote_en br=true %}</p>
           </div>
         </blockquote>
         {%- endif %}
       </div>
       <aside class="cv" aria-labelledby="cv-h">
-        <h3 id="cv-h"><span class="kr">{{ about.cv_title_kr | default: '약력' | escape }}</span><span class="en">{{ about.cv_title_en | default: 'Selected CV' | escape }}</span></h3>
+        {%- assign cv_title_kr = about.cv_title_kr | default: '약력' %}{% assign cv_title_en = about.cv_title_en | default: 'Selected CV' %}
+        <h3 id="cv-h"><span class="kr">{% include t.html s=cv_title_kr %}</span><span class="en">{% include t.html s=cv_title_en %}</span></h3>
         <ul>
           {%- for c in about.cv %}
-          <li><span class="y"><span class="kr">{{ c.year_kr | escape }}</span><span class="en">{{ c.year_en | default: c.year_kr | escape }}</span></span><span><span class="kr">{% include t.html s=c.text_kr %}</span><span class="en">{% include t.html s=c.text_en %}</span></span></li>
+          {%- assign cy_en = c.year_en | default: c.year_kr %}{% assign ct_en = c.text_en | default: c.text_kr %}
+          <li><span class="y"><span class="kr">{{ c.year_kr | escape }}</span><span class="en">{{ cy_en | escape }}</span></span><span><span class="kr">{% include t.html s=c.text_kr %}</span><span class="en">{% include t.html s=ct_en %}</span></span></li>
           {%- endfor %}
         </ul>
         {%- if info.instagram_url and info.instagram_url != "" %}
-        <p class="ig">Instagram · <a href="{{ info.instagram_url }}" target="_blank" rel="me noopener">{{ info.instagram_handle | escape }}</a></p>
+        <p class="ig">Instagram · <a href="{{ info.instagram_url | escape }}" target="_blank" rel="me noopener">{{ info.instagram_handle | escape }}</a></p>
         {%- endif %}
       </aside>
     </div>
     {%- assign ph = about.photo %}
     {%- if ph.show and ph.image and ph.image != "" %}
     <div class="about-photo" data-lb-group="about">
-      <figure class="art"{% if ph.w and ph.h %} style="--w:{{ ph.w }};--h:{{ ph.h }}"{% endif %}>
-        <button class="art-open" type="button" data-cap-kr="{{ ph.cap_kr | default: ph.title_kr | escape }}" data-cap-en="{{ ph.cap_en | default: ph.title_en | default: ph.title_kr | escape }}">
-          <img src="{{ ph.image | relative_url }}"{% if ph.w and ph.h %} width="{{ ph.w }}" height="{{ ph.h }}"{% endif %} loading="lazy" decoding="async" alt="{{ ph.alt | default: ph.title_kr | escape }}">
+      {%- assign psz = sizes[ph.image] %}
+      {%- assign ph_title_en = ph.title_en | default: ph.title_kr %}{% assign ph_sub_en = ph.sub_en | default: ph.sub_kr %}{% assign ph_meta_en = ph.meta_en | default: ph.meta_kr %}
+      <figure class="art"{% if psz %} style="--w:{{ psz.w }};--h:{{ psz.h }}"{% endif %}>
+        <button class="art-open" type="button" data-cap-kr="{{ ph.cap_kr | default: ph.title_kr | replace: '*', '' | escape }}" data-cap-en="{{ ph.cap_en | default: ph_title_en | replace: '*', '' | escape }}">
+          <img src="{{ ph.image | relative_url | escape }}"{% if psz %} width="{{ psz.w }}" height="{{ psz.h }}"{% endif %} loading="lazy" decoding="async" alt="{{ ph.alt | default: ph.title_kr | replace: '*', '' | escape }}">
         </button>
         <figcaption>
-          <p class="t"><span class="kr">{% include t.html s=ph.title_kr %}{% if ph.sub_kr and ph.sub_kr != "" %} <small>{{ ph.sub_kr | escape }}</small>{% endif %}</span><span class="en">{% include t.html s=ph.title_en %}{% if ph.sub_en and ph.sub_en != "" %} <small>{{ ph.sub_en | escape }}</small>{% endif %}</span></p>
+          <p class="t"><span class="kr">{% include t.html s=ph.title_kr %}{% if ph.sub_kr and ph.sub_kr != "" %} <small>{% include t.html s=ph.sub_kr %}</small>{% endif %}</span><span class="en">{% include t.html s=ph_title_en %}{% if ph_sub_en and ph_sub_en != "" %} <small>{% include t.html s=ph_sub_en %}</small>{% endif %}</span></p>
           {%- if ph.meta_kr and ph.meta_kr != "" %}
-          <p class="m"><span class="kr">{% include t.html s=ph.meta_kr %}</span><span class="en">{% include t.html s=ph.meta_en %}</span></p>
+          <p class="m"><span class="kr">{% include t.html s=ph.meta_kr br=true %}</span><span class="en">{% include t.html s=ph_meta_en br=true %}</span></p>
           {%- endif %}
         </figcaption>
       </figure>
@@ -567,11 +606,12 @@ footer a:hover{color:var(--seal)}
       {%- assign e_title_en = e.title_en | default: e.title_kr %}
       <div class="exh-row">
         <span class="when">{{ e.when | escape }}</span>
-        <span><span class="what">{% if e.url and e.url != "" %}<a href="{{ e.url }}" target="_blank" rel="noopener">{% endif %}<span class="kr">{% include t.html s=e.title_kr %}</span><span class="en">{% include t.html s=e_title_en %}</span>{% if e.url and e.url != "" %}</a>{% endif %}</span>
+        <span><span class="what">{% if e.url and e.url != "" %}<a href="{{ e.url | escape }}" target="_blank" rel="noopener">{% endif %}<span class="kr">{% include t.html s=e.title_kr %}</span><span class="en">{% include t.html s=e_title_en %}</span>{% if e.url and e.url != "" %}</a>{% endif %}</span>
         {%- assign has_where = false %}{% if e.where and e.where != "" %}{% assign has_where = true %}{% endif %}
         {%- assign has_detail = false %}{% if e.detail_kr and e.detail_kr != "" %}{% assign has_detail = true %}{% endif %}
         {%- if has_where or has_detail %}
-        <span class="where">{% if has_where %}{{ e.where | escape }}{% endif %}{% if has_where and has_detail %} · {% endif %}{% if has_detail %}<span class="kr">{% include t.html s=e.detail_kr %}</span><span class="en">{% include t.html s=e.detail_en %}</span>{% endif %}</span>
+        {%- assign e_detail_en = e.detail_en | default: e.detail_kr %}
+        <span class="where">{% if has_where %}{% include t.html s=e.where %}{% endif %}{% if has_where and has_detail %} · {% endif %}{% if has_detail %}<span class="kr">{% include t.html s=e.detail_kr %}</span><span class="en">{% include t.html s=e_detail_en %}</span>{% endif %}</span>
         {%- endif %}</span>
         {%- if e.upcoming %}
         <span class="badge"><span class="kr">예정</span><span class="en">UPCOMING</span></span>
@@ -588,45 +628,52 @@ footer a:hover{color:var(--seal)}
       <span class="num" aria-hidden="true"></span>
       <h2 id="studio-h"><span class="kr">스튜디오</span><span class="en">Studio</span></h2>
       {%- if studio.sub_kr and studio.sub_kr != "" %}
-      <p class="sub kr">{{ studio.sub_kr | escape }}</p>
-      <p class="sub en">{{ studio.sub_en | default: studio.sub_kr | escape }}</p>
+      {%- assign studio_sub_en = studio.sub_en | default: studio.sub_kr %}
+      <p class="sub kr">{% include t.html s=studio.sub_kr br=true %}</p>
+      <p class="sub en">{% include t.html s=studio_sub_en br=true %}</p>
       {%- endif %}
     </div>
     <div class="studio-cards">
       {%- assign cm = studio.commissions %}
       {%- if cm.show %}
       <div class="card">
-        <h3><span class="kr">{{ cm.title_kr | escape }}</span><span class="en">{{ cm.title_en | default: cm.title_kr | escape }}</span></h3>
-        <p class="kr">{{ cm.text_kr | escape }}</p>
-        <p class="en">{{ cm.text_en | default: cm.text_kr | escape }}</p>
-        <div class="card-foot"><a class="btn" href="mailto:{{ info.email }}?subject={{ cm.email_subject | default: 'Commission inquiry' | uri_escape }}"><span class="kr">{{ cm.button_kr | escape }}</span><span class="en">{{ cm.button_en | default: cm.button_kr | escape }}</span></a></div>
+        {%- assign cm_title_en = cm.title_en | default: cm.title_kr %}{% assign cm_text_en = cm.text_en | default: cm.text_kr %}{% assign cm_button_en = cm.button_en | default: cm.button_kr %}
+        {%- assign cm_subject = cm.email_subject | default: 'Commission inquiry' | url_encode | replace: "+", "%20" %}
+        <h3><span class="kr">{% include t.html s=cm.title_kr %}</span><span class="en">{% include t.html s=cm_title_en %}</span></h3>
+        <p class="kr">{% include t.html s=cm.text_kr br=true %}</p>
+        <p class="en">{% include t.html s=cm_text_en br=true %}</p>
+        <div class="card-foot"><a class="btn" href="mailto:{{ info.email | escape }}?subject={{ cm_subject }}"><span class="kr">{% include t.html s=cm.button_kr %}</span><span class="en">{% include t.html s=cm_button_en %}</span></a></div>
       </div>
       {%- endif %}
       {%- assign pr = studio.prints %}
       {%- if pr.show %}
       <div class="card">
-        <h3><span class="kr">{{ pr.title_kr | escape }}</span><span class="en">{{ pr.title_en | default: pr.title_kr | escape }}</span></h3>
-        <p class="kr">{{ pr.text_kr | escape }}</p>
-        <p class="en">{{ pr.text_en | default: pr.text_kr | escape }}</p>
+        {%- assign pr_title_en = pr.title_en | default: pr.title_kr %}{% assign pr_text_en = pr.text_en | default: pr.text_kr %}
+        {%- assign pr_shop_kr = pr.shop_button_kr | default: '샵 열기' %}{% assign pr_shop_en = pr.shop_button_en | default: 'Open the shop' %}
+        {%- assign pr_status_kr = pr.status_kr | default: '준비 중' %}{% assign pr_status_en = pr.status_en | default: 'COMING SOON' %}
+        <h3><span class="kr">{% include t.html s=pr.title_kr %}</span><span class="en">{% include t.html s=pr_title_en %}</span></h3>
+        <p class="kr">{% include t.html s=pr.text_kr br=true %}</p>
+        <p class="en">{% include t.html s=pr_text_en br=true %}</p>
         <div class="card-foot">
           {%- if pr.shop_url and pr.shop_url != "" %}
-          <a class="btn" href="{{ pr.shop_url }}" target="_blank" rel="noopener"><span class="kr">{{ pr.shop_button_kr | default: '샵 열기' | escape }}</span><span class="en">{{ pr.shop_button_en | default: 'Open the shop' | escape }}</span></a>
+          <a class="btn" href="{{ pr.shop_url | escape }}" target="_blank" rel="noopener"><span class="kr">{% include t.html s=pr_shop_kr %}</span><span class="en">{% include t.html s=pr_shop_en %}</span></a>
           {%- else %}
-          <span class="soon"><span class="kr">{{ pr.status_kr | default: '준비 중' | escape }}</span><span class="en">{{ pr.status_en | default: 'COMING SOON' | escape }}</span></span>
+          <span class="soon"><span class="kr">{% include t.html s=pr_status_kr %}</span><span class="en">{% include t.html s=pr_status_en %}</span></span>
           {%- endif %}
         </div>
       </div>
       {%- endif %}
-      {%- assign nl = studio.newsletter %}
       {%- if nl.show %}
+      {%- assign nl_title_en = nl.title_en | default: nl.title_kr %}{% assign nl_text_en = nl.text_en | default: nl.text_kr %}
+      {%- assign nl_button_kr = nl.button_kr | default: '구독하기' %}{% assign nl_button_en = nl.button_en | default: 'Subscribe' %}
       <div class="card" id="newsletter">
-        <h3 id="nl-h"><span class="kr">{{ nl.title_kr | escape }}</span><span class="en">{{ nl.title_en | default: nl.title_kr | escape }}</span></h3>
-        <p><span class="kr">{{ nl.text_kr | escape }}</span><span class="en">{{ nl.text_en | default: nl.text_kr | escape }}</span></p>
+        <h3 id="nl-h"><span class="kr">{% include t.html s=nl.title_kr %}</span><span class="en">{% include t.html s=nl_title_en %}</span></h3>
+        <p><span class="kr">{% include t.html s=nl.text_kr br=true %}</span><span class="en">{% include t.html s=nl_text_en br=true %}</span></p>
         <div class="card-foot">
-          <form id="nlForm" action="{% if nl.form_action and nl.form_action != '' %}{{ nl.form_action }}{% else %}#REPLACE_WITH_FORM_URL{% endif %}" method="post">
+          <form id="nlForm" action="{% if nl.form_action and nl.form_action != '' %}{{ nl.form_action | escape }}{% else %}#REPLACE_WITH_FORM_URL{% endif %}" method="post">
             <label for="nlEmail" class="sr-only"><span class="kr">이메일 주소</span><span class="en">Email address</span></label>
             <input id="nlEmail" type="email" name="email" required placeholder="you@email.com" autocomplete="email" inputmode="email">
-            <button class="btn" type="submit"><span class="kr">{{ nl.button_kr | default: '구독하기' | escape }}</span><span class="en">{{ nl.button_en | default: 'Subscribe' | escape }}</span></button>
+            <button class="btn" type="submit"><span class="kr">{% include t.html s=nl_button_kr %}</span><span class="en">{% include t.html s=nl_button_en %}</span></button>
           </form>
           <p id="nlMsg" class="rx-fine" hidden role="status" aria-live="polite"></p>
         </div>
@@ -643,11 +690,12 @@ footer a:hover{color:var(--seal)}
   <div class="wrap foot-in">
     <span class="seal" aria-hidden="true">{{ info.seal_top | escape }}<br>{{ info.seal_bottom | escape }}</span>
     <div>
-      <strong>{{ info.name_kr | escape }} {{ info.name_en | escape }}</strong> — <span class="kr">{{ info.location_kr | escape }}</span><span class="en">{{ info.location_en | default: info.location_kr | escape }}</span>
+      {%- assign loc_en = info.location_en | default: info.location_kr %}
+      <strong>{{ info.name_kr | escape }} {{ info.name_en | escape }}</strong> — <span class="kr">{% include t.html s=info.location_kr %}</span><span class="en">{% include t.html s=loc_en %}</span>
       <div class="foot-links">
-        <a href="mailto:{{ info.email }}">{{ info.email }}</a>
+        <a href="mailto:{{ info.email | escape }}">{{ info.email | escape }}</a>
         {%- if info.instagram_url and info.instagram_url != "" %}
-        <a href="{{ info.instagram_url }}" target="_blank" rel="me noopener">Instagram {{ info.instagram_handle | escape }}</a>
+        <a href="{{ info.instagram_url | escape }}" target="_blank" rel="me noopener">Instagram {{ info.instagram_handle | escape }}</a>
         {%- endif %}
       </div>
       <nav class="foot-nav" aria-label="Footer">
@@ -680,7 +728,7 @@ footer a:hover{color:var(--seal)}
 // ── 한/영 전환 (선택한 언어는 이 브라우저에 기억됩니다) ──
 (function(){
   var root = document.documentElement, btn = document.getElementById('langBtn');
-  var titles = { kr: {{ info.title_kr | jsonify }}, en: {{ info.title_en | jsonify }} };
+  var titles = { kr: {{ info.title_kr | jsonify }}, en: {{ title_en | jsonify }} };
   if (root.dataset.lang !== 'en') root.dataset.lang = 'kr';
   if (!btn) return;
   function label(lang){
