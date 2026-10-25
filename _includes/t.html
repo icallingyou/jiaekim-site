@@ -1,0 +1,9 @@
+{%- comment -%}
+  글자 출력 도우미: HTML 특수문자를 안전하게 바꾸고, *별표* 사이는 기울임(<em>)으로 표시합니다.
+  사용법은 index.html 을 참고하세요 (include t.html 에 s=값 을 넘깁니다).
+{%- endcomment -%}
+{%- assign _parts = include.s | default: "" | escape | split: "*" -%}
+{%- for _p in _parts -%}
+{%- assign _m = forloop.index0 | modulo: 2 -%}
+{%- if _m == 1 -%}<em>{{ _p }}</em>{%- else -%}{{ _p }}{%- endif -%}
+{%- endfor -%}

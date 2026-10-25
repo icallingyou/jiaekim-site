@@ -1,0 +1,689 @@
+# Pages CMS 설정 — https://app.pagescms.org 에서 GitHub 로그인 후 이 저장소를 열면 아래 항목들이 편집 메뉴로 나타납니다.
+# 저장하면 바로 GitHub 에 커밋되고 1~2분 안에 jiaekim.com 에 반영됩니다.
+
+media:
+  input: images
+  output: /images
+  categories: [image]
+  rename: false
+
+settings:
+  content:
+    merge: true
+  commit:
+    templates:
+      create: "내용 추가: {path} (Pages CMS)"
+      update: "내용 수정: {path} (Pages CMS)"
+      delete: "내용 삭제: {path} (Pages CMS)"
+      rename: "이름 변경: {oldPath} → {newPath} (Pages CMS)"
+
+components:
+  image_size:
+    type: object
+    label: 사진 크기 (비워 두면 자동)
+    description: 사진을 올린 뒤 1~2분이면 자동으로 채워집니다. 직접 입력할 필요 없습니다.
+    fields:
+      - name: w
+        label: 가로 픽셀
+        type: number
+      - name: h
+        label: 세로 픽셀
+        type: number
+
+content:
+  - name: works
+    label: 작품
+    type: file
+    path: _data/works.yml
+    format: yaml
+    list: true
+    fields:
+      - name: title_kr
+        label: 제목 (한국어)
+        type: string
+        required: true
+      - name: title_en
+        label: 제목 (영어)
+        type: string
+        description: 비워 두면 한국어 제목이 그대로 보입니다.
+      - name: image
+        label: 사진
+        type: image
+        required: true
+        description: 긴 변 1600~2200px 정도의 JPG를 권장합니다. 파일 이름은 영문으로 (예 morando.jpg).
+      - name: row
+        label: 줄 번호
+        type: number
+        required: true
+        description: 같은 번호끼리 한 줄에 나란히 걸립니다. 한 줄에 2~3점이 보기 좋습니다. (1, 2, 3 …)
+      - name: year
+        label: 연도
+        type: string
+        description: 예 2026. 모르면 비워 두세요.
+      - name: meta_kr
+        label: 재료 · 크기 (한국어)
+        type: string
+        description: "예 분채·먹, 한지 · 30 × 60 in"
+      - name: meta_en
+        label: 재료 · 크기 (영어)
+        type: string
+        description: "예 mineral & shell pigment and ink on hanji · 30 × 60 in. 기울임은 *별표*로 감싸세요."
+      - name: study
+        label: 재현 모사 작품
+        type: boolean
+        default: false
+        description: 켜면 갤러리 맨 끝 '재현 모사' 묶음에 들어갑니다.
+      - name: cap_kr
+        label: 크게 보기 설명 (한국어)
+        type: text
+        description: 비워 두면 '제목 · 연도 · 재료'로 자동 표시됩니다.
+      - name: cap_en
+        label: 크게 보기 설명 (영어)
+        type: text
+      - name: alt
+        label: 사진 설명 (시각장애인·검색용, 영어 권장)
+        type: string
+      - name: w
+        label: 사진 가로 픽셀 (비워 두면 자동)
+        type: number
+      - name: h
+        label: 사진 세로 픽셀 (비워 두면 자동)
+        type: number
+
+  - name: exhibitions
+    label: 전시
+    type: file
+    path: _data/exhibitions.yml
+    format: yaml
+    list: true
+    fields:
+      - name: when
+        label: 시기
+        type: string
+        required: true
+        description: 예 2027.01 또는 2024–26
+      - name: title_kr
+        label: 전시 제목 (한국어)
+        type: string
+        required: true
+        description: "예 그룹전 · Full Circle. 기울임은 *별표*로 감싸세요."
+      - name: title_en
+        label: 전시 제목 (영어)
+        type: string
+      - name: url
+        label: 전시 안내 링크
+        type: string
+        description: 있으면 제목이 링크가 됩니다.
+      - name: where
+        label: 장소
+        type: string
+        description: 예 Flushing Town Hall — Queens, NY
+      - name: detail_kr
+        label: 날짜·안내 (한국어)
+        type: string
+        description: 예 2027년 1월 23일 – 2월 23일 · 리셉션 안내
+      - name: detail_en
+        label: 날짜·안내 (영어)
+        type: string
+      - name: upcoming
+        label: 예정 표시
+        type: boolean
+        default: false
+        description: 켜면 '예정 / UPCOMING' 배지가 붙습니다. 전시가 끝나면 끄세요.
+      - name: show
+        label: 사이트에 표시
+        type: boolean
+        default: true
+        description: 끄면 목록에서 숨겨집니다(초안으로 보관).
+
+  - name: hero
+    label: 첫 화면 · 다음 전시
+    type: file
+    path: _data/hero.yml
+    format: yaml
+    fields:
+      - name: image
+        label: 대표 사진 (넓은 화면)
+        type: image
+        required: true
+      - name: image_mobile
+        label: 대표 사진 (폰, 비워 두면 위 사진 사용)
+        type: image
+      - name: image_alt
+        label: 대표 사진 설명
+        type: string
+      - name: plate_kr
+        label: 사진 위 작품명 칩 (한국어)
+        type: string
+      - name: plate_en
+        label: 사진 위 작품명 칩 (영어)
+        type: string
+      - name: plate_year
+        label: 칩에 쓸 연도
+        type: string
+      - name: plate_link
+        label: 칩 링크
+        type: string
+        description: "예 #w-bonghwangmun (갤러리의 해당 작품으로 이동. w- 뒤는 사진 파일 이름)"
+      - name: eyebrow
+        label: 이름 위 작은 글씨
+        type: string
+      - name: ho_kr
+        label: 호 (한국어)
+        type: string
+      - name: ho_en
+        label: 호 (영어)
+        type: string
+      - name: sub_kr
+        label: 소개 문장 (한국어)
+        type: text
+      - name: sub_en
+        label: 소개 문장 (영어)
+        type: text
+      - name: cta1_kr
+        label: 첫 번째 버튼 (한국어)
+        type: string
+      - name: cta1_en
+        label: 첫 번째 버튼 (영어)
+        type: string
+      - name: cta1_link
+        label: 첫 번째 버튼 링크
+        type: string
+        description: "예 #prescription"
+      - name: cta2_kr
+        label: 두 번째 버튼 (한국어)
+        type: string
+      - name: cta2_en
+        label: 두 번째 버튼 (영어)
+        type: string
+      - name: cta2_link
+        label: 두 번째 버튼 링크
+        type: string
+        description: "예 #shop"
+      - name: show_instagram
+        label: 인스타그램 링크 표시
+        type: boolean
+        default: true
+      - name: w
+        label: 대표 사진 가로 픽셀 (비워 두면 자동)
+        type: number
+      - name: h
+        label: 대표 사진 세로 픽셀 (비워 두면 자동)
+        type: number
+      - name: next_show
+        label: 다음 전시 라벨
+        type: object
+        fields:
+          - name: show
+            label: 표시
+            type: boolean
+            default: true
+          - name: tag_kr
+            label: 꼬리표 (한국어)
+            type: string
+            description: 예 다음 전시
+          - name: tag_en
+            label: 꼬리표 (영어)
+            type: string
+            description: 예 NEXT
+          - name: what_kr
+            label: 제목 (한국어)
+            type: string
+          - name: what_en
+            label: 제목 (영어)
+            type: string
+          - name: detail_kr
+            label: 장소·날짜 (한국어)
+            type: string
+            description: "기울임은 *별표*로 감싸세요. 예 *Quilt of Hopes* — Flushing Town Hall"
+          - name: detail_en
+            label: 장소·날짜 (영어)
+            type: string
+          - name: link_kr
+            label: 링크 글자 (한국어)
+            type: string
+          - name: link_en
+            label: 링크 글자 (영어)
+            type: string
+          - name: link_url
+            label: 링크 주소
+            type: string
+            description: "예 #exhibitions 또는 전시 안내 페이지 주소"
+          - name: link2_kr
+            label: 두 번째 링크 글자 (한국어)
+            type: string
+          - name: link2_en
+            label: 두 번째 링크 글자 (영어)
+            type: string
+          - name: link2_url
+            label: 두 번째 링크 주소
+            type: string
+
+  - name: about
+    label: 소개 · 약력
+    type: file
+    path: _data/about.yml
+    format: yaml
+    fields:
+      - name: lead_kr
+        label: 첫 문장 (한국어)
+        type: string
+      - name: lead_en
+        label: 첫 문장 (영어)
+        type: string
+      - name: body_kr
+        label: 소개 글 (한국어)
+        type: rich-text
+        options:
+          format: html
+          media: false
+      - name: body_en
+        label: 소개 글 (영어)
+        type: rich-text
+        options:
+          format: html
+          media: false
+      - name: quote_kr
+        label: 낙관 옆 인용문 (한국어)
+        type: text
+      - name: quote_en
+        label: 낙관 옆 인용문 (영어)
+        type: text
+      - name: cv_title_kr
+        label: 약력 제목 (한국어)
+        type: string
+      - name: cv_title_en
+        label: 약력 제목 (영어)
+        type: string
+      - name: cv
+        label: 약력 항목
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{year_kr} — {text_kr}"
+        fields:
+          - name: year_kr
+            label: 연도 (한국어)
+            type: string
+            description: 예 2026 · 2024 · 2025 · 학력
+          - name: year_en
+            label: 연도 (영어)
+            type: string
+            description: 비워 두면 한국어 칸이 그대로 보입니다.
+          - name: text_kr
+            label: 내용 (한국어)
+            type: string
+            description: "기울임은 *별표*로 감싸세요."
+          - name: text_en
+            label: 내용 (영어)
+            type: string
+      - name: photo
+        label: 소개 아래 사진
+        type: object
+        fields:
+          - name: show
+            label: 표시
+            type: boolean
+            default: true
+          - name: image
+            label: 사진
+            type: image
+          - name: alt
+            label: 사진 설명 (검색·접근성용)
+            type: string
+          - name: title_kr
+            label: 제목 (한국어)
+            type: string
+          - name: title_en
+            label: 제목 (영어)
+            type: string
+          - name: sub_kr
+            label: 작은 글씨 (한국어)
+            type: string
+          - name: sub_en
+            label: 작은 글씨 (영어)
+            type: string
+          - name: meta_kr
+            label: 설명 (한국어)
+            type: text
+          - name: meta_en
+            label: 설명 (영어)
+            type: text
+          - name: cap_kr
+            label: 크게 보기 설명 (한국어)
+            type: text
+          - name: cap_en
+            label: 크게 보기 설명 (영어)
+            type: text
+          - name: w
+            label: 사진 가로 픽셀 (비워 두면 자동)
+            type: number
+          - name: h
+            label: 사진 세로 픽셀 (비워 두면 자동)
+            type: number
+
+  - name: prescription
+    label: 민화 처방전
+    type: file
+    path: _data/prescription.yml
+    format: yaml
+    fields:
+      - name: show
+        label: 이 섹션 표시
+        type: boolean
+        default: true
+      - name: sub_kr
+        label: 제목 아래 한 줄 (한국어)
+        type: string
+      - name: sub_en
+        label: 제목 아래 한 줄 (영어)
+        type: string
+      - name: announcement
+        label: 안내 카드
+        type: object
+        fields:
+          - name: image
+            label: 안내 카드 사진
+            type: image
+          - name: alt
+            label: 사진 설명 (검색·접근성용)
+            type: string
+          - name: caption_kr
+            label: 사진 아래 글 (한국어)
+            type: string
+          - name: caption_en
+            label: 사진 아래 글 (영어)
+            type: string
+          - name: cap_kr
+            label: 크게 보기 설명 (한국어)
+            type: string
+          - name: cap_en
+            label: 크게 보기 설명 (영어)
+            type: string
+          - name: w
+            label: 사진 가로 픽셀 (비워 두면 자동)
+            type: number
+          - name: h
+            label: 사진 세로 픽셀 (비워 두면 자동)
+            type: number
+      - name: lead_kr
+        label: 소개 글 (한국어)
+        type: text
+      - name: lead_en
+        label: 소개 글 (영어)
+        type: text
+      - name: how_title_kr
+        label: 참여 방법 제목 (한국어)
+        type: string
+      - name: how_title_en
+        label: 참여 방법 제목 (영어)
+        type: string
+      - name: how_kr
+        label: 참여 방법 (한국어)
+        type: text
+      - name: how_en
+        label: 참여 방법 (영어)
+        type: text
+      - name: email_button_kr
+        label: 이메일 버튼 글자 (한국어)
+        type: string
+      - name: email_button_en
+        label: 이메일 버튼 글자 (영어)
+        type: string
+      - name: email_subject
+        label: 이메일 제목
+        type: string
+        description: 버튼을 누르면 이 제목으로 메일 앱이 열립니다.
+      - name: dm_button_kr
+        label: 인스타그램 버튼 글자 (한국어)
+        type: string
+        description: 비워 두면 버튼이 사라집니다.
+      - name: dm_button_en
+        label: 인스타그램 버튼 글자 (영어)
+        type: string
+      - name: fine_kr
+        label: 작은 안내 문구 (한국어)
+        type: string
+      - name: fine_en
+        label: 작은 안내 문구 (영어)
+        type: string
+      - name: cards
+        label: 상징 카드
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title_kr}"
+        fields:
+          - name: image
+            label: 카드 사진
+            type: image
+            required: true
+          - name: title_kr
+            label: 제목 (한국어)
+            type: string
+            required: true
+          - name: title_en
+            label: 제목 (영어)
+            type: string
+          - name: cap_kr
+            label: 크게 보기 설명 (한국어)
+            type: string
+          - name: cap_en
+            label: 크게 보기 설명 (영어)
+            type: string
+          - name: alt
+            label: 사진 설명 (검색·접근성용)
+            type: string
+          - name: w
+            label: 사진 가로 픽셀 (비워 두면 자동)
+            type: number
+          - name: h
+            label: 사진 세로 픽셀 (비워 두면 자동)
+            type: number
+
+  - name: studio
+    label: 스튜디오 (커미션 · 프린트 · 뉴스레터)
+    type: file
+    path: _data/studio.yml
+    format: yaml
+    fields:
+      - name: sub_kr
+        label: 제목 아래 한 줄 (한국어)
+        type: string
+      - name: sub_en
+        label: 제목 아래 한 줄 (영어)
+        type: string
+      - name: commissions
+        label: 커미션 카드
+        type: object
+        fields:
+          - name: show
+            label: 표시
+            type: boolean
+            default: true
+          - name: title_kr
+            label: 제목 (한국어)
+            type: string
+          - name: title_en
+            label: 제목 (영어)
+            type: string
+          - name: text_kr
+            label: 내용 (한국어)
+            type: text
+          - name: text_en
+            label: 내용 (영어)
+            type: text
+          - name: button_kr
+            label: 버튼 글자 (한국어)
+            type: string
+          - name: button_en
+            label: 버튼 글자 (영어)
+            type: string
+          - name: email_subject
+            label: 이메일 제목
+            type: string
+      - name: prints
+        label: 프린트 · 컬러링 도안 카드
+        type: object
+        fields:
+          - name: show
+            label: 표시
+            type: boolean
+            default: true
+          - name: title_kr
+            label: 제목 (한국어)
+            type: string
+          - name: title_en
+            label: 제목 (영어)
+            type: string
+          - name: text_kr
+            label: 내용 (한국어)
+            type: text
+          - name: text_en
+            label: 내용 (영어)
+            type: text
+          - name: status_kr
+            label: 준비 중 표시 (한국어)
+            type: string
+          - name: status_en
+            label: 준비 중 표시 (영어)
+            type: string
+          - name: shop_url
+            label: 샵 주소
+            type: string
+            description: 검로드·코파이 등 샵 링크를 넣으면 '준비 중' 대신 '샵 열기' 버튼이 나타납니다.
+          - name: shop_button_kr
+            label: 샵 버튼 글자 (한국어)
+            type: string
+          - name: shop_button_en
+            label: 샵 버튼 글자 (영어)
+            type: string
+      - name: newsletter
+        label: 뉴스레터 카드
+        type: object
+        fields:
+          - name: show
+            label: 표시
+            type: boolean
+            default: true
+          - name: title_kr
+            label: 제목 (한국어)
+            type: string
+          - name: title_en
+            label: 제목 (영어)
+            type: string
+          - name: text_kr
+            label: 내용 (한국어)
+            type: text
+          - name: text_en
+            label: 내용 (영어)
+            type: text
+          - name: button_kr
+            label: 버튼 글자 (한국어)
+            type: string
+          - name: button_en
+            label: 버튼 글자 (영어)
+            type: string
+          - name: form_action
+            label: 뉴스레터 폼 주소
+            type: string
+            description: 스티비·Beehiiv 등에서 받은 폼 주소를 넣으면 실제 구독으로 연결됩니다. 비워 두면 메일 앱이 열립니다.
+
+  - name: gallery
+    label: 작품 섹션 문구
+    type: file
+    path: _data/gallery.yml
+    format: yaml
+    fields:
+      - name: sub_kr
+        label: 제목 아래 한 줄 (한국어)
+        type: string
+      - name: sub_en
+        label: 제목 아래 한 줄 (영어)
+        type: string
+      - name: study_title_kr
+        label: 재현 모사 소제목 (한국어)
+        type: string
+      - name: study_title_en
+        label: 재현 모사 소제목 (영어)
+        type: string
+        description: "기울임은 *별표*로 감싸세요."
+      - name: study_text_kr
+        label: 재현 모사 설명 (한국어)
+        type: text
+      - name: study_text_en
+        label: 재현 모사 설명 (영어)
+        type: text
+
+  - name: site
+    label: 기본 정보 (이름 · 연락처 · 검색)
+    type: file
+    path: _data/site.yml
+    format: yaml
+    fields:
+      - name: name_kr
+        label: 이름 (한국어)
+        type: string
+        required: true
+      - name: name_en
+        label: 이름 (영어)
+        type: string
+        required: true
+      - name: email
+        label: 이메일
+        type: string
+        required: true
+      - name: instagram_url
+        label: 인스타그램 주소
+        type: string
+        description: 비워 두면 인스타그램 링크가 모두 사라집니다.
+      - name: instagram_handle
+        label: 인스타그램 아이디 (표시용)
+        type: string
+        description: "예 @siwoo.minhwa"
+      - name: location_kr
+        label: 푸터 한 줄 (한국어)
+        type: string
+      - name: location_en
+        label: 푸터 한 줄 (영어)
+        type: string
+      - name: auto_english
+        label: 한국어가 아닌 브라우저에는 영어로 열기
+        type: boolean
+        default: true
+      - name: title_kr
+        label: 브라우저 탭 제목 (한국어)
+        type: string
+      - name: title_en
+        label: 브라우저 탭 제목 (영어)
+        type: string
+      - name: description
+        label: 검색엔진 설명
+        type: text
+      - name: og_title
+        label: 링크 공유 시 제목
+        type: string
+      - name: og_description
+        label: 링크 공유 시 설명
+        type: string
+      - name: og_image
+        label: 링크 공유 시 이미지 (1200×630 권장)
+        type: image
+      - name: og_image_alt
+        label: 공유 이미지 설명
+        type: string
+      - name: url
+        label: 사이트 주소
+        type: string
+        description: 바꾸지 마세요 (도메인이 바뀌지 않는 한).
+      - name: seal_top
+        label: 낙관 윗글자
+        type: string
+      - name: seal_bottom
+        label: 낙관 아랫글자
+        type: string
+      - name: seal_label
+        label: 낙관 설명 (접근성용)
+        type: string

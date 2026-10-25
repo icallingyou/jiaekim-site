@@ -1,0 +1,56 @@
+# 소개 · 약력 — Pages CMS 의 '소개 · 약력'에서 편집됩니다.
+lead_kr: 안녕하세요, 뉴욕 퀸즈 베이사이드에서 민화를 그리는 김지애입니다.
+lead_en: I am a minhwa painter based in Bayside, Queens.
+body_kr: |-
+  <p>조선 후기 민화의 전통 그대로 — 돌과 조개를 갈아 만든 분채를 아교에 개어, 한지 위에 얇게 여러 번 쌓아 올립니다.</p>
+  <p>민화는 본래 집안의 그림이었습니다. 모란은 부귀를, 연꽃은 맑음을, 원앙 한 쌍은 화목을 빌었지요. 그림마다 담긴 이 복(福)의 언어를 오늘의 퀸즈로 옮겨 그리는 것이 제 작업입니다 — 처음에는 한인 이민 가정을 위해, 이제는 출신을 가리지 않는 이웃들을 위해.</p>
+  <p>형식을 현대화하지는 않습니다. 바꾸는 것은 그림이 누구를 위한 것인가입니다.</p>
+  <p>지닐민화 조현주 선생님 문하에서 수학했으며, K-Color Link의 창립 리드 아티스트로 퀸즈 곳곳에서 한·영 이중언어 무료 민화 워크숍을 엽니다. 2026년에는 베이사이드 역사협회(BHS Castle)에서 전시 <em>Moon and Bloom</em>을 기획하고 2주간 오픈 스튜디오 레지던시를 했습니다.</p>
+body_en: |-
+  <p>I work in the late-Joseon Korean folk painting tradition with its original materials: ground mineral and shell pigments (bunchae) bound with hide glue, built up in thin layers on handmade hanji paper.</p>
+  <p>Minhwa was the painting of the household. Peonies wished a family wealth and honor, the lotus purity, a pair of mandarin ducks harmony. My work carries that language of blessing into present-day Queens — first for Korean immigrant households, now for neighbors of every origin.</p>
+  <p>I do not modernize the form; I change whom it is for.</p>
+  <p>I trained in the Jinil Minhwa lineage under master painter Hyun-joo Cho. As founding lead artist of the K-Color Link collective I lead free bilingual minhwa workshops across Queens, and in 2026 I organized <em>Moon and Bloom</em> at the Bayside Historical Society, with a two-week open-studio residency.</p>
+quote_kr: 호(號)는 시우(時雨) — '때맞춰 내리는 비'라는 뜻입니다. 그림이 누군가의 벽에서, 꼭 필요한 순간에 내리는 단비가 되기를 바라는 마음을 담았습니다.
+quote_en: I paint under the artist name Si-Woo (時雨) — "timely rain" — in the hope that each painting arrives on someone's wall at just the moment it is needed.
+cv_title_kr: 약력
+cv_title_en: Selected CV
+cv:
+  - year_kr: "2027"
+    year_en: "2027"
+    text_kr: 그룹전 *Full Circle*, 퀸즈 칼리지 · *Quilt of Hopes*, 플러싱 타운홀 (예정)
+    text_en: Group exhibitions *Full Circle*, Queens College · *Quilt of Hopes*, Flushing Town Hall (upcoming)
+  - year_kr: "2026"
+    year_en: "2026"
+    text_kr: 퀸즈 아츠 펀드(QAF) 뉴워크 그랜트 — “Quilt of Hopes” (K-Color Link 창립 리드 아티스트) · NYFA / 뉴욕시 문화국
+    text_en: Queens Arts Fund New Work Grant — “Quilt of Hopes” (founding lead artist, K-Color Link) · NYFA / NYC Department of Cultural Affairs
+  - year_kr: "2026"
+    year_en: "2026"
+    text_kr: "*Moon and Bloom* 기획 · 2주 오픈 스튜디오 레지던시, 베이사이드 역사협회"
+    text_en: Organizer, *Moon and Bloom* · two-week open-studio residency, Bayside Historical Society
+  - year_kr: 2024 · 2025
+    year_en: 2024 · 2025
+    text_kr: 대한민국 민화공모전 입선
+    text_en: Korean Folk Painting Association national minhwa competition — Honorable Mention
+  - year_kr: 2023–
+    year_en: 2023–
+    text_kr: 지닐민화 — 조현주 선생 사사 · 한국민화협회 네트워크
+    text_en: Jinil Minhwa — trained under master painter Hyun-joo Cho · Korean Folk Painting Association
+  - year_kr: 학력
+    year_en: Education
+    text_kr: 삼성디자인교육원(SADI) 제품디자인 · 2008년부터 뉴욕 거주
+    text_en: Samsung Art and Design Institute, Seoul (product design) · based in New York since 2008
+photo:
+  show: true
+  image: /images/openstudio-moonandbloom.jpg
+  w: 1800
+  h: 1350
+  alt: Moon and Bloom 오픈 스튜디오 — 전시장 테이블 위에서 화병도를 채색하는 장면, 벽에는 족자 작품들
+  title_kr: 오픈 스튜디오, *Moon and Bloom*
+  title_en: Open studio during *Moon and Bloom*
+  sub_kr: Bayside Historical Society Castle · 2026년 8월
+  sub_en: Bayside Historical Society Castle · August 2026
+  meta_kr: 관람 시간에 전시장 안에서 화병도를 그렸습니다 — 민화가 어떻게 그려지는지 보여주는 2주.
+  meta_en: Two weeks of painting *Flowers in a Vase* inside the gallery during public hours, so visitors could watch minhwa being made.
+  cap_kr: Moon and Bloom 오픈 스튜디오 · 베이사이드 역사협회 캐슬, 2026년 8월 — 관람 시간에 전시장 안에서 화병도를 그리는 중
+  cap_en: Open studio during Moon and Bloom · Bayside Historical Society Castle, August 2026 — painting Flowers in a Vase in the gallery during public hours

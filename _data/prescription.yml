@@ -1,0 +1,59 @@
+# 민화 처방전 — Pages CMS 의 '민화 처방전'에서 편집됩니다.
+show: true
+sub_kr: 약 대신 그림을 처방해드립니다.
+sub_en: A painting, prescribed for your wish.
+announcement:
+  image: /images/prescription/announcement.jpg
+  w: 1080
+  h: 1350
+  alt: 민화 처방전 안내 — 증상, 처방, 용법이 적힌 처방전 형식 카드
+  caption_kr: 안내 카드 (한국어)
+  caption_en: Announcement card (Korean)
+  cap_kr: 민화 처방전 안내 카드
+  cap_en: Minhwa Prescription — announcement card (Korean)
+lead_kr: 옛사람들은 소원을 말하는 대신, 그림으로 그려 벽에 걸었습니다. 부귀를 바라면 모란을, 화목을 바라면 한 쌍의 새를, 변치 않는 마음을 바라면 한겨울의 동백을. 당신의 소원에는 어떤 그림이 필요할까요?
+lead_en: In old Korea, people didn't just speak their wishes — they hung them on the wall. Peonies for prosperity, birds in loving pairs for a happy home, winter camellias for a love that never fades. What painting does your wish need?
+how_title_kr: 참여 방법
+how_title_en: HOW IT WORKS
+how_kr: 이메일 또는 인스타그램 DM으로 두 가지만 보내주세요 — ① 그림을 걸고 싶은 벽 사진 한 장, ② 요즘 가장 바라는 소원 한 가지. 답장으로 소원에 맞는 민화 한 점과 그림에 담긴 상징 이야기, 당신의 벽에 걸린 모습 미리보기를 보내드립니다.
+how_en: Email me, or DM me on Instagram, with two things — ① a photo of the wall you'd like to fill, ② one thing you're wishing for these days. You'll receive the minhwa that matches your wish, the story behind it, and a preview of the painting on your own wall.
+email_button_kr: 이메일로 신청하기
+email_button_en: Request by email
+email_subject: 민화 처방전 / Minhwa Prescription
+dm_button_kr: 인스타그램 DM
+dm_button_en: DM on Instagram
+fine_kr: 처방은 무료이고, 부담은 없습니다. 처방전에는 유효기간이 없어요.
+fine_en: The prescription is free, no strings attached — and it never expires.
+cards:
+  - image: /images/prescription/card-moran.jpg
+    w: 1135
+    h: 1600
+    title_kr: 궁모란도 · 부귀영화
+    title_en: Royal Peony · Wealth & Honor
+    cap_kr: 궁모란도 — 부귀영화
+    cap_en: Royal Peony — Wealth and Honor
+    alt: 궁모란도 상징 카드 — 부귀영화
+  - image: /images/prescription/card-yeonhwa.jpg
+    w: 1135
+    h: 1600
+    title_kr: 연화도 · 화합과 평안
+    title_en: Lotus · Harmony & Peace
+    cap_kr: 연화도 — 화합과 평안
+    cap_en: Lotus — Harmony and Peace
+    alt: 연화도 상징 카드 — 화합과 평안
+  - image: /images/prescription/card-dongbaek.jpg
+    w: 1135
+    h: 1600
+    title_kr: 동백화 · 변치 않는 사랑
+    title_en: Camellia · Everlasting Love
+    cap_kr: 붉은 동백화 — 변치 않는 사랑
+    cap_en: Red Camellia — Everlasting Love
+    alt: 붉은 동백화 상징 카드 — 변치 않는 사랑
+  - image: /images/prescription/card-hwajo.jpg
+    w: 1135
+    h: 1600
+    title_kr: 화조도 · 부부금슬
+    title_en: Birds & Flowers · A Loving Home
+    cap_kr: 화조도 — 부부금슬
+    cap_en: Birds and Flowers — A Loving Home
+    alt: 화조도 상징 카드 — 부부금슬

@@ -1,0 +1,16 @@
+{%- comment -%} 작품 한 점 (갤러리). index.html 에서 include work.html 에 w=작품, n=순번 을 넘겨 사용합니다. {%- endcomment -%}
+{%- assign w = include.w -%}
+{%- assign _slug = w.image | default: "" | split: "/" | last | split: "." | first -%}
+{%- assign _title_en = w.title_en | default: w.title_kr -%}
+{%- assign _meta_en = w.meta_en | default: w.meta_kr -%}
+{%- capture _cap_kr -%}{%- if w.cap_kr and w.cap_kr != "" -%}{{ w.cap_kr }}{%- else -%}{{ w.title_kr }}{%- if w.year and w.year != "" %} · {{ w.year }}{%- endif -%}{%- if w.meta_kr and w.meta_kr != "" %} · {{ w.meta_kr | replace: "*", "" }}{%- endif -%}{%- endif -%}{%- endcapture -%}
+{%- capture _cap_en -%}{%- if w.cap_en and w.cap_en != "" -%}{{ w.cap_en }}{%- else -%}{{ _title_en }}{%- if w.year and w.year != "" %} · {{ w.year }}{%- endif -%}{%- if _meta_en and _meta_en != "" %} · {{ _meta_en | replace: "*", "" }}{%- endif -%}{%- endif -%}{%- endcapture -%}
+<figure class="art" id="w-{{ _slug | slugify: "pretty" }}"{% if w.w and w.h %} style="--w:{{ w.w }};--h:{{ w.h }}"{% endif %}>
+  <button class="art-open" type="button" data-cap-kr="{{ _cap_kr | strip | escape }}" data-cap-en="{{ _cap_en | strip | escape }}">
+    <img src="{{ w.image | relative_url }}"{% if w.w and w.h %} width="{{ w.w }}" height="{{ w.h }}"{% endif %}{% if include.n > 1 %} loading="lazy"{% endif %} decoding="async" alt="{{ w.alt | default: _title_en | escape }}">
+  </button>
+  <figcaption>
+    <p class="t"><span class="kr">{% include t.html s=w.title_kr %} <small>{% include t.html s=_title_en %}</small></span><span class="en">{% include t.html s=_title_en %} <small>{% include t.html s=w.title_kr %}</small></span></p>
+    <p class="m">{% if w.year and w.year != "" %}{{ w.year | escape }} · {% endif %}<span class="kr">{% include t.html s=w.meta_kr %}</span><span class="en">{% include t.html s=_meta_en %}</span></p>
+  </figcaption>
+</figure>

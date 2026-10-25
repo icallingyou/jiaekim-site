@@ -1,0 +1,36 @@
+# 히어로(첫 화면) — Pages CMS 의 '히어로 · 다음 전시'에서 편집됩니다.
+image: /images/hero-bonghwangmun.jpg
+w: 2000
+h: 1571
+image_mobile: /images/bonghwangmun.jpg
+image_alt: 봉황문인문보 — 김지애 작, 분채·먹, 한지 / Phoenix-and-Auspicious-Pattern Wrapping Cloth by Jiae Kim, mineral pigment on hanji
+plate_kr: 봉황문인문보
+plate_en: Phoenix Wrapping Cloth
+plate_year: "2025"
+plate_link: "#w-bonghwangmun"
+eyebrow: 민화 · Korean Folk Painting — Bayside, Queens, NY
+ho_kr: 호 시우(時雨) · Si-Woo
+ho_en: Si-Woo 時雨 · 시우
+sub_kr: 조선 후기 민화의 재료와 기법 그대로 — 분채와 먹, 한지 위에 그림에 담긴 복(福)을 오늘의 뉴욕으로 옮겨 그립니다.
+sub_en: Working in the late-Joseon folk painting tradition — mineral pigments and ink on hanji — carrying the paintings' old blessings into present-day New York.
+cta1_kr: 민화 처방전 받기
+cta1_en: Get a Minhwa Prescription
+cta1_link: "#prescription"
+cta2_kr: 커미션 문의
+cta2_en: Commissions
+cta2_link: "#shop"
+show_instagram: true
+next_show:
+  show: true
+  tag_kr: 다음 전시
+  tag_en: NEXT
+  what_kr: 그룹전 두 곳 · 2027년 1월
+  what_en: Two group exhibitions · January 2027
+  detail_kr: "*Quilt of Hopes* — Flushing Town Hall · *Full Circle* — Queens College (1월 23일 – 2월 23일) · Queens, NY"
+  detail_en: "*Quilt of Hopes* — Flushing Town Hall · *Full Circle* — Queens College (Jan 23 – Feb 23) · Queens, NY"
+  link_kr: 전시 →
+  link_en: Exhibitions →
+  link_url: "#exhibitions"
+  link2_kr: 소식 받기 →
+  link2_en: Get updates →
+  link2_url: "#newsletter"

@@ -1,0 +1,56 @@
+# 전시 목록 — Pages CMS 의 '전시'에서 편집됩니다. 위에서부터 순서대로 표시됩니다.
+# upcoming: true 면 '예정' 표시, show: false 면 사이트에 보이지 않습니다(초안으로 보관).
+- when: "2027.08"
+  title_kr: "개인전 · Door to Door: 퀸즈를 위한 세화"
+  title_en: "Solo exhibition · Door to Door: Sehwa (New Year Wish Paintings) for Queens"
+  url: ""
+  where: Bayside Historical Society, The Castle — Fort Totten, Bayside NY
+  detail_kr: 2027년 8월 · 세부 일정 추후 공지
+  detail_en: August 2027 · Dates to be announced
+  upcoming: true
+  show: false
+- when: "2027.01"
+  title_kr: 그룹전 · Full Circle
+  title_en: Group exhibition · *Full Circle*
+  url: ""
+  where: Queens College — Queens, NY
+  detail_kr: 2027년 1월 23일 – 2월 23일
+  detail_en: January 23 – February 23, 2027
+  upcoming: true
+  show: true
+- when: "2027.01"
+  title_kr: "그룹전 · Quilt of Hopes: Korean Folk Art in Queens"
+  title_en: "Group exhibition · *Quilt of Hopes: Korean Folk Art in Queens*"
+  url: ""
+  where: Flushing Town Hall — Queens, NY
+  detail_kr: K-Color Link · 퀸즈 아츠 펀드 뉴워크 그랜트 · 2027년 1월 · 세부 일정 추후 공지
+  detail_en: K-Color Link · Queens Arts Fund New Work Grant · January 2027 · Details to be announced
+  upcoming: true
+  show: true
+- when: "2026.08"
+  title_kr: "Moon and Bloom: Showcasing East Asian Art at the BHS Castle"
+  title_en: "Moon and Bloom: Showcasing East Asian Art at the BHS Castle"
+  url: https://www.baysidehistorical.org/events-1/moon-and-bloom-showcasing-east-asian-art-at-the-bhs-castle
+  where: Bayside Historical Society, The Castle — Fort Totten, Bayside NY
+  detail_kr: 2026. 8. 4 – 8. 14 · 전시 기획 · 2주 오픈 스튜디오 레지던시 · 무료 이중언어 워크숍
+  detail_en: Aug 4–14, 2026 · Organizer · two-week open-studio residency · free bilingual workshops
+  upcoming: false
+  show: true
+- when: "2025.03"
+  title_kr: Peony Stories Today
+  title_en: Peony Stories Today
+  url: ""
+  where: Shelter Rock Public Library — Albertson, NY
+  detail_kr: ""
+  detail_en: ""
+  upcoming: false
+  show: true
+- when: 2024–26
+  title_kr: 한국민화협회 그룹전
+  title_en: Korean Folk Painting Association — Group Exhibitions
+  url: ""
+  where: ""
+  detail_kr: ""
+  detail_en: ""
+  upcoming: false
+  show: true

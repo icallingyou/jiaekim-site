@@ -1,0 +1,32 @@
+# 스튜디오(커미션 · 프린트 · 뉴스레터) — Pages CMS 의 '스튜디오'에서 편집됩니다.
+sub_kr: 커미션, 프린트, 그리고 한 달에 한 번의 편지.
+sub_en: Commissions, prints, and a letter once a month.
+commissions:
+  show: true
+  title_kr: 커미션
+  title_en: Commissions
+  text_kr: 결혼·돌·개업 선물을 위한 축원 민화, 소형 원화 커미션을 소량으로 받습니다. 원하시는 상징(모란·연꽃·원앙 등)과 크기를 알려주세요.
+  text_en: I take a small number of commissions — blessing paintings for weddings, first birthdays, and new beginnings. Tell me the symbols and size you have in mind.
+  button_kr: 커미션 문의
+  button_en: Inquire by email
+  email_subject: Commission inquiry / 커미션 문의
+prints:
+  show: true
+  title_kr: 프린트 · 컬러링 도안
+  title_en: Prints & Coloring PDFs
+  text_kr: 원화 기반 아트 프린트와 민화 컬러링 도안 PDF를 준비하고 있습니다. 뉴스레터로 오픈 소식을 가장 먼저 알려드릴게요.
+  text_en: Art prints and minhwa coloring-page PDFs are in the works — newsletter readers hear first.
+  status_kr: 준비 중
+  status_en: COMING SOON
+  shop_url: ""
+  shop_button_kr: 샵 열기
+  shop_button_en: Open the shop
+newsletter:
+  show: true
+  title_kr: 뉴욕 그림 편지
+  title_en: A Letter from the Studio
+  text_kr: 한 달에 한 번 — 신작과 작업 과정, 전시 소식을 담아 보냅니다.
+  text_en: Once a month — new work, process notes, and exhibition news.
+  button_kr: 구독하기
+  button_en: Subscribe
+  form_action: ""

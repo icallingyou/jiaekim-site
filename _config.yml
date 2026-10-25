@@ -1,0 +1,11 @@
+# Jekyll 설정 (GitHub Pages 가 자동으로 읽습니다). 사이트 내용은 _data 폴더에 있습니다.
+title: 김지애 Jiae Kim — 민화
+url: https://jiaekim.com
+exclude:
+  - "README_*.txt"
+  - scripts
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .pages.yml
